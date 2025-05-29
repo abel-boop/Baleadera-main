@@ -1,0 +1,410 @@
+
+import { Link } from "react-router-dom";
+import { Users, UserCheck, Calendar, MapPin, Award, Target, Heart, ChevronRight, Facebook, Phone, Mail, Menu, X, BookOpen, Lightbulb, Crown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { useSmoothScroll } from "@/hooks/useSmoothScroll";
+import { useState } from "react";
+
+const Index = () => {
+  const { scrollToSection } = useSmoothScroll();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleNavClick = (sectionId: string) => {
+    scrollToSection(sectionId);
+    setMobileMenuOpen(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm border-b sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center space-x-3">
+              <div className="bg-gradient-to-r from-blue-600 to-red-600 p-2 rounded-lg">
+                <Users className="h-8 w-8 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
+                  ባለአደራ ትውልድ
+                </h1>
+                <p className="text-sm text-muted-foreground hidden sm:block">Faithful Stewards Leadership Forum</p>
+              </div>
+            </div>
+            
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex space-x-8">
+              <button 
+                onClick={() => handleNavClick('home')} 
+                className="text-foreground hover:text-blue-600 font-medium transition-colors duration-300 hover:scale-105"
+              >
+                Home
+              </button>
+              <Link to="/about" className="text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:scale-105">
+                About Us
+              </Link>
+              <Link to="/program" className="text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:scale-105">
+                Program
+              </Link>
+              <Link to="/register" className="text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:scale-105">
+                Registration
+              </Link>
+              <Link to="/testimonials" className="text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:scale-105">
+                Testimonials
+              </Link>
+            </nav>
+            
+            <div className="flex items-center space-x-4">
+              <ThemeToggle />
+              <Link to="/register" className="hidden sm:block">
+                <Button className="bg-gradient-to-r from-blue-600 to-red-600 hover:from-blue-700 hover:to-red-700 text-white transition-all duration-500 hover:scale-110 hover:shadow-lg relative overflow-hidden group">
+                  <span className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -skew-x-12"></span>
+                  <span className="relative">Register Now</span>
+                </Button>
+              </Link>
+              
+              {/* Mobile Menu Button */}
+              <button
+                className="md:hidden transition-transform duration-200 hover:scale-110"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+            </div>
+          </div>
+          
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <div className="md:hidden pb-4 animate-fade-in">
+              <nav className="flex flex-col space-y-2">
+                <button 
+                  onClick={() => handleNavClick('home')} 
+                  className="text-left py-2 px-4 text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:bg-accent rounded-lg"
+                >
+                  Home
+                </button>
+                <Link 
+                  to="/about" 
+                  className="py-2 px-4 text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:bg-accent rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  About Us
+                </Link>
+                <Link 
+                  to="/program" 
+                  className="py-2 px-4 text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:bg-accent rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Program
+                </Link>
+                <Link 
+                  to="/register" 
+                  className="py-2 px-4 text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:bg-accent rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Registration
+                </Link>
+                <Link 
+                  to="/testimonials" 
+                  className="py-2 px-4 text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:bg-accent rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Testimonials
+                </Link>
+              </nav>
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section id="home" className="relative bg-gradient-to-br from-blue-50 via-background to-red-50 dark:from-slate-900/20 dark:via-background dark:to-slate-800/20 py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/eadb4c28-fc6b-401e-9970-5f67b9ce053c.png')] bg-cover bg-center opacity-10"></div>
+        <div className="relative max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="text-center lg:text-left">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 animate-fade-in leading-tight">
+                <span className="block text-foreground mb-2 animate-slide-in-left">Become a</span>
+                <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent animate-slide-in-right">Faithful Steward</span>
+              </h2>
+              <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed animate-fade-in-delayed max-w-2xl mx-auto lg:mx-0">
+                Join us in a transformative journey of spiritual leadership, where young hearts are 
+                equipped with divine wisdom and biblical principles to become responsible stewards 
+                of God's calling in their generation.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                <Link to="/register" className="w-full sm:w-auto">
+                  <Button size="lg" className="group w-full bg-gradient-to-r from-blue-600 to-red-600 hover:from-blue-700 hover:to-red-700 text-white px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 relative overflow-hidden">
+                    <span className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -skew-x-12 group-hover:animate-shimmer"></span>
+                    <span className="relative flex items-center justify-center">
+                      Begin Your Journey
+                      <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </span>
+                  </Button>
+                </Link>
+                <Link to="/about" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold transition-all duration-300 hover:scale-105">
+                    Discover Our Mission
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="relative animate-float">
+              <div className="bg-gradient-to-r from-blue-600 to-red-600 rounded-2xl p-6 sm:p-8 text-white transform rotate-3 hover:rotate-0 transition-transform duration-500 hover:scale-105 shadow-2xl">
+                <div className="text-center">
+                  <Crown className="h-12 w-12 sm:h-16 sm:w-16 mx-auto mb-4 animate-pulse" />
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2">ባለአደራ ትውልድ</h3>
+                  <p className="text-blue-100 text-sm sm:text-base">Faithful Stewards of Tomorrow</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 animate-fade-in">Our Divine Calling</h3>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto animate-slide-up">
+              The Baleadera Tiweled Forum is dedicated to raising faithful stewards who walk in God's purpose, 
+              equipped with biblical wisdom to lead with integrity and serve their communities with Christ-like love.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card animate-fade-in group">
+              <CardHeader className="text-center">
+                <BookOpen className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 text-blue-600 group-hover:scale-110 transition-transform duration-300" />
+                <CardTitle className="text-lg sm:text-xl text-card-foreground">Biblical Foundation</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="text-muted-foreground text-sm sm:text-base">
+                  Grounded in Scripture, we equip young people with God's Word as the foundation 
+                  for wise leadership and righteous living in their communities.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card animate-fade-in group" style={{ animationDelay: '100ms' }}>
+              <CardHeader className="text-center">
+                <Heart className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 text-red-600 group-hover:scale-110 transition-transform duration-300" />
+                <CardTitle className="text-lg sm:text-xl text-card-foreground">Servant Leadership</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="text-muted-foreground text-sm sm:text-base">
+                  Following Christ's example of servant leadership, we nurture hearts that 
+                  seek to serve others with humility, compassion, and divine love.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card animate-fade-in group" style={{ animationDelay: '200ms' }}>
+              <CardHeader className="text-center">
+                <Lightbulb className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 text-green-600 group-hover:scale-110 transition-transform duration-300" />
+                <CardTitle className="text-lg sm:text-xl text-card-foreground">Spiritual Growth</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="text-muted-foreground text-sm sm:text-base">
+                  Through prayer, fellowship, and biblical study, participants grow in 
+                  spiritual maturity and develop a deeper relationship with God.
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Program Section */}
+      <section id="program" className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 animate-fade-in">Event Details</h3>
+            <p className="text-base sm:text-lg text-muted-foreground animate-slide-up">Join us for a transformative spiritual experience</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-blue-50 to-card dark:from-slate-800/40 dark:to-card animate-fade-in">
+              <CardHeader className="text-center">
+                <Calendar className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 text-blue-600" />
+                <CardTitle className="text-lg sm:text-xl text-card-foreground">When</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="text-muted-foreground text-sm sm:text-base">
+                  Annual Spiritual Gathering<br />
+                  Date: To Be Announced<br />
+                  Full Day of Fellowship
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-red-50 to-card dark:from-slate-800/40 dark:to-card animate-fade-in" style={{ animationDelay: '100ms' }}>
+              <CardHeader className="text-center">
+                <MapPin className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 text-red-600" />
+                <CardTitle className="text-lg sm:text-xl text-card-foreground">Where</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="text-muted-foreground text-sm sm:text-base">
+                  Church Fellowship Hall<br />
+                  Sacred gathering space<br />
+                  Details shared upon confirmation
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-green-50 to-card dark:from-slate-800/40 dark:to-card md:col-span-2 lg:col-span-1 animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <CardHeader className="text-center">
+                <Users className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 text-green-600" />
+                <CardTitle className="text-lg sm:text-xl text-card-foreground">Who</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="text-muted-foreground text-sm sm:text-base">
+                  Young Believers Ages 14-19<br />
+                  From Partner Churches<br />
+                  Called to Leadership
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-red-50 dark:from-slate-900/20 dark:to-slate-800/20">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 animate-fade-in">Testimonies of Faith</h3>
+            <p className="text-base sm:text-lg text-muted-foreground animate-slide-up">Hear from faithful stewards making a kingdom impact</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card animate-fade-in">
+              <CardContent className="p-6">
+                <div className="text-center mb-4">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-600 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold text-lg sm:text-xl">S</span>
+                  </div>
+                  <h4 className="font-semibold text-card-foreground">Faithful Servant</h4>
+                </div>
+                <p className="text-muted-foreground text-center italic text-sm sm:text-base">
+                  "This forum strengthened my faith and gave me the biblical foundation to start a youth ministry that now serves hundreds in our community."
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card animate-fade-in" style={{ animationDelay: '100ms' }}>
+              <CardContent className="p-6">
+                <div className="text-center mb-4">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-red-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold text-lg sm:text-xl">L</span>
+                  </div>
+                  <h4 className="font-semibold text-card-foreground">Kingdom Leader</h4>
+                </div>
+                <p className="text-muted-foreground text-center italic text-sm sm:text-base">
+                  "The spiritual mentorship and biblical teachings here equipped me to lead with wisdom and serve my community through God's grace."
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card md:col-span-2 lg:col-span-1 animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <CardContent className="p-6">
+                <div className="text-center mb-4">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-white font-bold text-lg sm:text-xl">D</span>
+                  </div>
+                  <h4 className="font-semibold text-card-foreground">Devoted Disciple</h4>
+                </div>
+                <p className="text-muted-foreground text-center italic text-sm sm:text-base">
+                  "Through this forum, I discovered my calling and now use my gifts to advance God's kingdom in my university and beyond."
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-red-600">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 animate-fade-in">Answer Your Divine Calling</h3>
+          <p className="text-lg sm:text-xl text-blue-100 mb-8 animate-slide-up">
+            Join faithful stewards who are transforming their communities through God's love and wisdom
+          </p>
+          <Link to="/register">
+            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-bounce-in">
+              Begin Your Spiritual Journey
+              <ChevronRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-card border-t py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="md:col-span-2">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="bg-gradient-to-r from-blue-600 to-red-600 p-2 rounded-lg">
+                  <Users className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-card-foreground">ባለአደራ ትውልድ</h3>
+                  <p className="text-muted-foreground text-sm sm:text-base">Faithful Stewards Leadership Forum</p>
+                </div>
+              </div>
+              <p className="text-muted-foreground mb-4 text-sm sm:text-base">
+                Raising the next generation of faithful stewards through biblical wisdom, spiritual growth, and servant leadership.
+              </p>
+              <div className="flex space-x-4">
+                <a href="https://www.facebook.com/share/16c5nWxemv/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-blue-400 transition-colors">
+                  <Facebook className="h-6 w-6" />
+                </a>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="text-base sm:text-lg font-semibold mb-4 text-card-foreground">Quick Links</h4>
+              <ul className="space-y-2">
+                <li><Link to="/about" className="text-muted-foreground hover:text-card-foreground transition-colors text-sm sm:text-base">About Us</Link></li>
+                <li><Link to="/program" className="text-muted-foreground hover:text-card-foreground transition-colors text-sm sm:text-base">Program</Link></li>
+                <li><Link to="/register" className="text-muted-foreground hover:text-card-foreground transition-colors text-sm sm:text-base">Registration</Link></li>
+                <li><Link to="/testimonials" className="text-muted-foreground hover:text-card-foreground transition-colors text-sm sm:text-base">Testimonials</Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-base sm:text-lg font-semibold mb-4 text-card-foreground">Contact</h4>
+              <ul className="space-y-2">
+                <li className="flex items-center text-muted-foreground text-sm sm:text-base">
+                  <Phone className="h-4 w-4 mr-2" />
+                  <span>Contact via Church</span>
+                </li>
+                <li className="flex items-center text-muted-foreground text-sm sm:text-base">
+                  <Mail className="h-4 w-4 mr-2" />
+                  <span>Through Local Coordinator</span>
+                </li>
+              </ul>
+              <div className="mt-4">
+                <Link to="/login" className="text-muted-foreground hover:text-card-foreground text-sm transition-colors">
+                  Admin Portal
+                </Link>
+              </div>
+            </div>
+          </div>
+          
+          <div className="border-t border-border mt-8 pt-8 text-center">
+            <p className="text-muted-foreground text-sm">
+              © 2024 ባለአደራ ትውልድ Faithful Stewards Leadership Forum. Transforming communities through faithful stewardship.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default Index;
