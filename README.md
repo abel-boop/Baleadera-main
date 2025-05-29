@@ -1,54 +1,82 @@
-# Welcome to your Lovable project
+# Youth Spark Register
 
-## Project info
+A modern web application built with React, TypeScript, and Vite, featuring a beautiful UI powered by Shadcn UI components.
 
-**URL**: https://lovable.dev/projects/495890a2-44f9-462a-8af8-91e479278737
+## ✨ Features
 
-## How can I edit this code?
+- ⚡ Blazing fast development with Vite
+- 🎨 Beautiful UI components from Shadcn UI
+- 🔒 Type-safe with TypeScript
+- 🚀 Optimized production builds
+- 📱 Responsive design
+- 🌙 Dark mode support
 
-There are several ways of editing your application.
+## 🚀 Getting Started
 
-**Use Lovable**
+### Prerequisites
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/495890a2-44f9-462a-8af8-91e479278737) and start prompting.
+- Node.js 18+ (recommend using [nvm](https://github.com/nvm-sh/nvm))
+- npm 9+ or pnpm 8+ or yarn 1.22+
+- Git
 
-Changes made via Lovable will be committed automatically to this repo.
+### Installation
 
-**Use your preferred IDE**
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/youth-spark-register.git
+   cd youth-spark-register
+   ```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn
+   # or
+   pnpm install
+   ```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+3. **Start the development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   ```
+   The app will be available at `http://localhost:5173`
 
-Follow these steps:
+### Building for Production
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm run build
+# or
+yarn build
+# or
+pnpm build
 ```
 
-**Edit a file directly in GitHub**
+The production build will be in the `dist` directory.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🛠️ Tech Stack
 
-**Use GitHub Codespaces**
+- [React](https://reactjs.org/) - UI Library
+- [TypeScript](https://www.typescriptlang.org/) - Type checking
+- [Vite](https://vitejs.dev/) - Build tool
+- [Shadcn UI](https://ui.shadcn.com/) - UI Components
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [React Router](https://reactrouter.com/) - Routing
+- [React Query](https://tanstack.com/query) - Data fetching
+- [date-fns](https://date-fns.org/) - Date utilities
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- All contributors who have helped shape this project
+- The open-source community for their amazing tools and libraries
 
 ## What technologies are used for this project?
 
