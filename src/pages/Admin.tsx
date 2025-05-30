@@ -129,26 +129,33 @@ const Admin = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-background to-red-50 dark:from-slate-900/20 dark:via-background dark:to-slate-800/20 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-muted-foreground">Loading registrations...</p>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-2 border-primary border-t-transparent mx-auto"></div>
+          <p className="text-muted-foreground">Loading registrations...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-background to-red-50 dark:from-slate-900/20 dark:via-background dark:to-slate-800/20 flex w-full">
+    <div className="min-h-screen bg-background flex w-full text-foreground transition-colors duration-200">
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div className="fixed inset-0 z-40 lg:hidden">
-          <div className="fixed inset-0 bg-black/50 dark:bg-black/70 transition-opacity duration-300" onClick={() => setSidebarOpen(false)}></div>
-          <div className="fixed left-0 top-0 h-full z-50 transform transition-transform duration-300">
-            <AdminSidebar activeTab={activeTab} onTabChange={(tab) => {
-              setActiveTab(tab);
-              setSidebarOpen(false);
-            }} />
+          <div 
+            className="fixed inset-0 bg-black/50 dark:bg-black/70 transition-opacity duration-300" 
+            onClick={() => setSidebarOpen(false)}
+            aria-hidden="true"
+          />
+          <div className="fixed left-0 top-0 h-full z-50 transform transition-transform duration-300 ease-in-out">
+            <AdminSidebar 
+              activeTab={activeTab} 
+              onTabChange={(tab) => {
+                setActiveTab(tab);
+                setSidebarOpen(false);
+              }} 
+            />
           </div>
         </div>
       )}
@@ -161,33 +168,36 @@ const Admin = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm border-b border-border px-4 sm:px-6 py-4">
+        <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-md border-b border-border/40 px-4 sm:px-6 py-3 transition-colors duration-200">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
               <Button
                 variant="ghost"
-                size="sm"
-                className="lg:hidden text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-105"
+                size="icon"
+                className="lg:hidden text-muted-foreground hover:text-foreground hover:bg-accent/50"
                 onClick={() => setSidebarOpen(true)}
+                aria-label="Toggle menu"
               >
                 <Menu className="h-4 w-4" />
               </Button>
-              <Link to="/">
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-105">
+              <Link to="/" className="hover:opacity-80 transition-opacity">
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground hover:bg-accent/50">
                   <ArrowLeft className="h-4 w-4 mr-2" />
                   <span className="hidden sm:inline">Back to Home</span>
                   <span className="sm:hidden">Back</span>
                 </Button>
               </Link>
             </div>
-            <ThemeToggle />
+            <div className="flex items-center space-x-2">
+              <ThemeToggle />
+            </div>
           </div>
         </header>
 
         {/* Content */}
         <main className="flex-1 p-4 sm:p-6 overflow-auto">
           {activeTab === "registrations" && (
-            <div className="space-y-6 animate-fade-in">
+            <div className="space-y-6 animate-fade-in [&_.text-muted-foreground]:text-gray-600 dark:[&_.text-muted-foreground]:text-gray-400">
               <AdminStatsCards stats={stats} />
               <AdminRegistrationsTable
                 registrations={registrations}
@@ -216,22 +226,22 @@ const Admin = () => {
           
           {activeTab === "events" && (
             <div className="text-center py-12 animate-fade-in">
-              <h3 className="text-lg font-medium text-foreground mb-2">Events Management</h3>
-              <p className="text-muted-foreground">Events management functionality coming soon...</p>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">Events Management</h3>
+              <p className="text-gray-600 dark:text-gray-400">Events management functionality coming soon...</p>
             </div>
           )}
           
           {activeTab === "users" && (
             <div className="text-center py-12 animate-fade-in">
-              <h3 className="text-lg font-medium text-foreground mb-2">User Management</h3>
-              <p className="text-muted-foreground">User management functionality coming soon...</p>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">User Management</h3>
+              <p className="text-gray-600 dark:text-gray-400">User management functionality coming soon...</p>
             </div>
           )}
           
           {activeTab === "settings" && (
             <div className="text-center py-12 animate-fade-in">
-              <h3 className="text-lg font-medium text-foreground mb-2">Settings</h3>
-              <p className="text-muted-foreground">Settings panel coming soon...</p>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">Settings</h3>
+              <p className="text-gray-600 dark:text-gray-400">Settings panel coming soon...</p>
             </div>
           )}
         </main>
