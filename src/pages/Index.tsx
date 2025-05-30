@@ -136,11 +136,20 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
                 <Link to="/register" className="w-full sm:w-auto">
-                  <Button size="lg" className="group w-full bg-gradient-to-r from-blue-600 to-red-600 hover:from-blue-700 hover:to-red-700 text-white px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 relative overflow-hidden">
-                    <span className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -skew-x-12 group-hover:animate-shimmer"></span>
+                  <Button 
+                    size="lg" 
+                    className="group w-full bg-gradient-to-r from-blue-600 to-red-600 hover:from-blue-700 hover:to-red-700 text-white px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 relative overflow-hidden animate-pulse-glow"
+                    style={{
+                      animation: 'pulse-glow 3s infinite',
+                      animationTimingFunction: 'cubic-bezier(0.4, 0, 0.6, 1)'
+                    }}
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/40 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -skew-x-12 group-hover:animate-shimmer"></span>
                     <span className="relative flex items-center justify-center">
-                      Begin Your Journey
-                      <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                      <span className="group-hover:animate-button-scale inline-block">
+                        Begin Your Journey
+                      </span>
+                      <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-2 transition-all duration-300 group-hover:scale-125" />
                     </span>
                   </Button>
                 </Link>
