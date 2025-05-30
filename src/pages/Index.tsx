@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Users, UserCheck, Calendar, MapPin, Award, Target, Heart, ChevronRight, Facebook, Phone, Mail, Menu, X, BookOpen, Lightbulb, Crown } from "lucide-react";
+import { Users, UserCheck, Calendar, MapPin, Award, Target, Heart, ChevronRight, Facebook, Phone, Mail, Menu, X, BookOpen, Lightbulb, Crown, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -369,8 +369,11 @@ const Index = () => {
                 Raising the next generation of faithful stewards through biblical wisdom, spiritual growth, and servant leadership.
               </p>
               <div className="flex space-x-4">
-                <a href="https://www.facebook.com/share/16c5nWxemv/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-blue-400 transition-colors">
+                <a href="https://www.facebook.com/share/16c5nWxemv/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-blue-400 transition-colors" aria-label="Facebook">
                   <Facebook className="h-6 w-6" />
+                </a>
+                <a href="https://youtube.com/@baleaderatiweled?si=Qzuly1Hjs07OIC-v" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-red-500 transition-colors" aria-label="YouTube">
+                  <Youtube className="h-6 w-6" />
                 </a>
               </div>
             </div>
@@ -405,9 +408,15 @@ const Index = () => {
             </div>
           </div>
           
-          <div className="border-t border-border mt-8 pt-8 text-center">
+          <div className="border-t border-border mt-8 pt-8 text-center space-y-2">
             <p className="text-muted-foreground text-sm">
               © 2024 ባለአደራ ትውልድ Faithful Stewards Leadership Forum. Transforming communities through faithful stewardship.
+            </p>
+            <p className="text-xs text-muted-foreground/60">
+              Built with ❤️ by Abel Desalegn · 
+              <a href="mailto:abeldesalegn2121@gmail.com" className="hover:text-muted-foreground transition-colors" aria-label="Contact developer">
+                abeldesalegn2121@gmail.com
+              </a>
             </p>
           </div>
         </div>
