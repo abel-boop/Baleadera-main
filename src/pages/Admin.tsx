@@ -147,11 +147,15 @@ const Admin = () => {
     try {
       await updateRegistrationStatus(registrationId, newStatus);
       
-      // Update local state
+      // Update local state immediately for better UX
       setRegistrations(prev => 
         prev.map(reg => 
           reg.id === registrationId 
-            ? { ...reg, status: newStatus, participant_id: newStatus === 'approved' ? 'Generated' : undefined }
+            ? { 
+                ...reg, 
+                status: newStatus, 
+                participant_id: newStatus === 'approved' ? 'Generated' : reg.participant_id 
+              }
             : reg
         )
       );
@@ -161,9 +165,13 @@ const Admin = () => {
         description: `Registration has been ${newStatus}.`,
       });
       
-      // Reload data to get the updated participant_id
-      const updatedData = await getAllRegistrations();
-      setRegistrations(updatedData);
+      // Reload data to ensure we have the latest state, but maintain the current edition filter
+      const allRegistrations = await getAllRegistrations();
+      const filteredData = selectedEdition === 'all' 
+        ? allRegistrations 
+        : allRegistrations.filter(reg => reg.edition_id === selectedEdition);
+        
+      setRegistrations(filteredData);
     } catch (error: any) {
       console.error('Error updating status:', error);
       toast({
