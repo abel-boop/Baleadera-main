@@ -17,12 +17,13 @@ export type Database = {
           gender: string
           grade: string
           id: string
-          location: string
+          participant_location: 'Hawassa' | 'Addis Ababa'
           name: string
           participant_id: string | null
           phone: string
           status: string
           updated_at: string
+          edition_id: number
         }
         Insert: {
           age: string
@@ -31,12 +32,13 @@ export type Database = {
           gender: string
           grade: string
           id?: string
-          location: string
+          participant_location: 'Hawassa' | 'Addis Ababa'
           name: string
           participant_id?: string | null
           phone: string
           status?: string
           updated_at?: string
+          edition_id: number
         }
         Update: {
           age?: string
@@ -45,12 +47,54 @@ export type Database = {
           gender?: string
           grade?: string
           id?: string
-          location?: string
+          participant_location?: 'Hawassa' | 'Addis Ababa'
           name?: string
           participant_id?: string | null
           phone?: string
           status?: string
           updated_at?: string
+          edition_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registrations_edition_id_fkey"
+            columns: ["edition_id"]
+            isOneToOne: false
+            referencedRelation: "editions"
+            referencedColumns: ["id"]
+          }
+        ]
+      },
+      editions: {
+        Row: {
+          id: number
+          year: number
+          name: string
+          is_active: boolean
+          start_date: string
+          end_date: string
+          event_location: string
+          created_at: string
+        }
+        Insert: {
+          id?: number
+          year: number
+          name: string
+          is_active?: boolean
+          start_date: string
+          end_date: string
+          event_location: string
+          created_at?: string
+        }
+        Update: {
+          id?: number
+          year?: number
+          name?: string
+          is_active?: boolean
+          start_date?: string
+          end_date?: string
+          event_location?: string
+          created_at?: string
         }
         Relationships: []
       }

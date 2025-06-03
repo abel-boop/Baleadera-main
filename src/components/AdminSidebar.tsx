@@ -35,9 +35,9 @@ const AdminSidebar = ({ activeTab, onTabChange, className }: AdminSidebarProps) 
 
   const menuItems = [
     { id: "registrations", label: "Registrations", icon: Users },
+    { id: "print-ids", label: "Print Participant IDs", icon: CreditCard },
     { id: "events", label: "Events", icon: Calendar },
     { id: "users", label: "Users", icon: BarChart3 },
-    { id: "print-ids", label: "Print Participant IDs", icon: CreditCard },
     { id: "settings", label: "Settings", icon: Settings },
   ];
 

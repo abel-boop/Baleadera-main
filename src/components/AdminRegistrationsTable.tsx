@@ -299,7 +299,7 @@ const AdminRegistrationsTable = ({
                     </div>
                     <div className="space-y-1">
                       <p className="text-xs text-muted-foreground">Location</p>
-                      <p className="text-foreground">{registration.location || '-'}</p>
+                      <p className="text-foreground">{registration.participant_location || '-'}</p>
                     </div>
                     
                     {registration.participant_id && (
@@ -389,7 +389,7 @@ const AdminRegistrationsTable = ({
                           {registration.church}
                         </td>
                         <td className="py-4 px-4 text-sm text-foreground/80">
-                          {registration.location || '-'}
+                          {registration.participant_location || '-'}
                         </td>
                         <td className="py-4 px-4">
                           {getStatusBadge(registration.status)}

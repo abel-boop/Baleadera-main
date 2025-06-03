@@ -22,17 +22,21 @@ export const useRegistrationFilters = (registrations: Registration[], options: F
   // Get unique values for filters
   const uniqueGrades = useMemo(() => [...new Set(registrations.map(r => r.grade))], [registrations]);
   
-  const uniqueLocations = useMemo(() => [
-    'Hawassa',
-    'Addis Abeba',
-    ...registrations
-      .map(r => r.location)
-      .filter((location): location is string => 
-        Boolean(location) && 
-        location !== 'Hawassa' && 
-        location !== 'Addis Abeba'
-      )
-  ].filter((value, index, self) => self.indexOf(value) === index), [registrations]);
+  const uniqueLocations = useMemo(() => {
+    // Get all unique participant locations
+    const participantLocations = registrations
+      .map(r => r.participant_location)
+      .filter((location): location is 'Hawassa' | 'Addis Ababa' => 
+        location === 'Hawassa' || location === 'Addis Ababa'
+      );
+      
+    // Combine with default locations and remove duplicates
+    return Array.from(new Set([
+      'Hawassa',
+      'Addis Ababa',
+      ...participantLocations
+    ]));
+  }, [registrations]);
 
   // Filter registrations
   const filteredRegistrations = useMemo(() => {
@@ -41,12 +45,12 @@ export const useRegistrationFilters = (registrations: Registration[], options: F
         registration.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         registration.phone.includes(searchTerm) ||
         registration.church?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        registration.location?.toLowerCase().includes(searchTerm.toLowerCase());
+        registration.participant_location?.toLowerCase().includes(searchTerm.toLowerCase());
       
       const matchesStatus = statusFilter === 'all' || registration.status === statusFilter;
       const matchesGrade = gradeFilter === 'all' || registration.grade === gradeFilter;
       const matchesChurch = churchFilter === 'all' || registration.church === churchFilter;
-      const matchesLocation = locationFilter === 'all' || registration.location === locationFilter;
+      const matchesLocation = locationFilter === 'all' || registration.participant_location === locationFilter;
       
       return matchesSearch && matchesStatus && matchesGrade && matchesChurch && matchesLocation;
     });

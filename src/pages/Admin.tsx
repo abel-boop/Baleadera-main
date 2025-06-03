@@ -1,10 +1,19 @@
-
 import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Menu } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { getAllRegistrations, updateRegistrationStatus, Registration } from "@/utils/supabaseDataManager";
+import { 
+  getAllRegistrations, 
+  updateRegistrationStatus, 
+  createEdition,
+  updateEditionStatus,
+  deleteEdition,
+  Registration,
+  getActiveEdition,
+  getAllEditions,
+  Edition
+} from "@/utils/supabaseDataManager";
 import { CHURCHES } from "@/constants/churches";
 import { useAuth } from "@/contexts/AuthContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -12,10 +21,14 @@ import AdminSidebar from "@/components/AdminSidebar";
 import AdminStatsCards from "@/components/AdminStatsCards";
 import AdminRegistrationsTable from "@/components/AdminRegistrationsTable";
 import PrintParticipantIds from "@/components/PrintParticipantIds";
+import AdminEditions from "@/components/AdminEditions";
+import { supabase } from '@/integrations/supabase/client';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 
 const Admin = () => {
+  const { user, signOut } = useAuth();
   const { toast } = useToast();
-  const { signOut } = useAuth();
   const [activeTab, setActiveTab] = useState("registrations");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,16 +36,64 @@ const Admin = () => {
   const [gradeFilter, setGradeFilter] = useState("all");
   const [churchFilter, setChurchFilter] = useState("all");
   const [locationFilter, setLocationFilter] = useState("all");
-  const [registrations, setRegistrations] = useState<Registration[]>([]);
+  const [selectedEdition, setSelectedEdition] = useState<number | 'all'>('all');
   const [loading, setLoading] = useState(true);
+  const [loadingEditions, setLoadingEditions] = useState(true);
+  const [editions, setEditions] = useState<Edition[]>([]);
+  const [registrations, setRegistrations] = useState<Registration[]>([]);
   
-  // Load registrations from Supabase
+  // Load editions and registrations from Supabase
+  useEffect(() => {
+    const loadEditions = async () => {
+      try {
+        setLoadingEditions(true);
+        const [activeEdition, allEditions] = await Promise.all([
+          getActiveEdition(),
+          getAllEditions()
+        ]);
+        
+        setEditions(allEditions);
+        
+        // Set the active edition as default if available
+        if (activeEdition) {
+          setSelectedEdition(activeEdition.id);
+        } else if (allEditions.length > 0) {
+          // If no active edition, select the most recent one
+          const sortedEditions = [...allEditions].sort((a, b) => 
+            new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+          );
+          setSelectedEdition(sortedEditions[0].id);
+        }
+      } catch (error: any) {
+        console.error('Error loading editions:', error);
+        toast({
+          title: "Error Loading Editions",
+          description: error.message || "Failed to load editions.",
+          variant: "destructive"
+        });
+      } finally {
+        setLoadingEditions(false);
+      }
+    };
+
+    loadEditions();
+  }, [toast]);
+
+  // Load registrations based on selected edition
   useEffect(() => {
     const loadRegistrations = async () => {
+      if (loadingEditions) return; // Wait for editions to load first
+      
       try {
         setLoading(true);
         const data = await getAllRegistrations();
-        setRegistrations(data);
+        
+        // If a specific edition is selected, filter registrations
+        const filteredData = selectedEdition === 'all' 
+          ? data 
+          : data.filter(reg => reg.edition_id === selectedEdition);
+          
+        setRegistrations(filteredData);
       } catch (error: any) {
         console.error('Error loading registrations:', error);
         toast({
@@ -46,24 +107,31 @@ const Admin = () => {
     };
 
     loadRegistrations();
-  }, [toast]);
+  }, [selectedEdition, loadingEditions, toast]);
 
   // Get unique values for filters
-  const uniqueGrades = [...new Set(registrations.map(r => r.grade))];
+  const uniqueGrades = useMemo(() => [...new Set(registrations.map(r => r.grade))], [registrations]);
   
-  const uniqueLocations = [
+  const uniqueLocations = useMemo(() => [
     'Hawassa',
-    'Addis Abeba',
+    'Addis Ababa',
     ...registrations
-      .map(r => r.location)
-      .filter((location): location is string => 
-        Boolean(location) && 
-        location !== 'Hawassa' && 
-        location !== 'Addis Abeba'
+      .map(r => r.participant_location)
+      .filter((location): location is 'Hawassa' | 'Addis Ababa' => 
+        location === 'Hawassa' || location === 'Addis Ababa'
       )
-  ].filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
+  ].filter((value, index, self) => self.indexOf(value) === index), [registrations]);
 
-  // Filtering is now handled in the AdminRegistrationsTable component using the useRegistrationFilters hook
+  // Get the current edition being viewed
+  const currentEdition = useMemo(() => {
+    if (selectedEdition === 'all') return null;
+    return editions.find(e => e.id === selectedEdition);
+  }, [selectedEdition, editions]);
+
+  // Handle edition change
+  const handleEditionChange = (value: string) => {
+    setSelectedEdition(value === 'all' ? 'all' : parseInt(value, 10));
+  };
 
   // Statistics
   const stats = useMemo(() => {
@@ -112,12 +180,12 @@ const Admin = () => {
       const matchesSearch = registration.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                         registration.phone.includes(searchTerm) ||
                         registration.church?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        registration.location?.toLowerCase().includes(searchTerm.toLowerCase());
+                        registration.participant_location?.toLowerCase().includes(searchTerm.toLowerCase());
       
       const matchesStatus = statusFilter === "all" || registration.status === statusFilter;
       const matchesGrade = gradeFilter === "all" || registration.grade === gradeFilter;
       const matchesChurch = churchFilter === "all" || registration.church === churchFilter;
-      const matchesLocation = locationFilter === "all" || registration.location === locationFilter;
+      const matchesLocation = locationFilter === "all" || registration.participant_location === locationFilter;
       
       return matchesSearch && matchesStatus && matchesGrade && matchesChurch && matchesLocation;
     });
@@ -127,7 +195,7 @@ const Admin = () => {
       "Name,Phone,Age,Grade,Gender,Church,Location,Status,Participant ID,Registration Date",
       // Data rows
       ...filteredData.map(reg => 
-        `"${reg.name}","${reg.phone}","${reg.age}","${reg.grade}","${reg.gender}","${reg.church}","${reg.location || ''}","${reg.status}","${reg.participant_id || ''}","${new Date(reg.created_at).toLocaleDateString()}"`
+        `"${reg.name}","${reg.phone}","${reg.age}","${reg.grade}","${reg.gender}","${reg.church}","${reg.participant_location || ''}","${reg.status}","${reg.participant_id || ''}","${new Date(reg.created_at).toLocaleDateString()}"`
       )
     ].join('\n');
 
@@ -214,6 +282,54 @@ const Admin = () => {
           {activeTab === "registrations" && (
             <div className="space-y-6 animate-fade-in [&_.text-muted-foreground]:text-gray-600 dark:[&_.text-muted-foreground]:text-gray-400">
               <AdminStatsCards stats={stats} />
+              <div className="flex flex-col space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <h2 className="text-xl font-semibold">
+                      {currentEdition ? currentEdition.name : 'All Editions'}
+                    </h2>
+                    {currentEdition && (
+                      <p className="text-sm text-muted-foreground">
+                        {new Date(currentEdition.start_date).toLocaleDateString()} - {new Date(currentEdition.end_date).toLocaleDateString()}
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Button onClick={exportData} variant="outline" size="sm">
+                      Export CSV
+                    </Button>
+                  </div>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="w-full sm:w-64">
+                    <Label htmlFor="edition-select" className="text-xs text-muted-foreground mb-1 block">
+                      Select Edition
+                    </Label>
+                    <Select
+                      value={selectedEdition === 'all' ? 'all' : selectedEdition.toString()}
+                      onValueChange={handleEditionChange}
+                      disabled={loadingEditions}
+                    >
+                      <SelectTrigger id="edition-select" className="h-9">
+                        <SelectValue placeholder="Select edition" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Editions</SelectItem>
+                        {editions.map((edition) => (
+                          <SelectItem 
+                            key={edition.id} 
+                            value={edition.id.toString()}
+                            className={edition.is_active ? 'font-medium' : ''}
+                          >
+                            {edition.name} {edition.is_active && '(Active)'}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
               <AdminRegistrationsTable
                 registrations={registrations}
                 searchTerm={searchTerm}
@@ -240,21 +356,24 @@ const Admin = () => {
               />
             </div>
           )}
-          
+
           {activeTab === "events" && (
-            <div className="text-center py-12 animate-fade-in">
-              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">Events Management</h3>
-              <p className="text-gray-600 dark:text-gray-400">Events management functionality coming soon...</p>
+            <div className="animate-fade-in">
+              <AdminEditions
+                editions={editions}
+                onEditionsChange={(newEditions) => setEditions(newEditions)}
+                supabase={supabase}
+              />
             </div>
           )}
-          
+
           {activeTab === "users" && (
             <div className="text-center py-12 animate-fade-in">
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">User Management</h3>
               <p className="text-gray-600 dark:text-gray-400">User management functionality coming soon...</p>
             </div>
           )}
-          
+
           {activeTab === "settings" && (
             <div className="text-center py-12 animate-fade-in">
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">Settings</h3>

@@ -3,18 +3,23 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, ArrowLeft, Users, Calendar, MapPin, CreditCard } from "lucide-react";
+import { CheckCircle, ArrowLeft, Users, Calendar, MapPin, CreditCard, CalendarDays, MapPin as MapPinIcon } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { getRegistration, Registration } from "@/utils/supabaseDataManager";
+import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
+
+type Edition = Database['public']['Tables']['editions']['Row'];
 
 const Confirmation = () => {
   const { id } = useParams();
   const [registration, setRegistration] = useState<Registration | null>(null);
+  const [edition, setEdition] = useState<Edition | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadRegistration = async () => {
+    const loadRegistrationAndEdition = async () => {
       if (!id) {
         setError("No registration ID provided");
         setLoading(false);
@@ -22,11 +27,31 @@ const Confirmation = () => {
       }
 
       try {
+        // Load the registration
         const data = await getRegistration(id);
-        if (data) {
-          setRegistration(data);
-        } else {
+        if (!data) {
           setError("Registration not found");
+          setLoading(false);
+          return;
+        }
+        
+        setRegistration(data);
+
+        // Load the edition information
+        if (data.edition_id) {
+          const { data: editionData, error: editionError } = await supabase
+            .from('editions')
+            .select('*')
+            .eq('id', data.edition_id)
+            .single();
+          
+          if (editionError) {
+            console.error('Error loading edition:', editionError);
+            // Don't fail the whole page if we can't load the edition
+            return;
+          }
+          
+          setEdition(editionData);
         }
       } catch (err: any) {
         console.error('Error loading registration:', err);
@@ -36,7 +61,7 @@ const Confirmation = () => {
       }
     };
 
-    loadRegistration();
+    loadRegistrationAndEdition();
   }, [id]);
 
   if (loading) {
@@ -115,8 +140,30 @@ const Confirmation = () => {
                 Registration Successful!
               </CardTitle>
               <CardDescription className="text-lg text-muted-foreground mt-2">
-                Thank you for registering for the Faithful Stewards Leadership Forum
+                Thank you for registering for the {edition?.name || 'Faithful Stewards Leadership Forum'}
               </CardDescription>
+              {edition && (
+                <div className="mt-4 flex flex-col sm:flex-row gap-4 justify-center">
+                  {edition.start_date && (
+                    <div className="flex items-center text-sm text-muted-foreground">
+                      <CalendarDays className="h-4 w-4 mr-1.5" />
+                      <span>{new Date(edition.start_date).toLocaleDateString()}</span>
+                      {edition.end_date && (
+                        <>
+                          <span className="mx-1">-</span>
+                          <span>{new Date(edition.end_date).toLocaleDateString()}</span>
+                        </>
+                      )}
+                    </div>
+                  )}
+                  {edition.event_location && (
+                    <div className="flex items-center text-sm text-muted-foreground">
+                      <MapPinIcon className="h-4 w-4 mr-1.5" />
+                      <span>Event Location: {edition.event_location}</span>
+                    </div>
+                  )}
+                </div>
+              )}
             </CardHeader>
             <CardContent>
               <div className="bg-muted/50 rounded-lg p-6 mb-6">
@@ -147,9 +194,19 @@ const Confirmation = () => {
                     <span className="ml-2 text-foreground">{registration.church}</span>
                   </div>
                   <div>
-                    <span className="font-medium text-muted-foreground">Location:</span>
-                    <span className="ml-2 text-foreground">{registration.location}</span>
+                    <span className="font-medium text-muted-foreground">Your Location:</span>
+                    <span className="ml-2 text-foreground">{registration.participant_location}</span>
                   </div>
+                  <div>
+                    <span className="font-medium text-muted-foreground">Event Location:</span>
+                    <span className="ml-2 text-foreground">{edition?.event_location || 'Hawassa'}</span>
+                  </div>
+                  {edition && (
+                    <div className="md:col-span-2">
+                      <span className="font-medium text-muted-foreground">Event:</span>
+                      <span className="ml-2 text-foreground">{edition.name}</span>
+                    </div>
+                  )}
                 </div>
                 <div className="mt-4 pt-4 border-t border-border">
                   <div className="flex justify-between items-center">

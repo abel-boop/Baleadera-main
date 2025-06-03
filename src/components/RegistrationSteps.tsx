@@ -15,7 +15,7 @@ interface RegistrationStepsProps {
     grade: string;
     gender: string;
     church: string;
-    location: string;
+    participant_location: 'Hawassa' | 'Addis Ababa';
   };
   ageError: string;
   onInputChange: (field: string, value: string) => void;
@@ -48,7 +48,7 @@ export const RegistrationSteps = ({
   const prevStep = () => setCurrentStep(1);
 
   const isStep1Valid = formData.name && formData.phone && formData.age && !ageError;
-  const isStep2Valid = formData.grade && formData.gender && formData.church && formData.location;
+  const isStep2Valid = formData.grade && formData.gender && formData.church && formData.participant_location;
 
   return (
     <div className="space-y-8">
@@ -225,10 +225,14 @@ export const RegistrationSteps = ({
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="location" className="text-sm font-medium text-foreground">
-                    Location *
+                  <Label htmlFor="participant_location" className="text-sm font-medium text-foreground">
+                    Your Location *
                   </Label>
-                  <Select onValueChange={(value) => onInputChange('location', value)} required>
+                  <Select 
+                    value={formData.participant_location}
+                    onValueChange={(value) => onInputChange('participant_location', value as 'Hawassa' | 'Addis Ababa')} 
+                    required
+                  >
                     <SelectTrigger className="border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300">
                       <SelectValue placeholder="Select your location" />
                     </SelectTrigger>
@@ -237,6 +241,9 @@ export const RegistrationSteps = ({
                       <SelectItem value="Addis Ababa">Addis Ababa</SelectItem>
                     </SelectContent>
                   </Select>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Select the city you're coming from
+                  </p>
                 </div>
 
                 <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
