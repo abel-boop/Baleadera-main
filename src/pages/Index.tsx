@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Users, UserCheck, Calendar, MapPin, Award, Target, Heart, ChevronRight, Facebook, Phone, Mail, Menu, X, BookOpen, Lightbulb, Crown, Youtube } from "lucide-react";
+import { Users, UserCheck, Calendar, MapPin, Award, Target, Heart, ChevronRight, Facebook, Phone, Mail, Menu, X, BookOpen, Lightbulb, Crown, Youtube, Instagram, MessageSquare, Music } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -134,30 +134,36 @@ const Index = () => {
                 equipped with divine wisdom and biblical principles to become responsible stewards 
                 of God's calling in their generation.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                <Link to="/register" className="w-full sm:w-auto">
-                  <Button 
-                    size="lg" 
-                    className="group w-full bg-gradient-to-r from-blue-600 to-red-600 hover:from-blue-700 hover:to-red-700 text-white px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 relative overflow-hidden animate-pulse-glow"
-                    style={{
-                      animation: 'pulse-glow 3s infinite',
-                      animationTimingFunction: 'cubic-bezier(0.4, 0, 0.6, 1)'
-                    }}
-                  >
-                    <span className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/40 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -skew-x-12 group-hover:animate-shimmer"></span>
-                    <span className="relative flex items-center justify-center">
-                      <span className="group-hover:animate-button-scale inline-block">
-                        Begin Your Journey
+              <div className="w-full">
+                <div className="inline-flex flex-wrap gap-3 sm:gap-4">
+                  <Link to="/register" className="min-w-[140px] max-w-[200px] sm:max-w-none">
+                    <Button 
+                      size="sm"
+                      className="group w-full bg-gradient-to-r from-blue-600 to-red-600 hover:from-blue-700 hover:to-red-700 text-white px-4 sm:px-6 py-1.5 sm:py-3 text-xs sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-500 transform hover:scale-105 relative overflow-hidden animate-pulse-glow"
+                      style={{
+                        animation: 'pulse-glow 3s infinite',
+                        animationTimingFunction: 'cubic-bezier(0.4, 0, 0.6, 1)'
+                      }}
+                    >
+                      <span className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/40 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -skew-x-12 group-hover:animate-shimmer"></span>
+                      <span className="relative flex items-center justify-center">
+                        <span className="group-hover:animate-button-scale inline-block">
+                          Register Now
+                        </span>
+                        <ChevronRight className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4 group-hover:translate-x-1 sm:group-hover:translate-x-2 transition-all duration-300 group-hover:scale-125" />
                       </span>
-                      <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-2 transition-all duration-300 group-hover:scale-125" />
-                    </span>
-                  </Button>
-                </Link>
-                <Link to="/about" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold transition-all duration-300 hover:scale-105">
-                    Discover Our Mission
-                  </Button>
-                </Link>
+                    </Button>
+                  </Link>
+                  <Link to="/about" className="min-w-[140px] max-w-[200px] sm:max-w-none">
+                    <Button 
+                      size="sm"
+                      variant="outline" 
+                      className="w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 sm:px-6 py-1.5 sm:py-3 text-xs sm:text-base font-semibold transition-all duration-300 hover:scale-105"
+                    >
+                      Our Mission
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="relative animate-float">
@@ -179,8 +185,7 @@ const Index = () => {
           <div className="text-center mb-12">
             <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 animate-fade-in">Our Divine Calling</h3>
             <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto animate-slide-up">
-              The Baleadera Tiweled Forum is dedicated to raising faithful stewards who walk in God's purpose, 
-              equipped with biblical wisdom to lead with integrity and serve their communities with Christ-like love.
+              To raise a generation of trustworthy, Christ-centered individuals who are deeply passionate about and faithfully committed to their local church — cultivating the Body of Christ, advancing the mission of the Church, and strengthening the unity and fellowship of believers for the glory of God.
             </p>
           </div>
           
@@ -368,12 +373,21 @@ const Index = () => {
               <p className="text-muted-foreground mb-4 text-sm sm:text-base">
                 Raising the next generation of faithful stewards through biblical wisdom, spiritual growth, and servant leadership.
               </p>
-              <div className="flex space-x-4">
-                <a href="https://www.facebook.com/share/16c5nWxemv/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-blue-400 transition-colors" aria-label="Facebook">
+              <div className="flex flex-wrap gap-3">
+                <a href="https://www.facebook.com/share/16c5nWxemv/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-blue-400 transition-colors" aria-label="Facebook" title="Facebook">
                   <Facebook className="h-6 w-6" />
                 </a>
-                <a href="https://youtube.com/@baleaderatiweled?si=Qzuly1Hjs07OIC-v" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-red-500 transition-colors" aria-label="YouTube">
+                <a href="https://youtube.com/@baleaderatiweled?si=Qzuly1Hjs07OIC-v" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-red-500 transition-colors" aria-label="YouTube" title="YouTube">
                   <Youtube className="h-6 w-6" />
+                </a>
+                <a href="https://www.instagram.com/baleadera_teweled?igsh=eGx5OTV4NnU1eDNx&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-pink-500 transition-colors" aria-label="Instagram" title="Instagram">
+                  <Instagram className="h-6 w-6" />
+                </a>
+                <a href="https://www.tiktok.com/@baleadera_tewled?_t=ZM-8wtAMUzIsp6&_r=1" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="TikTok" title="TikTok">
+                  <Music className="h-6 w-6" />
+                </a>
+                <a href="https://t.me/baladera_teweled" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-blue-500 transition-colors" aria-label="Telegram" title="Telegram">
+                  <MessageSquare className="h-6 w-6" />
                 </a>
               </div>
             </div>

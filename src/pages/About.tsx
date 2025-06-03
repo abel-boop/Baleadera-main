@@ -102,23 +102,19 @@ const About = () => {
           
           <div className="prose prose-lg mx-auto text-muted-foreground">
             <p className="mb-6">
-              The Baleadera Tiweled Youth Empowerment Forum was founded with a vision to transform 
-              communities through empowered youth. Our journey began with a simple belief: when young 
-              people are equipped with the right tools, values, and opportunities, they become catalysts 
-              for positive change.
+              We recognize a critical gap within the Church — a gap that has led to the loss of many teenagers before they can transition into youth leadership. This gap, between Sunday School and Youth Ministry, often leaves ages 13 to 19 overlooked and underserved. As a result, we risk missing a whole generation of future leaders in God's Kingdom.
+            </p>
+            
+            <blockquote className="border-l-4 border-blue-600 pl-6 py-2 my-8 italic text-foreground font-medium">
+              "I am the Trustee Generation — turning from self, reaching for Christ."
+            </blockquote>
+            
+            <p className="mb-6">
+              Our mission is to stand in that gap — to engage, equip, and empower this age group to grow in their faith and confidently live it out and share it in the years to come. We believe that by addressing this critical transition period, we can raise up a generation of young people who are firmly rooted in their faith and prepared to be leaders in both the church and the world.
             </p>
             
             <p className="mb-6">
-              Over the years, we have developed comprehensive programs that focus on leadership development, 
-              character building, and practical skills training. Our approach combines traditional values 
-              with modern methodologies to prepare young leaders for the challenges of today's world.
-            </p>
-            
-            <p className="mb-6">
-              The forum serves as a platform where young minds come together to learn, share experiences, 
-              and build lasting networks. Through workshops, mentorship programs, and community service 
-              initiatives, participants develop the confidence and competence needed to make a difference 
-              in their communities.
+              Through targeted programs, mentorship, and biblical teaching, we help young people navigate the challenges of adolescence while deepening their relationship with Christ. Our approach combines spiritual formation with practical life skills, creating well-rounded individuals who are prepared to make a lasting impact for God's Kingdom.
             </p>
           </div>
         </div>
