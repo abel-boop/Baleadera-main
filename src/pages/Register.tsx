@@ -42,7 +42,7 @@ const Register = () => {
     setIsSubmitting(true);
 
     // Validate form
-    const requiredFields = ['name', 'phone', 'age', 'grade', 'gender', 'church'];
+    const requiredFields = ['name', 'phone', 'age', 'grade', 'gender', 'church', 'location'];
     const missingFields = requiredFields.filter(field => !formData[field]);
     
     if (missingFields.length > 0) {

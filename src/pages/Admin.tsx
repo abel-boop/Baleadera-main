@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Menu } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { getAllRegistrations, updateRegistrationStatus, Registration } from "@/utils/supabaseDataManager";
+import { CHURCHES } from "@/constants/churches";
 import { useAuth } from "@/contexts/AuthContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import AdminSidebar from "@/components/AdminSidebar";
@@ -21,6 +22,7 @@ const Admin = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [gradeFilter, setGradeFilter] = useState("all");
   const [churchFilter, setChurchFilter] = useState("all");
+  const [locationFilter, setLocationFilter] = useState("all");
   const [registrations, setRegistrations] = useState<Registration[]>([]);
   const [loading, setLoading] = useState(true);
   
@@ -47,23 +49,21 @@ const Admin = () => {
   }, [toast]);
 
   // Get unique values for filters
-  const uniqueChurches = [...new Set(registrations.map(r => r.church))];
   const uniqueGrades = [...new Set(registrations.map(r => r.grade))];
+  
+  const uniqueLocations = [
+    'Hawassa',
+    'Addis Abeba',
+    ...registrations
+      .map(r => r.location)
+      .filter((location): location is string => 
+        Boolean(location) && 
+        location !== 'Hawassa' && 
+        location !== 'Addis Abeba'
+      )
+  ].filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
 
-  // Filter registrations
-  const filteredRegistrations = useMemo(() => {
-    return registrations.filter(registration => {
-      const matchesSearch = registration.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          registration.phone.includes(searchTerm) ||
-                          registration.church.toLowerCase().includes(searchTerm.toLowerCase());
-      
-      const matchesStatus = statusFilter === "all" || registration.status === statusFilter;
-      const matchesGrade = gradeFilter === "all" || registration.grade === gradeFilter;
-      const matchesChurch = churchFilter === "all" || registration.church === churchFilter;
-      
-      return matchesSearch && matchesStatus && matchesGrade && matchesChurch;
-    });
-  }, [registrations, searchTerm, statusFilter, gradeFilter, churchFilter]);
+  // Filtering is now handled in the AdminRegistrationsTable component using the useRegistrationFilters hook
 
   // Statistics
   const stats = useMemo(() => {
@@ -107,12 +107,27 @@ const Admin = () => {
   };
 
   const exportData = () => {
+    // Apply the same filters as in the UI
+    const filteredData = registrations.filter(registration => {
+      const matchesSearch = registration.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        registration.phone.includes(searchTerm) ||
+                        registration.church?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        registration.location?.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      const matchesStatus = statusFilter === "all" || registration.status === statusFilter;
+      const matchesGrade = gradeFilter === "all" || registration.grade === gradeFilter;
+      const matchesChurch = churchFilter === "all" || registration.church === churchFilter;
+      const matchesLocation = locationFilter === "all" || registration.location === locationFilter;
+      
+      return matchesSearch && matchesStatus && matchesGrade && matchesChurch && matchesLocation;
+    });
+
     const csvContent = [
       // Headers
-      "Name,Phone,Age,Grade,Gender,Church,Status,Participant ID,Registration Date",
+      "Name,Phone,Age,Grade,Gender,Church,Location,Status,Participant ID,Registration Date",
       // Data rows
-      ...filteredRegistrations.map(reg => 
-        `"${reg.name}","${reg.phone}","${reg.age}","${reg.grade}","${reg.gender}","${reg.church}","${reg.status}","${reg.participant_id || ''}","${new Date(reg.created_at).toLocaleDateString()}"`
+      ...filteredData.map(reg => 
+        `"${reg.name}","${reg.phone}","${reg.age}","${reg.grade}","${reg.gender}","${reg.church}","${reg.location || ''}","${reg.status}","${reg.participant_id || ''}","${new Date(reg.created_at).toLocaleDateString()}"`
       )
     ].join('\n');
 
@@ -201,17 +216,16 @@ const Admin = () => {
               <AdminStatsCards stats={stats} />
               <AdminRegistrationsTable
                 registrations={registrations}
-                filteredRegistrations={filteredRegistrations}
                 searchTerm={searchTerm}
                 statusFilter={statusFilter}
                 gradeFilter={gradeFilter}
                 churchFilter={churchFilter}
-                uniqueGrades={uniqueGrades}
-                uniqueChurches={uniqueChurches}
+                locationFilter={locationFilter}
                 onSearchChange={setSearchTerm}
                 onStatusFilterChange={setStatusFilter}
                 onGradeFilterChange={setGradeFilter}
                 onChurchFilterChange={setChurchFilter}
+                onLocationFilterChange={setLocationFilter}
                 onStatusUpdate={handleStatusUpdate}
                 onExportData={exportData}
               />
@@ -220,7 +234,10 @@ const Admin = () => {
 
           {activeTab === "print-ids" && (
             <div className="animate-fade-in">
-              <PrintParticipantIds registrations={registrations} />
+              <PrintParticipantIds 
+                registrations={registrations} 
+                locationFilter={locationFilter}
+              />
             </div>
           )}
           

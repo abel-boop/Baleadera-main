@@ -1,9 +1,8 @@
-import { useMemo, useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { QrCode, Search, Printer, Download, Filter, X, IdCard, ChevronUp, ChevronDown } from 'lucide-react';
+import { Search, Printer, Filter, IdCard, ChevronUp, ChevronDown } from 'lucide-react';
 import type { Registration } from '@/utils/supabaseDataManager';
 import { ParticipantIdCard } from './ParticipantIdCard';
 import {
@@ -13,12 +12,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useRegistrationFilters } from "@/hooks/useRegistrationFilters";
+
+// Extend the Registration type to match ParticipantIdCard props
+type Participant = {
+  id: string;
+  name: string;
+  age?: number;
+  phone?: string;
+  participant_id?: string;
+  status: string;
+};
 
 type PrintParticipantIdsProps = {
   registrations: Registration[];
+  locationFilter?: string;
 };
 
-export const PrintParticipantIds = ({ registrations }: PrintParticipantIdsProps) => {
+export const PrintParticipantIds = ({ registrations, locationFilter = "all" }: PrintParticipantIdsProps) => {
   const printRef = useRef<HTMLDivElement>(null);
   
   const [gradeFilter, setGradeFilter] = useState("all");
@@ -26,25 +37,40 @@ export const PrintParticipantIds = ({ registrations }: PrintParticipantIdsProps)
   const [statusFilter, setStatusFilter] = useState("approved");
   const [searchTerm, setSearchTerm] = useState("");
   const [showFilters, setShowFilters] = useState(false);
+  const [internalLocationFilter, setInternalLocationFilter] = useState(locationFilter);
 
-  // Get unique values for filters
-  const uniqueGrades = [...new Set(registrations.map(r => r.grade))];
-  const uniqueChurches = [...new Set(registrations.map(r => r.church))];
+  // Update internal location filter when prop changes
+  useEffect(() => {
+    setInternalLocationFilter(locationFilter);
+  }, [locationFilter]);
 
-  // Filter registrations
-  const filteredRegistrations = useMemo(() => {
-    return registrations.filter(registration => {
-      const matchesStatus = statusFilter === "all" || registration.status === statusFilter;
-      const matchesGrade = gradeFilter === "all" || registration.grade === gradeFilter;
-      const matchesChurch = churchFilter === "all" || registration.church === churchFilter;
-      const matchesSearch = searchTerm === "" || 
-        registration.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        registration.phone?.includes(searchTerm) ||
-        registration.church?.toLowerCase().includes(searchTerm.toLowerCase());
-      
-      return matchesStatus && matchesGrade && matchesChurch && matchesSearch;
-    });
-  }, [registrations, statusFilter, gradeFilter, churchFilter, searchTerm]);
+  // Use the custom hook for filtering
+  const { 
+    filteredRegistrations, 
+    uniqueGrades, 
+    uniqueLocations, 
+    CHURCHES 
+  } = useRegistrationFilters(registrations, {
+    searchTerm,
+    statusFilter,
+    gradeFilter,
+    churchFilter,
+    locationFilter: internalLocationFilter
+  });
+
+  // Convert Registration[] to Participant[]
+  const participants = filteredRegistrations.map(reg => ({
+    id: reg.id,
+    name: reg.name,
+    age: parseInt(reg.age) || undefined,
+    phone: reg.phone,
+    participant_id: reg.participant_id,
+    status: reg.status
+  }));
+
+  // Debug logging
+  console.log('Filtered registrations:', filteredRegistrations);
+  console.log('CHURCHES:', CHURCHES);
 
   const handlePrint = async () => {
     // Create a hidden iframe instead of a new window
@@ -347,7 +373,7 @@ export const PrintParticipantIds = ({ registrations }: PrintParticipantIdsProps)
                       <SelectContent>
                         <SelectItem value="all">All Grades</SelectItem>
                         {uniqueGrades.map(grade => (
-                          <SelectItem key={grade} value={grade}>
+                          <SelectItem key={`grade-${grade}`} value={grade}>
                             {grade}
                           </SelectItem>
                         ))}
@@ -363,9 +389,26 @@ export const PrintParticipantIds = ({ registrations }: PrintParticipantIdsProps)
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="all">All Churches</SelectItem>
-                        {uniqueChurches.map(church => (
-                          <SelectItem key={church} value={church}>
+                        {CHURCHES.map(church => (
+                          <SelectItem key={`church-${church}`} value={church}>
                             {church}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-medium text-muted-foreground">Location</label>
+                    <Select value={internalLocationFilter} onValueChange={setInternalLocationFilter}>
+                      <SelectTrigger className="h-9 text-sm bg-background/70 border-border/50">
+                        <SelectValue placeholder="All Locations" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Locations</SelectItem>
+                        {uniqueLocations.map(location => (
+                          <SelectItem key={`location-${location}`} value={location}>
+                            {location}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -401,10 +444,13 @@ export const PrintParticipantIds = ({ registrations }: PrintParticipantIdsProps)
           </div>
 
           {/* ID Cards Grid - Screen View */}
-          {filteredRegistrations.length > 0 ? (
+          {participants.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-              {filteredRegistrations.map((participant) => (
-                <div key={participant.id} className="transition-transform hover:scale-[1.02] hover:shadow-lg">
+              {participants.map((participant) => (
+                <div 
+                  key={participant.id}
+                  className="transition-transform hover:scale-[1.02] hover:shadow-lg"
+                >
                   <ParticipantIdCard participant={participant} />
                 </div>
               ))}
@@ -422,8 +468,11 @@ export const PrintParticipantIds = ({ registrations }: PrintParticipantIdsProps)
           {/* Hidden Print View */}
           <div className="hidden">
             <div ref={printRef} className="print-grid">
-              {filteredRegistrations.map((participant) => (
-                <div key={`print-${participant.id}`} className="print-item">
+              {participants.map((participant) => (
+                <div 
+                  key={`print-${participant.id}`}
+                  className="print-item"
+                >
                   <ParticipantIdCard participant={participant} />
                 </div>
               ))}

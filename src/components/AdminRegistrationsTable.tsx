@@ -2,45 +2,58 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Check, X, Search, Download, Filter, Users, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from "lucide-react";
 import { Registration } from "@/utils/supabaseDataManager";
+import { useRegistrationFilters } from "@/hooks/useRegistrationFilters";
 import { cn } from "@/lib/utils";
 
 interface RegistrationsTableProps {
   registrations: Registration[];
-  filteredRegistrations: Registration[];
   searchTerm: string;
   statusFilter: string;
   gradeFilter: string;
   churchFilter: string;
-  uniqueGrades: string[];
-  uniqueChurches: string[];
+  locationFilter: string;
   onSearchChange: (value: string) => void;
   onStatusFilterChange: (value: string) => void;
   onGradeFilterChange: (value: string) => void;
   onChurchFilterChange: (value: string) => void;
+  onLocationFilterChange: (value: string) => void;
   onStatusUpdate: (id: string, status: 'approved' | 'rejected' | 'pending') => void;
   onExportData: () => void;
 }
 
 const AdminRegistrationsTable = ({
   registrations,
-  filteredRegistrations,
   searchTerm,
   statusFilter,
   gradeFilter,
   churchFilter,
-  uniqueGrades,
-  uniqueChurches,
+  locationFilter,
   onSearchChange,
   onStatusFilterChange,
   onGradeFilterChange,
   onChurchFilterChange,
+  onLocationFilterChange,
   onStatusUpdate,
   onExportData
 }: RegistrationsTableProps) => {
+  // Use the custom hook for filtering
+  const { 
+    filteredRegistrations, 
+    uniqueGrades, 
+    uniqueLocations, 
+    CHURCHES 
+  } = useRegistrationFilters(registrations, {
+    searchTerm,
+    statusFilter,
+    gradeFilter,
+    churchFilter,
+    locationFilter
+  });
   const [showFilters, setShowFilters] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [registrationsPerPage] = useState(10);
@@ -206,11 +219,28 @@ const AdminRegistrationsTable = ({
                     <SelectTrigger className="h-9 text-sm bg-background/70 border-border/50">
                       <SelectValue placeholder="All Churches" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="max-h-[300px] overflow-y-auto">
                       <SelectItem value="all">All Churches</SelectItem>
-                      {uniqueChurches.map(church => (
-                        <SelectItem key={church} value={church}>
+                      {CHURCHES.map((church, index) => (
+                        <SelectItem key={index} value={church}>
                           {church}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-medium text-muted-foreground">Location</label>
+                  <Select value={locationFilter} onValueChange={onLocationFilterChange}>
+                    <SelectTrigger className="h-9 text-sm bg-background/70 border-border/50">
+                      <SelectValue placeholder="All Locations" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Locations</SelectItem>
+                      {uniqueLocations.map(location => (
+                        <SelectItem key={location} value={location}>
+                          {location}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -266,6 +296,10 @@ const AdminRegistrationsTable = ({
                     <div className="space-y-1">
                       <p className="text-xs text-muted-foreground">Church</p>
                       <p className="text-foreground">{registration.church}</p>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-xs text-muted-foreground">Location</p>
+                      <p className="text-foreground">{registration.location || '-'}</p>
                     </div>
                     
                     {registration.participant_id && (
@@ -326,6 +360,7 @@ const AdminRegistrationsTable = ({
                     <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Age</th>
                     <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Grade</th>
                     <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Church</th>
+                    <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Location</th>
                     <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Status</th>
                     <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">ID</th>
                     <th className="text-right py-3 px-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Actions</th>
@@ -352,6 +387,9 @@ const AdminRegistrationsTable = ({
                         </td>
                         <td className="py-4 px-4 text-sm text-foreground/80">
                           {registration.church}
+                        </td>
+                        <td className="py-4 px-4 text-sm text-foreground/80">
+                          {registration.location || '-'}
                         </td>
                         <td className="py-4 px-4">
                           {getStatusBadge(registration.status)}

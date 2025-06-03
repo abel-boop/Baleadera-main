@@ -17,6 +17,7 @@ export type Database = {
           gender: string
           grade: string
           id: string
+          location: string
           name: string
           participant_id: string | null
           phone: string
@@ -30,6 +31,7 @@ export type Database = {
           gender: string
           grade: string
           id?: string
+          location: string
           name: string
           participant_id?: string | null
           phone: string
@@ -43,6 +45,7 @@ export type Database = {
           gender?: string
           grade?: string
           id?: string
+          location?: string
           name?: string
           participant_id?: string | null
           phone?: string

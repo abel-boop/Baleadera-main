@@ -146,6 +146,10 @@ const Confirmation = () => {
                     <span className="font-medium text-muted-foreground">Church:</span>
                     <span className="ml-2 text-foreground">{registration.church}</span>
                   </div>
+                  <div>
+                    <span className="font-medium text-muted-foreground">Location:</span>
+                    <span className="ml-2 text-foreground">{registration.location}</span>
+                  </div>
                 </div>
                 <div className="mt-4 pt-4 border-t border-border">
                   <div className="flex justify-between items-center">

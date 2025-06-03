@@ -9,6 +9,7 @@ export interface Registration {
   grade: string;
   gender: string;
   church: string;
+  location: string;
   status: 'pending' | 'approved' | 'rejected';
   participant_id?: string;
   created_at: string;
@@ -67,7 +68,7 @@ export const getRegistration = async (id: string): Promise<Registration | null> 
 };
 
 // Save a new registration (public - no auth required)
-export const saveRegistration = async (formData: Omit<Registration, 'id' | 'status' | 'created_at' | 'updated_at'>): Promise<string> => {
+export const saveRegistration = async (formData: Omit<Registration, 'id' | 'status' | 'participant_id' | 'created_at' | 'updated_at'>): Promise<string> => {
   try {
     const { data, error } = await supabase
       .from('registrations')
@@ -78,6 +79,7 @@ export const saveRegistration = async (formData: Omit<Registration, 'id' | 'stat
         grade: formData.grade,
         gender: formData.gender,
         church: formData.church,
+        location: formData.location,
         status: 'pending'
       }])
       .select('id')
