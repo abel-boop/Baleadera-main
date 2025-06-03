@@ -19,7 +19,8 @@ const Register = () => {
     age: "",
     grade: "",
     gender: "",
-    church: ""
+    church: "",
+    location: ""
   });
 
   const handleInputChange = (field: string, value: string) => {
@@ -28,8 +29,8 @@ const Register = () => {
     // Age validation
     if (field === 'age') {
       const ageNum = parseInt(value);
-      if (value && (ageNum < 14 || ageNum > 19)) {
-        setAgeError("Age must be between 14 and 19 years");
+      if (value && (ageNum < 13 || ageNum > 20)) {
+        setAgeError("Age must be between 13 and 20 years");
       } else {
         setAgeError("");
       }
@@ -56,10 +57,10 @@ const Register = () => {
 
     // Age validation
     const ageNum = parseInt(formData.age);
-    if (ageNum < 14 || ageNum > 19) {
+    if (ageNum < 13 || ageNum > 20) {
       toast({
         title: "Invalid Age",
-        description: "Age must be between 14 and 19 years.",
+        description: "Age must be between 13 and 20 years.",
         variant: "destructive"
       });
       setIsSubmitting(false);

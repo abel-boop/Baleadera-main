@@ -15,6 +15,7 @@ interface RegistrationStepsProps {
     grade: string;
     gender: string;
     church: string;
+    location: string;
   };
   ageError: string;
   onInputChange: (field: string, value: string) => void;
@@ -47,7 +48,7 @@ export const RegistrationSteps = ({
   const prevStep = () => setCurrentStep(1);
 
   const isStep1Valid = formData.name && formData.phone && formData.age && !ageError;
-  const isStep2Valid = formData.grade && formData.gender && formData.church;
+  const isStep2Valid = formData.grade && formData.gender && formData.church && formData.location;
 
   return (
     <div className="space-y-8">
@@ -192,14 +193,50 @@ export const RegistrationSteps = ({
                   <Label htmlFor="church" className="text-sm font-medium text-foreground">
                     Church *
                   </Label>
-                  <Input
-                    id="church"
-                    placeholder="Enter your church name"
-                    value={formData.church}
-                    onChange={(e) => onInputChange('church', e.target.value)}
-                    className="border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
-                    required
-                  />
+                  <Select onValueChange={(value) => onInputChange('church', value)} required>
+                    <SelectTrigger className="border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300">
+                      <SelectValue placeholder="Select your church" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover max-h-60 overflow-y-auto">
+                      <SelectItem value="ሀዋሳ አማኑኤል ኅብረት ቤተ-ክርስቲያን">1. ሀዋሳ አማኑኤል ኅብረት ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ ካቦድ አማኑኤል ኅብረት ቤተ-ክርስቲያን">2. ሀዋሳ ካቦድ አማኑኤል ኅብረት ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ የህይወት ብርሃን ቤተ-ክርስቲያን">3. ሀዋሳ የህይወት ብርሃን ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ ታቦር የህይወት ብርሃን ቤተ-ክርስቲያን">4. ሀዋሳ ታቦር የህይወት ብርሃን ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ መንኃሪያ አከባቢ የህይወት ብርሃን ቤተ-ክርስቲያን">5. ሀዋሳ መንኃሪያ አከባቢ የህይወት ብርሃን ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ አላሙራ የህይወት ብርሃን ቤተ-ክርስቲያን">6. ሀዋሳ አላሙራ የህይወት ብርሃን ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ ሆጎባ የህይወት ብርሃን ቤተ-ክርስቲያን">7. ሀዋሳ ሆጎባ የህይወት ብርሃን ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ አዳሬ የህይወት ብርሃን ቤተ-ክርስቲያን">8. ሀዋሳ አዳሬ የህይወት ብርሃን ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ ምስራቅ የህይወት ብርሃን ቤተ-ክርስቲያን">9. ሀዋሳ ምስራቅ የህይወት ብርሃን ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ ሀይቅ ዳር ቃለ-ህይወት ቤተ-ክርስቲያን">10. ሀዋሳ ሀይቅ ዳር ቃለ-ህይወት ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ መኃል ቃለ-ህይወት ቤተ-ክርስቲያን">11. ሀዋሳ መኃል ቃለ-ህይወት ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ ታቦር ቃለ-ህይወት ቤተ-ክርስቲያን">12. ሀዋሳ ታቦር ቃለ-ህይወት ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ ቡልቻ ቃለ-ህይወት ቤተ-ክርስቲያን">13. ሀዋሳ ቡልቻ ቃለ-ህይወት ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ ምስራቅ መሠረተ ክርስቶስ ቤተ-ክርስቲያን">14. ሀዋሳ ምስራቅ መሠረተ ክርስቶስ ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ ታቦር መሠረተ ክርስቶስ ቤተ-ክርስቲያን">15. ሀዋሳ ታቦር መሠረተ ክርስቶስ ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ መኃል መሠረተ ክርስቶስ ቤተ-ክርስቲያን">16. ሀዋሳ መኃል መሠረተ ክርስቶስ ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ ገነት ቤተ-ክርስቲያን">17. ሀዋሳ ገነት ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ሀዋሳ የህይወት ቃል ቤተ-ክርስቲያን">18. ሀዋሳ የህይወት ቃል ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ቤሪያ የክ/ዳ/ም/አ ቤተ-ክርስቲያን">19. ቤሪያ የክ/ዳ/ም/አ ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="በክርስቶስ ፍቅር የዓለም ብርሃን ቤተ-ክርስቲያን">20. በክርስቶስ ፍቅር የዓለም ብርሃን ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ቤተ-ሳይዳ የወንጌል አማኞች ቤተ-ክርስቲያን">21. ቤተ-ሳይዳ የወንጌል አማኞች ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ምስጋና ቤተ-ክርስቲያን">22. ምስጋና ቤተ-ክርስቲያን</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="location" className="text-sm font-medium text-foreground">
+                    Location *
+                  </Label>
+                  <Select onValueChange={(value) => onInputChange('location', value)} required>
+                    <SelectTrigger className="border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300">
+                      <SelectValue placeholder="Select your location" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover">
+                      <SelectItem value="Hawassa">Hawassa</SelectItem>
+                      <SelectItem value="Addis Ababa">Addis Ababa</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
