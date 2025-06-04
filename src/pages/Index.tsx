@@ -1,6 +1,8 @@
 
 import { Link } from "react-router-dom";
-import { Users, UserCheck, Calendar, MapPin, Award, Target, Heart, ChevronRight, Facebook, Phone, Mail, Menu, X, BookOpen, Lightbulb, Crown, Youtube, Instagram, MessageSquare, Music } from "lucide-react";
+import { Users, UserCheck, Calendar, MapPin, Award, Target, Heart, ChevronRight, Facebook, Phone, Mail, Menu, X, BookOpen, Lightbulb, Crown, Youtube, Instagram, MessageSquare } from "lucide-react";
+import { FaTiktok } from "react-icons/fa6";
+import { FaTelegramPlane } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -30,7 +32,7 @@ const Index = () => {
                 <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
                   ባለአደራ ትውልድ
                 </h1>
-                <p className="text-sm text-muted-foreground hidden sm:block">Faithful Stewards Leadership Forum</p>
+                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Leadership Forum</p>
               </div>
             </div>
             
@@ -127,7 +129,7 @@ const Index = () => {
             <div className="text-center lg:text-left">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 animate-fade-in leading-tight">
                 <span className="block text-foreground mb-2 animate-slide-in-left">Become a</span>
-                <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent animate-slide-in-right">Faithful Steward</span>
+                <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent animate-slide-in-right">Trustee Generation</span>
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed animate-fade-in-delayed max-w-2xl mx-auto lg:mx-0">
                 Join us in a transformative journey of spiritual leadership, where young hearts are 
@@ -171,7 +173,7 @@ const Index = () => {
                 <div className="text-center">
                   <Crown className="h-12 w-12 sm:h-16 sm:w-16 mx-auto mb-4 animate-pulse" />
                   <h3 className="text-xl sm:text-2xl font-bold mb-2">ባለአደራ ትውልድ</h3>
-                  <p className="text-blue-100 text-sm sm:text-base">Faithful Stewards of Tomorrow</p>
+                  <p className="text-blue-100 text-sm sm:text-base">Trustee Generation of Tomorrow</p>
                 </div>
               </div>
             </div>
@@ -291,7 +293,7 @@ const Index = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 animate-fade-in">Testimonies of Faith</h3>
-            <p className="text-base sm:text-lg text-muted-foreground animate-slide-up">Hear from faithful stewards making a kingdom impact</p>
+            <p className="text-base sm:text-lg text-muted-foreground animate-slide-up">Hear from our trustee generation making a kingdom impact</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -304,7 +306,7 @@ const Index = () => {
                   <h4 className="font-semibold text-card-foreground">Faithful Servant</h4>
                 </div>
                 <p className="text-muted-foreground text-center italic text-sm sm:text-base">
-                  "This forum strengthened my faith and gave me the biblical foundation to start a youth ministry that now serves hundreds in our community."
+                  "This forum strengthened my faith and gave me the biblical foundation to start a ministry for teenagers that now serves hundreds in our community."
                 </p>
               </CardContent>
             </Card>
@@ -345,7 +347,7 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 animate-fade-in">Answer Your Divine Calling</h3>
           <p className="text-lg sm:text-xl text-blue-100 mb-8 animate-slide-up">
-            Join faithful stewards who are transforming their communities through God's love and wisdom
+            Join the trustee generation who are transforming their communities through God's love and wisdom
           </p>
           <Link to="/register">
             <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-bounce-in">
@@ -367,11 +369,11 @@ const Index = () => {
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-bold text-card-foreground">ባለአደራ ትውልድ</h3>
-                  <p className="text-muted-foreground text-sm sm:text-base">Faithful Stewards Leadership Forum</p>
+                  <p className="text-muted-foreground text-sm sm:text-base">Trustee Generation Leadership Forum</p>
                 </div>
               </div>
               <p className="text-muted-foreground mb-4 text-sm sm:text-base">
-                Raising the next generation of faithful stewards through biblical wisdom, spiritual growth, and servant leadership.
+                Raising the next generation of trustees through biblical wisdom, spiritual growth, and servant leadership.
               </p>
               <div className="flex flex-wrap gap-3">
                 <a href="https://www.facebook.com/share/16c5nWxemv/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-blue-400 transition-colors" aria-label="Facebook" title="Facebook">
@@ -384,10 +386,10 @@ const Index = () => {
                   <Instagram className="h-6 w-6" />
                 </a>
                 <a href="https://www.tiktok.com/@baleadera_tewled?_t=ZM-8wtAMUzIsp6&_r=1" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="TikTok" title="TikTok">
-                  <Music className="h-6 w-6" />
+                  <FaTiktok className="h-6 w-6" />
                 </a>
                 <a href="https://t.me/baladera_teweled" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-blue-500 transition-colors" aria-label="Telegram" title="Telegram">
-                  <MessageSquare className="h-6 w-6" />
+                  <FaTelegramPlane className="h-6 w-6" />
                 </a>
               </div>
             </div>
@@ -404,14 +406,23 @@ const Index = () => {
             
             <div>
               <h4 className="text-base sm:text-lg font-semibold mb-4 text-card-foreground">Contact</h4>
-              <ul className="space-y-2">
-                <li className="flex items-center text-muted-foreground text-sm sm:text-base">
-                  <Phone className="h-4 w-4 mr-2" />
-                  <span>Contact via Church</span>
+              <ul className="space-y-3">
+                <li className="flex items-start text-muted-foreground text-sm sm:text-base">
+                  <Mail className="h-4 w-4 mt-1 mr-2 flex-shrink-0" />
+                  <a href="mailto:baladeratiweled15@gmail.com" className="hover:text-card-foreground transition-colors">
+                    baladeratiweled15@gmail.com
+                  </a>
                 </li>
-                <li className="flex items-center text-muted-foreground text-sm sm:text-base">
-                  <Mail className="h-4 w-4 mr-2" />
-                  <span>Through Local Coordinator</span>
+                <li className="flex items-start text-muted-foreground text-sm sm:text-base">
+                  <Phone className="h-4 w-4 mt-1 mr-2 flex-shrink-0" />
+                  <div>
+                    <div className="hover:text-card-foreground transition-colors">
+                      <a href="tel:+251916078032" className="block">+251 91 607 8032 (Hawassa)</a>
+                    </div>
+                    <div className="hover:text-card-foreground transition-colors mt-1">
+                      <a href="tel:+251916156529" className="block">+251 91 615 6529 (Addis Ababa)</a>
+                    </div>
+                  </div>
                 </li>
               </ul>
               <div className="mt-4">
@@ -424,7 +435,7 @@ const Index = () => {
           
           <div className="border-t border-border mt-8 pt-8 text-center space-y-2">
             <p className="text-muted-foreground text-sm">
-              © 2024 ባለአደራ ትውልድ Faithful Stewards Leadership Forum. Transforming communities through faithful stewardship.
+              © 2024 ባለአደራ ትውልድ Trustee Generation Leadership Forum. Transforming communities through faithful stewardship.
             </p>
             <p className="text-xs text-muted-foreground/60">
               Built with ❤️ by Abel Desalegn · 

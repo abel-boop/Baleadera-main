@@ -64,7 +64,7 @@ const Testimonials = () => {
                 <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
                   ባለአደራ ትውልድ
                 </h1>
-                <p className="text-sm text-muted-foreground hidden sm:block">Youth Empowerment Forum</p>
+                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Forum</p>
               </div>
             </Link>
             
@@ -148,7 +148,7 @@ const Testimonials = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="text-4xl font-bold text-blue-600 mb-2">500+</div>
-              <div className="text-muted-foreground">Youth Empowered</div>
+              <div className="text-muted-foreground">Teens Empowered</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-red-600 mb-2">50+</div>

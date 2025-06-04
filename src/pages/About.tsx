@@ -19,7 +19,7 @@ const About = () => {
                 <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
                   ባለአደራ ትውልድ
                 </h1>
-                <p className="text-sm text-muted-foreground hidden sm:block">Youth Empowerment Forum</p>
+                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Forum</p>
               </div>
             </Link>
             
@@ -41,7 +41,7 @@ const About = () => {
             <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">Our Forum</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in">
-            The Baleadera Tiweled Youth Empowerment Forum is dedicated to nurturing young leaders 
+            The Baleadera Tiweled Trustee Generation Forum is dedicated to nurturing teenage leaders 
             and building stronger communities through education, mentorship, and fellowship.
           </p>
         </div>
@@ -102,7 +102,7 @@ const About = () => {
           
           <div className="prose prose-lg mx-auto text-muted-foreground">
             <p className="mb-6">
-              We recognize a critical gap within the Church — a gap that has led to the loss of many teenagers before they can transition into youth leadership. This gap, between Sunday School and Youth Ministry, often leaves ages 13 to 19 overlooked and underserved. As a result, we risk missing a whole generation of future leaders in God's Kingdom.
+              We recognize a critical gap within the Church — a gap that has led to the loss of many teenagers before they can transition into leadership. This gap, between Sunday School and Young Adult Ministry, often leaves ages 13 to 19 overlooked and underserved. As a result, we risk missing a whole generation of future leaders in God's Kingdom.
             </p>
             
             <blockquote className="border-l-4 border-blue-600 pl-6 py-2 my-8 italic text-foreground font-medium">
@@ -125,7 +125,7 @@ const About = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-3xl font-bold text-white mb-4">Join Our Mission</h3>
           <p className="text-xl text-blue-100 mb-8">
-            Be part of a movement that's transforming communities through empowered youth
+            Be part of a movement that's transforming communities through empowered teenagers
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/register">

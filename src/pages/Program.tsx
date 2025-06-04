@@ -19,7 +19,7 @@ const Program = () => {
                 <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
                   ባለአደራ ትውልድ
                 </h1>
-                <p className="text-sm text-muted-foreground hidden sm:block">Youth Empowerment Forum</p>
+                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Forum</p>
               </div>
             </Link>
             
@@ -91,7 +91,7 @@ const Program = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground text-base">
-                  Youth Ages 14-19<br />
+                  Teens Ages 14-19<br />
                   From Partner Churches<br />
                   All Welcome
                 </CardDescription>
