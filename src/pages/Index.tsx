@@ -56,6 +56,9 @@ const Index = () => {
               <Link to="/testimonials" className="text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:scale-105">
                 Testimonials
               </Link>
+              <Link to="/memories" className="text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:scale-105">
+                Memories
+              </Link>
             </nav>
             
             <div className="flex items-center space-x-4">
@@ -114,6 +117,13 @@ const Index = () => {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Testimonials
+                </Link>
+                <Link 
+                  to="/memories" 
+                  className="py-2 px-4 text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:bg-accent rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Memories
                 </Link>
               </nav>
             </div>

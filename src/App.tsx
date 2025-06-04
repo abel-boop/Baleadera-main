@@ -15,6 +15,7 @@ import Register from "./pages/Register";
 import Confirmation from "./pages/Confirmation";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
+import Memories from "./pages/Memories";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
               <Route path="/about" element={<About />} />
               <Route path="/program" element={<Program />} />
               <Route path="/testimonials" element={<Testimonials />} />
+              <Route path="/memories" element={<Memories />} />
               <Route path="/register" element={<Register />} />
               <Route path="/confirmation/:id" element={<Confirmation />} />
               <Route path="/login" element={<Login />} />
