@@ -35,29 +35,56 @@ const useRoundsData = (): MemoryRound[] => {
         height: 900,
         caption: `First Round - Moment ${i + 1}`,
         date: '2023-08-15',
-        location: 'Addis Ababa, Ethiopia'
+        location: 'Hawassa, Ethiopia'
       }))
     },
     {
       id: 'round-2',
       title: 'Second Round: Deep Dive',
       description: 'Expanding our knowledge and skills through intensive workshops and team-building exercises.',
-      date: '2023-11-10',
-      images: [] // Will be populated when images are added to round-2 folder
+      date: '2024-02-20',
+      images: Array.from({ length: 26 }, (_, i) => ({
+        id: `2-${i + 1}`,
+        src: `/images/memories/round-2/image-${String(i + 1).padStart(2, '0')}.jpg`,
+        alt: `Second round event photo ${i + 1}`,
+        width: 1200,
+        height: 900,
+        caption: `Second Round - Moment ${i + 1}`,
+        date: '2024-02-20',
+        location: 'Hawassa, Ethiopia'
+      }))
     },
     {
       id: 'round-3',
       title: 'Third Round: Implementation',
       description: 'Putting our learning into practice with real-world projects and community initiatives.',
-      date: '2024-02-20',
-      images: [] // Will be populated when images are added to round-3 folder
+      date: '2024-07-15',
+      images: Array.from({ length: 27 }, (_, i) => ({
+        id: `3-${i + 1}`,
+        src: `/images/memories/round-3/image-${String(i + 1).padStart(2, '0')}.jpg`,
+        alt: `Third round event photo ${i + 1}`,
+        width: 1200,
+        height: 900,
+        caption: `Third Round - Moment ${i + 1}`,
+        date: '2024-07-15',
+        location: 'Hawassa, Ethiopia'
+      }))
     },
     {
       id: 'round-4',
       title: 'Fourth Round: Celebration',
       description: 'Celebrating our achievements and the impact we\'ve made together as a community.',
-      date: '2024-05-15',
-      images: [] // Will be populated when images are added to round-4 folder
+      date: '2025-02-15',
+      images: Array.from({ length: 24 }, (_, i) => ({
+        id: `4-${i + 1}`,
+        src: `/images/memories/round-4/image-${String(i + 1).padStart(2, '0')}.jpg`,
+        alt: `Fourth round event photo ${i + 1}`,
+        width: 1200,
+        height: 900,
+        caption: `Fourth Round - Moment ${i + 1}`,
+        date: '2025-02-15',
+        location: 'Hawassa, Ethiopia'
+      }))
     }
   ], []);
 };
