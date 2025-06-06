@@ -75,7 +75,7 @@ const useRoundsData = (): MemoryRound[] => {
       title: 'Fourth Round: 2025 Winter Discipleship',
       description: 'Our most recent gathering focused on discipleship and preparing young believers to be strong witnesses in their communities.',
       date: '2025-02-15',
-      images: Array.from({ length: 24 }, (_, i) => ({
+      images: Array.from({ length: 32 }, (_, i) => ({
         id: `4-${i + 1}`,
         src: `/images/memories/round-4/image-${String(i + 1).padStart(2, '0')}.jpg`,
         alt: `Fourth round event photo ${i + 1}`,
