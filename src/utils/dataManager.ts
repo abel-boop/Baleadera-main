@@ -1,3 +1,4 @@
+import { getCurrentEthiopianYear } from './ethiopianDate';
 
 export interface Registration {
   id: string;
@@ -15,17 +16,39 @@ export interface Registration {
 
 const STORAGE_KEY = 'youth_camp_registrations';
 
+// Find the next available sequential number for the current Ethiopian year
+const findNextParticipantNumber = (): { number: number; year: string } => {
+  const currentYear = getCurrentEthiopianYear();
+  const registrations = getAllRegistrations();
+  
+  // Extract numbers from IDs that match the current year
+  const currentYearIds = registrations
+    .filter(reg => {
+      const match = reg.participantId?.match(/^BT(\d{3})\/(\d{4})$/);
+      return match && match[2] === currentYear;
+    })
+    .map(reg => {
+      const match = reg.participantId?.match(/^BT(\d{3})/);
+      return match ? parseInt(match[1], 10) : 0;
+    });
+  
+  const nextNumber = currentYearIds.length > 0 ? Math.max(...currentYearIds) + 1 : 1;
+  
+  return {
+    number: nextNumber,
+    year: currentYear
+  };
+};
+
 // Generate a unique ID
 const generateId = (): string => {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 };
 
-// Generate participant ID
+// Generate participant ID with BT prefix, 3-digit sequential number, and Ethiopian year
 const generateParticipantId = (): string => {
-  const prefix = 'YEF';
-  const year = new Date().getFullYear().toString().substr(-2);
-  const random = Math.floor(Math.random() * 9999).toString().padStart(4, '0');
-  return `${prefix}${year}${random}`;
+  const { number, year } = findNextParticipantNumber();
+  return `BT${number.toString().padStart(3, '0')}/${year}`;
 };
 
 // Get all registrations from localStorage
