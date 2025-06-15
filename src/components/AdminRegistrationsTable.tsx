@@ -130,7 +130,7 @@ const AdminRegistrationsTable = ({
           <div>
             <CardTitle className="text-2xl font-semibold tracking-tight text-foreground">Registration Management</CardTitle>
             <CardDescription className="text-sm text-muted-foreground mt-1">
-              Oversee and manage all your forum registrations
+              Oversee and manage all your camp registrations
             </CardDescription>
           </div>
           <div className="flex items-center gap-2">

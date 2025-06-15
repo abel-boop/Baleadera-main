@@ -10,21 +10,21 @@ const Testimonials = () => {
       name: "Sarah M.",
       role: "Youth Pastor",
       church: "Hope Community Church",
-      content: "The forum changed my perspective on leadership and gave me the confidence to start a youth ministry in my church. The skills I learned here are invaluable.",
+      content: "The camp changed my perspective on leadership and gave me the confidence to start a youth ministry in my church. The skills I learned here are invaluable.",
       rating: 5
     },
     {
       name: "Daniel K.",
       role: "Community Leader",
       church: "Grace Fellowship",
-      content: "The skills I learned here helped me organize community development projects that have impacted hundreds of families. This forum is truly transformative.",
+      content: "The skills I learned here helped me organize community development projects that have impacted hundreds of families. This camp is truly transformative.",
       rating: 5
     },
     {
       name: "Ruth A.",
       role: "Student Leader",
       church: "New Life Church",
-      content: "This forum equipped me with leadership tools that I use daily in my university and community activities. The networking opportunities were amazing.",
+      content: "This camp equipped me with leadership tools that I use daily in my university and community activities. The networking opportunities were amazing.",
       rating: 5
     },
     {
@@ -45,7 +45,7 @@ const Testimonials = () => {
       name: "Yonas B.",
       role: "Social Worker",
       church: "Bethel Church",
-      content: "This forum opened my eyes to the power of youth in community transformation. I've since started programs that have reached over 200 young people.",
+      content: "This camp opened my eyes to the power of youth in community transformation. I've since started programs that have reached over 200 young people.",
       rating: 5
     }
   ];
@@ -133,35 +133,6 @@ const Testimonials = () => {
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Statistics Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-foreground mb-4">Our Impact in Numbers</h3>
-            <p className="text-lg text-muted-foreground">The difference we've made together</p>
-          </div>
-          
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">500+</div>
-              <div className="text-muted-foreground">Teens Empowered</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-red-600 mb-2">50+</div>
-              <div className="text-muted-foreground">Partner Churches</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-green-600 mb-2">200+</div>
-              <div className="text-muted-foreground">Community Projects</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-purple-600 mb-2">10+</div>
-              <div className="text-muted-foreground">Years of Impact</div>
-            </div>
           </div>
         </div>
       </section>

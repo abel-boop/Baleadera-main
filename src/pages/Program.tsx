@@ -63,9 +63,7 @@ const Program = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground text-base">
-                  Annual Event<br />
-                  Date: To Be Announced<br />
-                  Full Day Program
+                  ሐምሌ 7 (July 13, 2025)
                 </CardDescription>
               </CardContent>
             </Card>
@@ -77,9 +75,8 @@ const Program = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground text-base">
-                  Community Center<br />
-                  Location Details<br />
-                  Will be shared upon confirmation
+                  Location 1: ሀዋሳ ገነት ቤተ-ክርሰቲያን (Hawasa Genet Church)<br /><br />
+                  Location 2: ሀዋሳ አማኑኤል ኀብረት ቤተ-ክርሰቲያን (Hawasa Emmanuel United Church)
                 </CardDescription>
               </CardContent>
             </Card>
@@ -120,7 +117,7 @@ const Program = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-foreground mb-4">Program Highlights</h3>
-            <p className="text-lg text-muted-foreground">What to expect during the forum</p>
+            <p className="text-lg text-muted-foreground">What to expect during the camp</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">

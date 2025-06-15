@@ -13,7 +13,7 @@ export interface Registration {
   updatedAt: string;
 }
 
-const STORAGE_KEY = 'youth_forum_registrations';
+const STORAGE_KEY = 'youth_camp_registrations';
 
 // Generate a unique ID
 const generateId = (): string => {

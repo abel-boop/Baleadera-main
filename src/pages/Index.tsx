@@ -260,9 +260,7 @@ const Index = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground text-sm sm:text-base">
-                  Annual Spiritual Gathering<br />
-                  Date: To Be Announced<br />
-                  Full Day of Fellowship
+                  ሐምሌ 7 (July 13, 2025)
                 </CardDescription>
               </CardContent>
             </Card>
@@ -274,9 +272,8 @@ const Index = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground text-sm sm:text-base">
-                  Church Fellowship Hall<br />
-                  Sacred gathering space<br />
-                  Details shared upon confirmation
+Location 1: ሀዋሳ ገነት ቤተ-ክርሰቲያን (Hawasa Genet Church)<br /><br />
+                  Location 2: ሀዋሳ አማኑኤል ኀብረት ቤተ-ክርሰቲያን (Hawasa Emmanuel United Church)
                 </CardDescription>
               </CardContent>
             </Card>
@@ -316,7 +313,7 @@ const Index = () => {
                   <h4 className="font-semibold text-card-foreground">Faithful Servant</h4>
                 </div>
                 <p className="text-muted-foreground text-center italic text-sm sm:text-base">
-                  "This forum strengthened my faith and gave me the biblical foundation to start a ministry for teenagers that now serves hundreds in our community."
+                  "This camp strengthened my faith and gave me the biblical foundation to start a ministry for teenagers that now serves hundreds in our community."
                 </p>
               </CardContent>
             </Card>
@@ -344,7 +341,69 @@ const Index = () => {
                   <h4 className="font-semibold text-card-foreground">Devoted Disciple</h4>
                 </div>
                 <p className="text-muted-foreground text-center italic text-sm sm:text-base">
-                  "Through this forum, I discovered my calling and now use my gifts to advance God's kingdom in my university and beyond."
+                  "Through this camp, I discovered my calling and now use my gifts to advance God's kingdom in my university and beyond."
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Impact Section */}
+      <section id="impact" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-red-50 dark:from-slate-900/20 dark:to-slate-800/20">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 animate-fade-in">Our Impact</h3>
+            <p className="text-base sm:text-lg text-muted-foreground animate-slide-up">Transforming lives through 4 powerful rounds of our program</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-blue-50 to-card dark:from-slate-800/40 dark:to-card animate-fade-in">
+              <CardHeader className="text-center">
+                <Users className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 text-blue-600" />
+                <CardTitle className="text-lg sm:text-xl text-card-foreground">Total Reach</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <div className="text-3xl sm:text-4xl font-bold text-foreground mb-2">5,110+</div>
+                <CardDescription className="text-muted-foreground text-sm sm:text-base">
+                  Teenagers reached across our 4 rounds of programs
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-red-50 to-card dark:from-slate-800/40 dark:to-card animate-fade-in" style={{ animationDelay: '100ms' }}>
+              <CardHeader className="text-center">
+                <Heart className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 text-red-600" />
+                <CardTitle className="text-lg sm:text-xl text-card-foreground">Spiritual Impact</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <div className="text-3xl sm:text-4xl font-bold text-foreground mb-2">538+</div>
+                <CardDescription className="text-muted-foreground text-sm sm:text-base">
+                  Teenagers experienced spiritual renewal and transformation
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-green-50 to-card dark:from-slate-800/40 dark:to-card animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <CardHeader className="text-center">
+                <Target className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-4 text-green-600" />
+                <CardTitle className="text-lg sm:text-xl text-card-foreground">Life Changes</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <div className="text-3xl sm:text-4xl font-bold text-foreground mb-2">400+</div>
+                <CardDescription className="text-muted-foreground text-sm sm:text-base">
+                  Lives transformed by overcoming addiction through our program
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12 text-center">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.01] bg-gradient-to-r from-purple-50 to-card dark:from-slate-800/40 dark:to-card max-w-3xl mx-auto animate-fade-in">
+              <CardContent className="p-6">
+                <div className="text-2xl sm:text-3xl font-bold text-foreground mb-2">20+ Churches</div>
+                <p className="text-muted-foreground text-sm sm:text-base">
+                  Partnered with us, including 11 churches that have integrated our program into their regular curriculum
                 </p>
               </CardContent>
             </Card>
