@@ -11,6 +11,7 @@ import {
   Edition
 } from "@/utils/supabaseDataManager";
 import { Plus, Edit2, Trash2 } from "lucide-react";
+import { ConfirmationDialog } from "./ui/confirmation-dialog";
 import { supabase } from '@/integrations/supabase/client';
 
 interface AdminEditionsProps {
@@ -30,34 +31,64 @@ const AdminEditions = ({ editions, onEditionsChange, supabase }: AdminEditionsPr
     event_location: 'Hawassa'
   });
   const [editingEdition, setEditingEdition] = useState<Edition | null>(null);
+  const [deletingEdition, setDeletingEdition] = useState<Edition | null>(null);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showDeleteRegistrationsDialog, setShowDeleteRegistrationsDialog] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleCreateEdition = async () => {
     try {
-      // Check if an edition for this year already exists
-      const existingEdition = editions.find(edition => edition.year === newEdition.year);
-      if (existingEdition) {
-        toast({
-          title: "Error",
-          description: `An edition for year ${newEdition.year} already exists`,
-          variant: "destructive"
-        });
-        return;
-      }
+      // Check if we're editing an existing edition
+      if (editingEdition) {
+        // Update existing edition
+        const { data, error } = await supabase
+          .from('editions')
+          .update({
+            name: newEdition.name,
+            year: newEdition.year,
+            start_date: newEdition.start_date,
+            end_date: newEdition.end_date,
+            event_location: newEdition.event_location
+          })
+          .eq('id', editingEdition.id)
+          .select('*')
+          .single();
 
-      console.log('Attempting to create edition with data:', newEdition);
-      const result = await createEdition(newEdition);
-      console.log('Edition created successfully:', result);
-      toast({
-        title: "Success",
-        description: "New edition created successfully",
-      });
-      
-      // Update the editions list
-      onEditionsChange([...editions, result]);
+        if (error) throw error;
+        
+        // Update the editions list
+        onEditionsChange(editions.map(e => e.id === editingEdition.id ? data : e));
+        
+        toast({
+          title: "Success",
+          description: "Edition updated successfully",
+        });
+        
+        // Reset form and editing state
+        setEditingEdition(null);
+      } else {
+        // Check if an edition for this year already exists
+        const existingEdition = editions.find(edition => edition.year === newEdition.year);
+        if (existingEdition) {
+          throw new Error(`An edition for year ${newEdition.year} already exists`);
+        }
+
+        console.log('Attempting to create edition with data:', newEdition);
+        const result = await createEdition(newEdition);
+        console.log('Edition created successfully:', result);
+        
+        // Update the editions list
+        onEditionsChange([...editions, result]);
+        
+        toast({
+          title: "Success",
+          description: "New edition created successfully",
+        });
+      }
       
       // Reset form
       setNewEdition({
-        year: new Date().getFullYear() + 1, // Default to next year when resetting
+        year: new Date().getFullYear() + 1,
         name: '',
         start_date: new Date().toISOString().split('T')[0],
         end_date: new Date().toISOString().split('T')[0],
@@ -65,10 +96,10 @@ const AdminEditions = ({ editions, onEditionsChange, supabase }: AdminEditionsPr
       });
       setIsCreating(false);
     } catch (error: any) {
-      console.error('Error creating edition:', error);
+      console.error('Error saving edition:', error);
       toast({
         title: "Error",
-        description: error.message || "Failed to create edition",
+        description: error.message || "Failed to save edition",
         variant: "destructive"
       });
     }
@@ -106,26 +137,129 @@ const AdminEditions = ({ editions, onEditionsChange, supabase }: AdminEditionsPr
     }
   };
 
-  const handleDeleteEdition = async (editionId: number) => {
+  const handleDeleteClick = (edition: Edition) => {
+    setDeletingEdition(edition);
+    setShowDeleteDialog(true);
+  };
+
+  const confirmDelete = async (deleteRegistrations = false) => {
+    if (!deletingEdition) return;
+    
+    setIsProcessing(true);
+    setShowDeleteDialog(false);
+    setShowDeleteRegistrationsDialog(false);
+    
     try {
-      await deleteEdition(editionId);
+      if (deleteRegistrations) {
+        // Delete all registrations for this edition first
+        const { error: deleteError } = await supabase
+          .from('registrations')
+          .delete()
+          .eq('edition_id', deletingEdition.id);
+          
+        if (deleteError) throw deleteError;
+        
+        toast({
+          title: "Success",
+          description: "Registrations deleted successfully",
+        });
+      }
+      
+      // Now delete the edition
+      const { error } = await supabase
+        .from('editions')
+        .delete()
+        .eq('id', deletingEdition.id);
+        
+      if (error) throw error;
+      
+      // Update the editions list
+      onEditionsChange(editions.filter(e => e.id !== deletingEdition.id));
+      
       toast({
         title: "Success",
         description: "Edition deleted successfully",
       });
-      
-      // Update the editions list
-      onEditionsChange(editions.filter(e => e.id !== editionId));
     } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to delete edition",
-        variant: "destructive"
-      });
+      console.error('Error deleting edition:', error);
+      
+      if (error.message.includes('violates foreign key constraint')) {
+        // Show dialog to delete registrations first
+        setShowDeleteRegistrationsDialog(true);
+      } else {
+        toast({
+          title: "Error",
+          description: error.message || "Failed to delete edition",
+          variant: "destructive"
+        });
+      }
+    } finally {
+      setIsProcessing(false);
+      if (!showDeleteRegistrationsDialog) {
+        setDeletingEdition(null);
+      }
     }
+  };
+  
+  const startEditing = (edition: Edition) => {
+    setNewEdition({
+      year: edition.year,
+      name: edition.name,
+      start_date: edition.start_date.split('T')[0],
+      end_date: edition.end_date.split('T')[0],
+      event_location: edition.event_location
+    });
+    setEditingEdition(edition);
+    setIsCreating(true);
+  };
+  
+  const cancelEditing = () => {
+    setNewEdition({
+      year: new Date().getFullYear(),
+      name: '',
+      start_date: new Date().toISOString().split('T')[0],
+      end_date: new Date().toISOString().split('T')[0],
+      event_location: 'Hawassa'
+    });
+    setEditingEdition(null);
+    setIsCreating(false);
   };
 
   return (
+    <>
+      {/* Delete Confirmation Dialog */}
+      <ConfirmationDialog
+        isOpen={showDeleteDialog}
+        onClose={() => {
+          setShowDeleteDialog(false);
+          setDeletingEdition(null);
+        }}
+        onConfirm={() => confirmDelete(false)}
+        title="Delete Edition"
+        description="Are you sure you want to delete this edition? This action cannot be undone."
+        confirmText="Delete Edition"
+        variant="destructive"
+      />
+      
+      {/* Delete with Registrations Confirmation Dialog */}
+      <ConfirmationDialog
+        isOpen={showDeleteRegistrationsDialog}
+        onClose={() => {
+          setShowDeleteRegistrationsDialog(false);
+          setDeletingEdition(null);
+        }}
+        onConfirm={() => confirmDelete(true)}
+        title="Delete Edition with Registrations"
+        description={
+          <>
+            <p>This edition has existing registrations. Deleting it will also remove all associated registration data.</p>
+            <p className="mt-2 font-medium">Are you sure you want to continue?</p>
+          </>
+        }
+        confirmText="Delete All"
+        variant="destructive"
+      />
+      
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-semibold">Edition Management</h2>
@@ -181,8 +315,10 @@ const AdminEditions = ({ editions, onEditionsChange, supabase }: AdminEditionsPr
             </Select>
           </div>
           <div className="flex justify-end space-x-2">
-            <Button variant="outline" onClick={() => setIsCreating(false)}>Cancel</Button>
-            <Button onClick={handleCreateEdition}>Create Edition</Button>
+            <Button variant="outline" onClick={cancelEditing}>Cancel</Button>
+            <Button onClick={handleCreateEdition}>
+              {editingEdition ? 'Update Edition' : 'Create Edition'}
+            </Button>
           </div>
         </div>
       )}
@@ -193,7 +329,15 @@ const AdminEditions = ({ editions, onEditionsChange, supabase }: AdminEditionsPr
             <div className="flex-1 min-w-0">
               <div className="flex items-center space-x-3">
                 <div className="truncate">
-                  <h3 className="text-sm font-medium truncate">{edition.name}</h3>
+                  <div className="flex items-center space-x-2">
+                    <h3 className="text-sm font-medium truncate">{edition.name}</h3>
+                    <span className="text-sm text-muted-foreground">({edition.year})</span>
+                    {edition.is_active && (
+                      <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+                        Active
+                      </span>
+                    )}
+                  </div>
                   <p className="text-sm text-muted-foreground">
                     {new Date(edition.start_date).toLocaleDateString()} - {new Date(edition.end_date).toLocaleDateString()}
                   </p>
@@ -214,24 +358,43 @@ const AdminEditions = ({ editions, onEditionsChange, supabase }: AdminEditionsPr
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => handleUpdateStatus(edition.id, !edition.is_active)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  startEditing(edition);
+                }}
+                title="Edit"
+                className="text-blue-600 hover:bg-blue-50"
               >
-                <Edit2 className="mr-2 h-4 w-4" />
+                <Edit2 className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handleUpdateStatus(edition.id, !edition.is_active)}
+                title={edition.is_active ? 'Deactivate' : 'Activate'}
+                className={edition.is_active ? 'text-yellow-600 hover:bg-yellow-50' : 'text-green-600 hover:bg-green-50'}
+              >
                 {edition.is_active ? 'Deactivate' : 'Activate'}
               </Button>
               <Button
-                variant="destructive"
+                variant="outline"
                 size="sm"
-                onClick={() => handleDeleteEdition(edition.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteClick(edition);
+                }}
+                title="Delete"
+                className="text-red-600 hover:bg-red-50"
+                disabled={isProcessing}
               >
-                <Trash2 className="mr-2 h-4 w-4" />
-                Delete
+                <Trash2 className="h-4 w-4" />
               </Button>
             </div>
           </div>
         ))}
       </div>
     </div>
+    </>
   );
 };
 

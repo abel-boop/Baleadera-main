@@ -29,17 +29,36 @@ const Register = () => {
   });
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    
-    // Age validation
     if (field === 'age') {
-      const ageNum = parseInt(value);
-      if (value && (ageNum < 13 || ageNum > 20)) {
-        setAgeError("Age must be between 13 and 20 years");
-      } else {
-        setAgeError("");
+      // Only allow numbers and empty string
+      if (value !== '' && !/^\d*$/.test(value)) {
+        return; // Don't update if not a number
       }
+      
+      // Always update the form data first
+      setFormData(prev => ({ ...prev, [field]: value }));
+      
+      // Then validate
+      validateAge(value);
+    } else {
+      setFormData(prev => ({ ...prev, [field]: value }));
     }
+  };
+  
+  const validateAge = (value: string) => {
+    if (!value) {
+      setAgeError('');
+      return false;
+    }
+    
+    const ageNum = parseInt(value, 10);
+    if (isNaN(ageNum) || ageNum < 14 || ageNum > 19) {
+      setAgeError('Age must be between 14 and 19 years');
+      return false;
+    }
+    
+    setAgeError('');
+    return true;
   };
 
   // Fetch active edition on component mount
@@ -102,18 +121,29 @@ const Register = () => {
     setIsSubmitting(true);
 
     try {
-      // Validate form
-      const requiredFields = ['name', 'phone', 'age', 'grade', 'gender', 'church', 'participant_location'] as const;
+      // First validate age
+      if (!validateAge(formData.age)) {
+        setFormData(prev => ({ ...prev, age: '' }));
+        setTimeout(() => document.getElementById('age')?.focus(), 0);
+        throw new Error("Please enter a valid age between 14 and 19");
+      }
+
+      // Then check for other required fields
+      const requiredFields = ['name', 'phone', 'grade', 'gender', 'church', 'participant_location'] as const;
       const missingFields = requiredFields.filter(field => !formData[field]);
       
       if (missingFields.length > 0) {
         throw new Error(`Please fill in all required fields: ${missingFields.join(', ')}`);
       }
 
-      // Age validation
-      const ageNum = parseInt(formData.age);
-      if (ageNum < 13 || ageNum > 20) {
-        throw new Error("Age must be between 13 and 20 years.");
+      // Parse age again to be safe
+      const ageNum = parseInt(formData.age, 10);
+      if (ageNum < 14 || ageNum > 19) {
+        // This should never happen due to previous validation, but just in case
+        setAgeError('Age must be between 14 and 19 years');
+        setFormData(prev => ({ ...prev, age: '' }));
+        setTimeout(() => document.getElementById('age')?.focus(), 0);
+        throw new Error("Invalid age range. Please enter an age between 14 and 19");
       }
 
       // Create the registration data that matches the RegistrationInsert type
@@ -181,7 +211,7 @@ const Register = () => {
         <div className="container flex h-16 items-center justify-between px-4">
           <Link to="/" className="flex items-center space-x-2">
             <Users className="h-6 w-6" />
-            <span className="font-bold">{edition.name} {edition.year}</span>
+            <span className="font-bold">{edition.name}</span>
           </Link>
           <div className="flex items-center space-x-4">
             <ThemeToggle />

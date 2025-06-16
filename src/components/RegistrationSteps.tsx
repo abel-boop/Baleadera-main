@@ -15,7 +15,6 @@ interface RegistrationStepsProps {
     grade: string;
     gender: string;
     church: string;
-    participant_location: 'Hawassa' | 'Addis Ababa';
   };
   ageError: string;
   onInputChange: (field: string, value: string) => void;
@@ -119,19 +118,51 @@ export const RegistrationSteps = ({
                   <Label htmlFor="age" className="text-sm font-medium text-foreground">
                     Age (14-19 years) *
                   </Label>
-                  <Input
-                    id="age"
-                    type="number"
-                    placeholder="Enter your age"
-                    value={formData.age}
-                    onChange={(e) => onInputChange('age', e.target.value)}
-                    className={`border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 ${
-                      ageError ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
-                    }`}
-                    min="14"
-                    max="19"
-                    required
-                  />
+                  <div className="relative">
+                    <Input
+                      id="age"
+                      type="number"
+                      placeholder="Enter your age (14-19)"
+                      value={formData.age}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        // Only allow numbers and empty string
+                        if (value === '' || /^\d*$/.test(value)) {
+                          onInputChange('age', value);
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        // Allow only numbers, backspace, delete, tab, arrow keys
+                        if (!/^[0-9\b\t\n\r\x00\x1B]$/.test(e.key) && 
+                            e.key !== 'Backspace' && 
+                            e.key !== 'Delete' && 
+                            e.key !== 'Tab' &&
+                            !e.key.startsWith('Arrow')) {
+                          e.preventDefault();
+                        }
+                      }}
+                      onBlur={(e) => {
+                        const value = e.target.value;
+                        if (value) {
+                          const age = parseInt(value, 10);
+                          if (age < 14 || age > 19) {
+                            onInputChange('age', '');
+                          }
+                        }
+                      }}
+                      className={`pr-10 border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 ${
+                        ageError ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                      }`}
+                      min="14"
+                      max="19"
+                      required
+                    />
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <span className="text-muted-foreground text-sm">
+                        yrs
+                      </span>
+                    </div>
+                  </div>
                   {ageError && (
                     <p className="text-red-500 text-sm mt-1 animate-fade-in">{ageError}</p>
                   )}
@@ -177,14 +208,12 @@ export const RegistrationSteps = ({
                       <SelectValue placeholder="Select your grade" />
                     </SelectTrigger>
                     <SelectContent className="bg-popover">
+                      <SelectItem value="grade-7">Grade 7</SelectItem>
                       <SelectItem value="grade-8">Grade 8</SelectItem>
                       <SelectItem value="grade-9">Grade 9</SelectItem>
                       <SelectItem value="grade-10">Grade 10</SelectItem>
                       <SelectItem value="grade-11">Grade 11</SelectItem>
                       <SelectItem value="grade-12">Grade 12</SelectItem>
-                      <SelectItem value="preparatory">Preparatory</SelectItem>
-                      <SelectItem value="first-year">First Year University</SelectItem>
-                      <SelectItem value="second-year">Second Year University</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -224,29 +253,7 @@ export const RegistrationSteps = ({
                   </Select>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="participant_location" className="text-sm font-medium text-foreground">
-                    Your Location *
-                  </Label>
-                  <Select 
-                    value={formData.participant_location}
-                    onValueChange={(value) => onInputChange('participant_location', value as 'Hawassa' | 'Addis Ababa')} 
-                    required
-                  >
-                    <SelectTrigger className="border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300">
-                      <SelectValue placeholder="Select your location" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-popover">
-                      <SelectItem value="Hawassa">Hawassa</SelectItem>
-                      <SelectItem value="Addis Ababa">Addis Ababa</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Select the city you're coming from
-                  </p>
-                </div>
-
-                <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+<div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
                   <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">Registration Requirements:</h4>
                   <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
                     <li>• Age must be between 14 and 19 years</li>

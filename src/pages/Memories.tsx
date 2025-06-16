@@ -24,7 +24,7 @@ const useRoundsData = (): MemoryRound[] => {
   return useMemo(() => [
     {
       id: 'round-1',
-      title: 'First Round: 2023 Summer Gathering',
+      title: '1st Round-BT/2023',
       description: 'Our first gathering where we began building a strong foundation in faith and fellowship for teenagers in Hawassa, Ethiopia.',
       date: '2023-08-15',
       images: Array.from({ length: 27 }, (_, i) => ({
@@ -40,7 +40,7 @@ const useRoundsData = (): MemoryRound[] => {
     },
     {
       id: 'round-2',
-      title: 'Second Round: 2024 Winter Retreat',
+      title: '2nd Round-BT/2024',
       description: 'A spiritual retreat focused on deepening faith and building Christian character among our youth members.',
       date: '2024-02-20',
       images: Array.from({ length: 26 }, (_, i) => ({
@@ -56,7 +56,7 @@ const useRoundsData = (): MemoryRound[] => {
     },
     {
       id: 'round-3',
-      title: 'Third Round: 2024 Summer Bible Camp',
+      title: '3rd Round-BT/2024',
       description: 'A summer filled with Bible study, worship, and fellowship as we grew together in faith and service.',
       date: '2024-07-15',
       images: Array.from({ length: 27 }, (_, i) => ({
@@ -72,7 +72,7 @@ const useRoundsData = (): MemoryRound[] => {
     },
     {
       id: 'round-4',
-      title: 'Fourth Round: 2025 Winter Discipleship',
+      title: '4th Round-BT/2025',
       description: 'Our most recent gathering focused on discipleship and preparing young believers to be strong witnesses in their communities.',
       date: '2025-02-15',
       images: Array.from({ length: 32 }, (_, i) => ({
@@ -88,7 +88,7 @@ const useRoundsData = (): MemoryRound[] => {
     },
     {
       id: 'round-5',
-      title: 'Fifth Round: 2025 Summer Program',
+      title: '5th Round-BT/2025',
       description: 'Our upcoming summer program - stay tuned for more details about this exciting new chapter in our ministry!',
       date: '2025-08-15',
       images: [{
