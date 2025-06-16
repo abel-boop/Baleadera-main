@@ -194,10 +194,6 @@ const Confirmation = () => {
                     <span className="ml-2 text-foreground">{registration.church}</span>
                   </div>
                   <div>
-                    <span className="font-medium text-muted-foreground">Your Location:</span>
-                    <span className="ml-2 text-foreground">{registration.participant_location}</span>
-                  </div>
-                  <div>
                     <span className="font-medium text-muted-foreground">Event Location:</span>
                     <span className="ml-2 text-foreground">{edition?.event_location || 'Hawassa'}</span>
                   </div>
@@ -210,12 +206,6 @@ const Confirmation = () => {
                 </div>
                 <div className="mt-4 pt-4 border-t border-border">
                   <div className="flex justify-between items-center">
-                    <span className="font-medium text-muted-foreground">Registration ID:</span>
-                    <span className="font-mono text-sm bg-blue-100 dark:bg-blue-950/20 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">
-                      {registration.id}
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center mt-2">
                     <span className="font-medium text-muted-foreground">Status:</span>
                     <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                       registration.status === 'approved' 
@@ -228,14 +218,20 @@ const Confirmation = () => {
                        registration.status === 'approved' ? 'Approved' : 'Rejected'}
                     </span>
                   </div>
-                  {registration.participant_id && (
-                    <div className="flex justify-between items-center mt-2">
-                      <span className="font-medium text-muted-foreground">Participant ID:</span>
-                      <span className="font-mono text-sm bg-green-100 dark:bg-green-950/20 text-green-800 dark:text-green-200 px-2 py-1 rounded">
-                        {registration.participant_id}
-                      </span>
-                    </div>
-                  )}
+                  <div className="mt-2">
+                    {registration.participant_id ? (
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium text-muted-foreground">Your Participant ID:</span>
+                        <span className="font-mono text-sm bg-green-100 dark:bg-green-950/20 text-green-800 dark:text-green-200 px-2 py-1 rounded">
+                          {registration.participant_id}
+                        </span>
+                      </div>
+                    ) : (
+                      <p className="text-sm text-muted-foreground mt-2">
+                        Your participant ID will be assigned once your registration is approved.
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -246,11 +242,11 @@ const Confirmation = () => {
             <Card className="border border-border shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card/80 backdrop-blur-sm">
               <CardHeader className="text-center">
                 <Calendar className="h-8 w-8 mx-auto mb-3 text-blue-600 dark:text-blue-400" />
-                <CardTitle className="text-lg text-foreground">What's Next?</CardTitle>
+                <CardTitle className="text-lg text-foreground">Registration Status</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground">
-                  Your registration is being reviewed. You'll receive confirmation within 2-3 business days.
+                  Your registration is being reviewed. Your participant ID will be sent to your church coordinator once approved.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -262,7 +258,7 @@ const Confirmation = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground">
-                  Once approved, visit the registration desk on event day to collect your participant ID.
+                  Your participant ID will be sent to your church. Please contact your church coordinator to collect your ID before the event.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -270,11 +266,16 @@ const Confirmation = () => {
             <Card className="border border-border shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card/80 backdrop-blur-sm">
               <CardHeader className="text-center">
                 <MapPin className="h-8 w-8 mx-auto mb-3 text-indigo-600 dark:text-indigo-400" />
-                <CardTitle className="text-lg text-foreground">Event Details</CardTitle>
+                <CardTitle className="text-lg text-foreground">Event Locations</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground">
-                  Location and schedule details will be shared via phone/email closer to the event date.
+                  <div className="space-y-2">
+                    <div>Location 1: ሀዋሳ ገነት ቤተ-ክርሰቲያን</div>
+                    <div className="text-sm">(Hawasa Genet Church)</div>
+                    <div className="mt-2">Location 2: ሀዋሳ አማኑኤል ኀብረት ቤተ-ክርሰቲያን</div>
+                    <div className="text-sm">(Hawasa Emmanuel United Church)</div>
+                  </div>
                 </CardDescription>
               </CardContent>
             </Card>
