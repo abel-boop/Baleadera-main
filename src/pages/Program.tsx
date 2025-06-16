@@ -102,9 +102,9 @@ const Program = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground text-base">
-                  8:00 AM - 6:00 PM<br />
-                  Interactive Sessions<br />
-                  Networking & Meals
+                  2:00 - 10:30 PM local time<br />
+                  Training, prayer, interactive sessions,<br />
+                  networking and meals
                 </CardDescription>
               </CardContent>
             </Card>
@@ -112,50 +112,90 @@ const Program = () => {
         </div>
       </section>
 
-      {/* Program Agenda */}
+      {/* Program Highlights */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-bold text-foreground mb-4">Program Highlights</h3>
-            <p className="text-lg text-muted-foreground">What to expect during the camp</p>
+            <p className="text-lg text-muted-foreground">What Makes This Experience Unforgettable</p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card group">
               <CardHeader className="text-center">
-                <Award className="h-12 w-12 mx-auto mb-4 text-blue-600" />
-                <CardTitle className="text-xl text-card-foreground">Leadership Training</CardTitle>
+                <div className="w-16 h-16 bg-red-50 dark:bg-red-950/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-red-100 dark:group-hover:bg-red-900/40 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-red-600">
+                    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1 1.5 1.2 2.5"></path>
+                    <path d="M9 18h6"></path>
+                    <path d="M10 22h4"></path>
+                  </svg>
+                </div>
+                <CardTitle className="text-xl text-card-foreground">Power Encounter</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground text-base">
-                  Interactive workshops on leadership principles, team building, 
-                  and effective communication skills.
+                  Life-changing moments in the presence of the Holy Spirit
                 </CardDescription>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card group">
               <CardHeader className="text-center">
-                <BookOpen className="h-12 w-12 mx-auto mb-4 text-green-600" />
-                <CardTitle className="text-xl text-card-foreground">Skill Development</CardTitle>
+                <div className="w-16 h-16 bg-blue-50 dark:bg-blue-950/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/40 transition-colors">
+                  <Users className="h-8 w-8 text-blue-600" />
+                </div>
+                <CardTitle className="text-xl text-card-foreground">Trustee Generation</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground text-base">
-                  Practical sessions on project management, public speaking, 
-                  and community engagement strategies.
+                  Raising a bold generation entrusted with purpose and impact
                 </CardDescription>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card group">
               <CardHeader className="text-center">
-                <Heart className="h-12 w-12 mx-auto mb-4 text-red-600" />
-                <CardTitle className="text-xl text-card-foreground">Character Building</CardTitle>
+                <div className="w-16 h-16 bg-green-50 dark:bg-green-950/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-100 dark:group-hover:bg-green-900/40 transition-colors">
+                  <Award className="h-8 w-8 text-green-600" />
+                </div>
+                <CardTitle className="text-xl text-card-foreground">Next-Level Leadership</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground text-base">
-                  Sessions focused on values, ethics, and personal development 
-                  to build strong character foundations.
+                  Unlock your voice, vision, and influence
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card group md:col-span-2 lg:col-span-1">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-purple-50 dark:bg-purple-950/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/40 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-600">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                  </svg>
+                </div>
+                <CardTitle className="text-xl text-card-foreground">Future-Ready Skills</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="text-muted-foreground text-base">
+                  Learn real-world skills to lead, create, and thrive
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card group md:col-span-2 lg:col-span-1">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-yellow-50 dark:bg-yellow-950/30 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-yellow-100 dark:group-hover:bg-yellow-900/40 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-600">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                </div>
+                <CardTitle className="text-xl text-card-foreground">Unshakable Character</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <CardDescription className="text-muted-foreground text-base">
+                  Build a strong heart, grounded values, and inner strength
                 </CardDescription>
               </CardContent>
             </Card>

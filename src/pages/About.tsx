@@ -19,7 +19,7 @@ const About = () => {
                 <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
                   ባለአደራ ትውልድ
                 </h1>
-                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Forum</p>
+                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Camp</p>
               </div>
             </Link>
             
@@ -38,10 +38,10 @@ const About = () => {
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl font-bold mb-6 animate-fade-in">
             <span className="block text-foreground mb-2">About</span>
-            <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">Our Forum</span>
+            <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">Our Camp</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in">
-            The Baleadera Tiweled Trustee Generation Forum is dedicated to nurturing teenage leaders 
+            The Baleadera Tiweled Trustee Generation Camp is dedicated to nurturing teenage leaders 
             and building stronger communities through education, mentorship, and fellowship.
           </p>
         </div>
@@ -58,8 +58,9 @@ const About = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground text-base">
-                  To empower young people with the skills, knowledge, and values 
-                  needed to become effective leaders in their communities.
+                  To inspire and equip the next generation of changemakers — 
+                  empowering teens with the mindset, skills, and heart to lead 
+                  boldly and make a real difference in their world.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -67,12 +68,34 @@ const About = () => {
             <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card animate-fade-in">
               <CardHeader className="text-center">
                 <Heart className="h-12 w-12 mx-auto mb-4 text-red-600" />
-                <CardTitle className="text-xl text-card-foreground">Our Values</CardTitle>
+                <CardTitle className="text-xl text-card-foreground">Our Core Values</CardTitle>
               </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-muted-foreground text-base">
-                  Integrity, excellence, compassion, and service to others 
-                  form the foundation of everything we do.
+              <CardContent className="text-left px-6">
+                <CardDescription className="text-muted-foreground text-base space-y-3">
+                  <div className="flex items-start">
+                    <span className="font-semibold text-foreground mr-2">1.</span>
+                    <span>Confidentiality</span>
+                  </div>
+                  <div className="flex items-start">
+                    <span className="font-semibold text-foreground mr-2">2.</span>
+                    <span>Integrity</span>
+                  </div>
+                  <div className="flex items-start">
+                    <span className="font-semibold text-foreground mr-2">3.</span>
+                    <span>Excellence</span>
+                  </div>
+                  <div className="flex items-start">
+                    <span className="font-semibold text-foreground mr-2">4.</span>
+                    <span>Humility and Closeness</span>
+                  </div>
+                  <div className="flex items-start">
+                    <span className="font-semibold text-foreground mr-2">5.</span>
+                    <span>Servant Heart</span>
+                  </div>
+                  <div className="flex items-start">
+                    <span className="font-semibold text-foreground mr-2">6.</span>
+                    <span>Focus on Teenagers</span>
+                  </div>
                 </CardDescription>
               </CardContent>
             </Card>

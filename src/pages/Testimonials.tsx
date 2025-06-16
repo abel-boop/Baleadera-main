@@ -5,50 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 const Testimonials = () => {
-  const testimonials = [
-    {
-      name: "Sarah M.",
-      role: "Youth Pastor",
-      church: "Hope Community Church",
-      content: "The camp changed my perspective on leadership and gave me the confidence to start a youth ministry in my church. The skills I learned here are invaluable.",
-      rating: 5
-    },
-    {
-      name: "Daniel K.",
-      role: "Community Leader",
-      church: "Grace Fellowship",
-      content: "The skills I learned here helped me organize community development projects that have impacted hundreds of families. This camp is truly transformative.",
-      rating: 5
-    },
-    {
-      name: "Ruth A.",
-      role: "Student Leader",
-      church: "New Life Church",
-      content: "This camp equipped me with leadership tools that I use daily in my university and community activities. The networking opportunities were amazing.",
-      rating: 5
-    },
-    {
-      name: "Michael T.",
-      role: "Youth Coordinator",
-      church: "Faith Baptist Church",
-      content: "The character building sessions helped me develop a strong foundation for leadership. I now mentor other young people in my community.",
-      rating: 5
-    },
-    {
-      name: "Hanna W.",
-      role: "Event Organizer",
-      church: "Unity Christian Center",
-      content: "The project management skills I gained here enabled me to successfully organize large-scale community events. The training was practical and effective.",
-      rating: 5
-    },
-    {
-      name: "Yonas B.",
-      role: "Social Worker",
-      church: "Bethel Church",
-      content: "This camp opened my eyes to the power of youth in community transformation. I've since started programs that have reached over 200 young people.",
-      rating: 5
-    }
-  ];
+  // Testimonials will be added here later
+  const testimonials = [];
 
   return (
     <div className="min-h-screen bg-background">
@@ -64,7 +22,7 @@ const Testimonials = () => {
                 <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
                   ባለአደራ ትውልድ
                 </h1>
-                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Forum</p>
+                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Camp</p>
               </div>
             </Link>
             
@@ -86,14 +44,38 @@ const Testimonials = () => {
             <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">Stories</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in">
-            Hear from our alumni who are making a difference in their communities 
-            and leading positive change wherever they go.
+            Be among the first to hear inspiring stories of transformation from our participants. 
+            Check back soon as we prepare to share powerful testimonies of growth, leadership, 
+            and community impact from our upcoming camp sessions.
           </p>
         </div>
       </section>
 
-      {/* Testimonials Grid */}
+      {/* Coming Soon Message */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto text-center bg-blue-50 dark:bg-blue-950/30 rounded-2xl p-8 border border-blue-100 dark:border-blue-900/50">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/50 mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600 dark:text-blue-400">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <h3 className="text-2xl font-bold text-foreground mb-4">Inspiring Stories Coming Soon</h3>
+          <p className="text-muted-foreground mb-6">
+            We're gathering powerful testimonies from our camp participants. 
+            These stories of transformation and growth will be shared here soon. 
+            Be sure to check back after our upcoming sessions to be inspired by 
+            the incredible journeys of our young leaders.
+          </p>
+          <Link to="/register">
+            <Button className="bg-gradient-to-r from-blue-600 to-red-600 hover:from-blue-700 hover:to-red-700 text-white">
+              Be Part of the Story
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Testimonials Grid - Hidden until we have content */}
+      <section className="hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
@@ -146,7 +128,7 @@ const Testimonials = () => {
           </p>
           <Link to="/register">
             <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-              Register for the Forum
+              Register for the Camp
             </Button>
           </Link>
         </div>

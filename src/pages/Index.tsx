@@ -32,7 +32,7 @@ const Index = () => {
                 <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
                   ባለአደራ ትውልድ
                 </h1>
-                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Leadership Forum</p>
+                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Leadership Camp</p>
               </div>
             </div>
             
@@ -295,60 +295,6 @@ Location 1: ሀዋሳ ገነት ቤተ-ክርሰቲያን (Hawasa Genet Church)<
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section id="testimonials" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-red-50 dark:from-slate-900/20 dark:to-slate-800/20">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 animate-fade-in">Testimonies of Faith</h3>
-            <p className="text-base sm:text-lg text-muted-foreground animate-slide-up">Hear from our trustee generation making a kingdom impact</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card animate-fade-in">
-              <CardContent className="p-6">
-                <div className="text-center mb-4">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-600 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-white font-bold text-lg sm:text-xl">S</span>
-                  </div>
-                  <h4 className="font-semibold text-card-foreground">Faithful Servant</h4>
-                </div>
-                <p className="text-muted-foreground text-center italic text-sm sm:text-base">
-                  "This camp strengthened my faith and gave me the biblical foundation to start a ministry for teenagers that now serves hundreds in our community."
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card animate-fade-in" style={{ animationDelay: '100ms' }}>
-              <CardContent className="p-6">
-                <div className="text-center mb-4">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-red-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-white font-bold text-lg sm:text-xl">L</span>
-                  </div>
-                  <h4 className="font-semibold text-card-foreground">Kingdom Leader</h4>
-                </div>
-                <p className="text-muted-foreground text-center italic text-sm sm:text-base">
-                  "The spiritual mentorship and biblical teachings here equipped me to lead with wisdom and serve my community through God's grace."
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card md:col-span-2 lg:col-span-1 animate-fade-in" style={{ animationDelay: '200ms' }}>
-              <CardContent className="p-6">
-                <div className="text-center mb-4">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-white font-bold text-lg sm:text-xl">D</span>
-                  </div>
-                  <h4 className="font-semibold text-card-foreground">Devoted Disciple</h4>
-                </div>
-                <p className="text-muted-foreground text-center italic text-sm sm:text-base">
-                  "Through this camp, I discovered my calling and now use my gifts to advance God's kingdom in my university and beyond."
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* Impact Section */}
       <section id="impact" className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-red-50 dark:from-slate-900/20 dark:to-slate-800/20">
         <div className="max-w-6xl mx-auto">
@@ -379,7 +325,7 @@ Location 1: ሀዋሳ ገነት ቤተ-ክርሰቲያን (Hawasa Genet Church)<
               <CardContent className="text-center">
                 <div className="text-3xl sm:text-4xl font-bold text-foreground mb-2">538+</div>
                 <CardDescription className="text-muted-foreground text-sm sm:text-base">
-                  Teenagers experienced spiritual renewal and transformation
+                  Set free from demonic oppression
                 </CardDescription>
               </CardContent>
             </Card>
@@ -438,7 +384,7 @@ Location 1: ሀዋሳ ገነት ቤተ-ክርሰቲያን (Hawasa Genet Church)<
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-bold text-card-foreground">ባለአደራ ትውልድ</h3>
-                  <p className="text-muted-foreground text-sm sm:text-base">Trustee Generation Leadership Forum</p>
+                  <p className="text-muted-foreground text-sm sm:text-base">Trustee Generation Leadership Camp</p>
                 </div>
               </div>
               <p className="text-muted-foreground mb-4 text-sm sm:text-base">
@@ -504,7 +450,7 @@ Location 1: ሀዋሳ ገነት ቤተ-ክርሰቲያን (Hawasa Genet Church)<
           
           <div className="border-t border-border mt-8 pt-8 text-center space-y-2">
             <p className="text-muted-foreground text-sm">
-              © 2024 ባለአደራ ትውልድ Trustee Generation Leadership Forum. Transforming communities through faithful stewardship.
+              © 2025 ባለአደራ ትውልድ Trustee Generation Leadership Camp. Transforming communities through faithful stewardship.
             </p>
             <p className="text-xs text-muted-foreground/60">
               Built with ❤️ by Abel Desalegn · 
