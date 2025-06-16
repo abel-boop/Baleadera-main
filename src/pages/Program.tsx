@@ -41,8 +41,9 @@ const Program = () => {
             <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">Program</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in">
-            A comprehensive program designed to empower, inspire, and equip young leaders 
-            with the tools they need to make a lasting impact.
+            An epic journey built to ignite your purpose, boost your confidence, and equip you with real tools to lead, create change, and leave your mark on the world.
+            <br /><br />
+            <span className="font-medium text-foreground">This isn't just a camp — it's where future world-changers are made.</span>
           </p>
         </div>
       </section>

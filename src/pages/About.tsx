@@ -41,8 +41,12 @@ const About = () => {
             <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">Our Camp</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in">
-            The Baleadera Tiweled Trustee Generation Camp is dedicated to nurturing teenage leaders 
-            and building stronger communities through education, mentorship, and fellowship.
+            <span className="block font-medium text-foreground text-2xl mb-4">This isn't just a camp — it's a movement.</span>
+            The Baleadera Tiweled Trustee Generation Camp is where future leaders are born. It's your space to grow, 
+            lead, and ignite real change — in your life, your crew, and your community.
+            <br /><br />
+            Through powerful mentorship, real-talk learning, and deep faith-filled fellowship, we're raising a generation 
+            that's strong, smart, and spiritually unstoppable.
           </p>
         </div>
       </section>
@@ -106,9 +110,9 @@ const About = () => {
                 <CardTitle className="text-xl text-card-foreground">Our Impact</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
-                <CardDescription className="text-muted-foreground text-base">
-                  Over 500 young leaders have been equipped and are making 
-                  positive changes in their communities.
+                <div className="text-3xl sm:text-4xl font-bold text-foreground mb-2">5,110+</div>
+                <CardDescription className="text-muted-foreground text-sm sm:text-base">
+                  Teenagers reached across our 4 rounds of programs, with over 538 set free from demonic oppression and 400+ lives transformed through overcoming addiction.
                 </CardDescription>
               </CardContent>
             </Card>

@@ -142,9 +142,14 @@ const Index = () => {
                 <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent animate-slide-in-right">Trustee Generation</span>
               </h2>
               <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed animate-fade-in-delayed max-w-2xl mx-auto lg:mx-0">
-                Join us in a transformative journey of spiritual leadership, where young hearts are 
-                equipped with divine wisdom and biblical principles to become responsible stewards 
-                of God's calling in their generation.
+                Join us in a life-changing journey where young hearts are lit with divine wisdom, 
+                trained in real biblical power, and called to carry God's mission with purpose. 
+                This is your moment. A generation rising — bold, fearless, and grounded in truth.
+                <br /><br />
+                <span className="font-medium text-foreground">
+                  You're not just learning — you're becoming a trusted leader, a world-changer, 
+                  a kingdom warrior for your generation.
+                </span>
               </p>
               <div className="w-full">
                 <div className="inline-flex flex-wrap gap-3 sm:gap-4">
