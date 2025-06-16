@@ -46,7 +46,7 @@ export const ParticipantIdCard = ({ participant }: ParticipantIdCardProps) => {
               </div>
               <div className="flex items-center justify-between mt-1">
                 <p className="text-xs text-blue-100 font-medium tracking-wider">
-                  YOUTH FORUM MEMBERSHIP CARD
+                  YOUTH CAMP MEMBERSHIP CARD
                 </p>
                 <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -72,7 +72,7 @@ export const ParticipantIdCard = ({ participant }: ParticipantIdCardProps) => {
             </div>
             
             <div className="bg-yellow-500/20 p-3 rounded-lg border-l-4 border-yellow-400 flex-1 flex flex-col">
-              <p className="text-yellow-100 text-[10px] uppercase font-medium mb-1">Forum ID</p>
+              <p className="text-yellow-100 text-[10px] uppercase font-medium mb-1">Camp ID</p>
               <p className="font-mono font-bold text-yellow-300 text-sm break-all">
                 {participant.participant_id || 'Pending'}
               </p>

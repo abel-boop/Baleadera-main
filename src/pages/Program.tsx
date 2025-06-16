@@ -19,7 +19,7 @@ const Program = () => {
                 <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
                   ባለአደራ ትውልድ
                 </h1>
-                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Forum</p>
+                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Camp</p>
               </div>
             </Link>
             
@@ -37,7 +37,7 @@ const Program = () => {
       <section className="relative bg-gradient-to-br from-blue-50 via-background to-red-50 dark:from-blue-950/20 dark:via-background dark:to-red-950/20 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl font-bold mb-6 animate-fade-in">
-            <span className="block text-foreground mb-2">Forum</span>
+            <span className="block text-foreground mb-2">Camp</span>
             <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">Program</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in">
@@ -212,7 +212,7 @@ const Program = () => {
           </p>
           <Link to="/register">
             <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-              Register for the Forum
+              Register for the Camp
             </Button>
           </Link>
         </div>

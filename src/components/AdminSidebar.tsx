@@ -54,7 +54,7 @@ const AdminSidebar = ({ activeTab, onTabChange, className }: AdminSidebarProps) 
           </div>
           <div>
             <h2 className="text-lg font-semibold text-foreground">Admin Panel</h2>
-            <p className="text-sm text-muted-foreground">Youth Forum Admin</p>
+            <p className="text-sm text-muted-foreground">Youth Camp Admin</p>
           </div>
         </div>
       </div>

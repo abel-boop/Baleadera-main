@@ -118,7 +118,7 @@ const Confirmation = () => {
                   <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
                     ባለአደራ ትውልድ
                   </h1>
-                  <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Leadership Forum</p>
+                  <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Leadership Camp</p>
                 </div>
               </div>
             </div>
@@ -140,7 +140,7 @@ const Confirmation = () => {
                 Registration Successful!
               </CardTitle>
               <CardDescription className="text-lg text-muted-foreground mt-2">
-                Thank you for registering for the {edition?.name || 'Trustee Generation Leadership Forum'}
+                Thank you for registering for the {edition?.name || 'Trustee Generation Leadership Camp'}
               </CardDescription>
               {edition && (
                 <div className="mt-4 flex flex-col sm:flex-row gap-4 justify-center">
