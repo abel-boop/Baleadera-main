@@ -132,20 +132,25 @@ export const PrintParticipantIds = ({ registrations, locationFilter = "all" }: P
             
             .print-grid {
               display: grid;
-              grid-template-columns: repeat(3, 1fr);
-              gap: 1cm;
-              padding: 1cm;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 0;
+              padding: 0;
+              margin: 0;
               width: 100%;
+              height: 100%;
               box-sizing: border-box;
             }
             
             .print-item {
               break-inside: avoid;
               page-break-inside: avoid;
-              width: 100%;
-              height: 3.5in;
+              width: 4.25in;  /* Standard ID card width */
+              height: 1in;     /* Minimal height */
               position: relative;
               overflow: hidden;
+              border: 1px solid #eee;
+              box-sizing: border-box;
+              margin: 0 auto;  /* Center the cards in their grid cells */
             }
             
             /* Ensure all elements are visible */

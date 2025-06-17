@@ -134,15 +134,7 @@ const AdminRegistrationsTable = ({
             </CardDescription>
           </div>
           <div className="flex items-center gap-2">
-            <Button 
-              onClick={onExportData} 
-              variant="outline"
-              size="sm"
-              className="gap-1.5 text-foreground/80 hover:text-foreground hover:bg-accent/50"
-            >
-              <Download className="h-3.5 w-3.5" />
-              <span>Export Data</span>
-            </Button>
+            {/* Export functionality moved to the top of the page */}
           </div>
         </div>
 

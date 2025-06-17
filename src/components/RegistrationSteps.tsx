@@ -9,7 +9,8 @@ import { CheckCircle, User, GraduationCap, ArrowRight, ArrowLeft } from "lucide-
 
 interface RegistrationStepsProps {
   formData: {
-    name: string;
+    firstName: string;
+    fathersName: string;
     phone: string;
     age: string;
     grade: string;
@@ -30,24 +31,87 @@ export const RegistrationSteps = ({
   isSubmitting 
 }: RegistrationStepsProps) => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [errors, setErrors] = useState({ 
+    firstName: '', 
+    fathersName: '',
+    phone: '' 
+  });
+  
+  const validateName = (name: string, field: 'firstName' | 'fathersName') => {
+    // Only allow letters and Amharic characters
+    const nameRegex = /^[\p{L}]+(?:[\s-][\p{L}]+)*$/u;
+    if (!name.trim()) return field === 'firstName' ? 'First name is required' : 'Father\'s name is required';
+    if (!nameRegex.test(name)) return 'Can only contain letters and hyphens';
+    if (name.trim().split(/\s+/).length > 2) return 'Please enter only first and last name';
+    return '';
+  };
+  
+  const validatePhone = (phone: string) => {
+    // Remove any non-digit characters for validation
+    const digitsOnly = phone.replace(/\D/g, '');
+    if (!digitsOnly) return 'Phone number is required';
+    if (digitsOnly.length !== 10) return 'Phone number must be 10 digits';
+    if (!digitsOnly.startsWith('09')) return 'Phone number must start with 09';
+    return '';
+  };
+  
+  const formatPhoneNumber = (value: string) => {
+    // Remove all non-digit characters
+    const cleaned = value.replace(/\D/g, '');
+    
+    // Format as 09XX XXX XXXX
+    if (cleaned.length > 3 && cleaned.length <= 6) {
+      return `${cleaned.slice(0, 3)} ${cleaned.slice(3)}`;
+    } else if (cleaned.length > 6) {
+      return `${cleaned.slice(0, 3)} ${cleaned.slice(3, 6)} ${cleaned.slice(6, 10)}`;
+    }
+    return cleaned;
+  };
 
   const nextStep = () => {
-    // Validate step 1 before proceeding
     if (currentStep === 1) {
-      const requiredStep1Fields = ['name', 'phone', 'age'];
-      const missingFields = requiredStep1Fields.filter(field => !formData[field]);
+      // Validate all fields
+      const firstNameError = validateName(formData.firstName, 'firstName');
+      const fathersNameError = validateName(formData.fathersName, 'fathersName');
+      const phoneError = validatePhone(formData.phone);
       
-      if (missingFields.length > 0 || ageError) {
+      const newErrors = {
+        firstName: firstNameError,
+        fathersName: fathersNameError,
+        phone: phoneError
+      };
+      
+      setErrors(newErrors);
+      
+      // Only proceed if there are no validation errors
+      if (firstNameError || fathersNameError || phoneError || ageError) {
         return;
       }
+      
+      // Format phone number before proceeding
+      onInputChange('phone', formData.phone.replace(/\s/g, ''));
+      
+      // Clear any previous errors
+      setErrors({ firstName: '', fathersName: '', phone: '' });
+      
+      // Proceed to next step
+      setCurrentStep(2);
     }
-    setCurrentStep(2);
   };
 
   const prevStep = () => setCurrentStep(1);
 
-  const isStep1Valid = formData.name && formData.phone && formData.age && !ageError;
-  const isStep2Valid = formData.grade && formData.gender && formData.church && formData.participant_location;
+  const isStep1Valid = 
+    formData.firstName && 
+    formData.fathersName && 
+    formData.phone && 
+    formData.age && 
+    !ageError &&
+    !errors.firstName &&
+    !errors.fathersName &&
+    !errors.phone;
+    
+  const isStep2Valid = formData.grade && formData.gender && formData.church;
 
   return (
     <div className="space-y-8">
@@ -85,33 +149,109 @@ export const RegistrationSteps = ({
           <form onSubmit={onSubmit}>
             {currentStep === 1 && (
               <div className="space-y-6 animate-fade-in">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm font-medium text-foreground">
-                    Full Name *
-                  </Label>
-                  <Input
-                    id="name"
-                    placeholder="Enter your full name"
-                    value={formData.name}
-                    onChange={(e) => onInputChange('name', e.target.value)}
-                    className="border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
-                    required
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName" className="text-sm font-medium text-foreground">
+                      First Name *
+                    </Label>
+                    <Input
+                      id="firstName"
+                      placeholder="Your first name"
+                      value={formData.firstName}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        // Only update if the input matches the allowed pattern or is empty
+                        if (value === '' || /^[\p{L}\s-]*$/u.test(value)) {
+                          onInputChange('firstName', value);
+                          setErrors(prev => ({ ...prev, firstName: '' }));
+                        }
+                      }}
+                      onBlur={(e) => {
+                        const error = validateName(e.target.value, 'firstName');
+                        setErrors(prev => ({ ...prev, firstName: error }));
+                      }}
+                      className={`border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 ${
+                        errors.firstName ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                      }`}
+                      required
+                    />
+                    {errors.firstName && (
+                      <p className="text-red-500 text-xs mt-1 animate-fade-in">{errors.firstName}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="fathersName" className="text-sm font-medium text-foreground">
+                      Father's Name *
+                    </Label>
+                    <Input
+                      id="fathersName"
+                      placeholder="Your father's name"
+                      value={formData.fathersName}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        // Only update if the input matches the allowed pattern or is empty
+                        if (value === '' || /^[\p{L}\s-]*$/u.test(value)) {
+                          onInputChange('fathersName', value);
+                          setErrors(prev => ({ ...prev, fathersName: '' }));
+                        }
+                      }}
+                      onBlur={(e) => {
+                        const error = validateName(e.target.value, 'fathersName');
+                        setErrors(prev => ({ ...prev, fathersName: error }));
+                      }}
+                      className={`border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 ${
+                        errors.fathersName ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                      }`}
+                      required
+                    />
+                    {errors.fathersName && (
+                      <p className="text-red-500 text-xs mt-1 animate-fade-in">{errors.fathersName}</p>
+                    )}
+                  </div>
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="phone" className="text-sm font-medium text-foreground">
                     Phone Number *
                   </Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="Enter your phone number"
-                    value={formData.phone}
-                    onChange={(e) => onInputChange('phone', e.target.value)}
-                    className="border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
-                    required
-                  />
+                  <div className="relative">
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="09XX XXX XXXX"
+                      value={formatPhoneNumber(formData.phone)}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        // Only allow numbers and spaces, max 12 characters (including spaces)
+                        if (/^[0-9\s]*$/.test(value) && value.replace(/\s/g, '').length <= 10) {
+                          onInputChange('phone', value.replace(/\s/g, ''));
+                          setErrors(prev => ({ ...prev, phone: '' }));
+                        }
+                      }}
+                      onBlur={(e) => {
+                        const error = validatePhone(e.target.value);
+                        setErrors(prev => ({ ...prev, phone: error }));
+                      }}
+                      className={`border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 pr-10 ${
+                        errors.phone ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
+                      }`}
+                      maxLength={12} // 09XX XXX XXXX
+                      required
+                    />
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <span className="text-muted-foreground text-sm">
+                        +251
+                      </span>
+                    </div>
+                  </div>
+                  {errors.phone ? (
+                    <p className="text-red-500 text-sm mt-1 animate-fade-in">{errors.phone}</p>
+                  ) : (
+                    <p className="text-muted-foreground text-xs mt-1">
+                      Enter your 10-digit (e.g., 0912345678)
+                    </p>
+                  )}
                 </div>
 
                 <div className="space-y-2">

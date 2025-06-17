@@ -141,15 +141,14 @@ const Index = () => {
                 <span className="block text-foreground mb-2 animate-slide-in-left">Become a</span>
                 <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent animate-slide-in-right">Trustee Generation</span>
               </h2>
-              <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed animate-fade-in-delayed max-w-2xl mx-auto lg:mx-0">
-                Join us in a life-changing journey where young hearts are lit with divine wisdom, 
-                trained in real biblical power, and called to carry God's mission with purpose. 
-                This is your moment. A generation rising — bold, fearless, and grounded in truth.
+              <p className="text-lg sm:text-xl text-foreground mb-8 leading-relaxed animate-fade-in-delayed max-w-2xl mx-auto lg:mx-0">
+                This is your moment. A generation rising — <strong className="text-lg sm:text-xl">bold</strong>, <strong className="text-lg sm:text-xl">fearless</strong>, and <strong className="text-lg sm:text-xl">grounded in truth</strong>.
                 <br /><br />
-                <span className="font-medium text-foreground">
-                  You're not just learning — you're becoming a trusted leader, a world-changer, 
-                  a kingdom warrior for your generation.
-                </span>
+                Join a <strong className="text-lg sm:text-xl">life-changing journey</strong> where young hearts are <strong className="text-lg sm:text-xl">lit with divine wisdom</strong>, 
+                trained in real <strong className="text-lg sm:text-xl">biblical power</strong>, and called to carry <strong className="text-lg sm:text-xl">God's mission with purpose</strong>.
+                <br /><br />
+                You're not just learning — you're becoming a <strong className="text-lg sm:text-xl">trusted leader</strong>, a <strong className="text-lg sm:text-xl">world-changer</strong>, 
+                a <strong className="text-lg sm:text-xl">kingdom warrior</strong> for your generation.
               </p>
               <div className="w-full">
                 <div className="inline-flex flex-wrap gap-3 sm:gap-4">

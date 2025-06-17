@@ -19,7 +19,8 @@ const Register = () => {
   const [ageError, setAgeError] = useState("");
   const [edition, setEdition] = useState<Edition | null>(null);
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    fathersName: "",
     phone: "",
     age: "",
     grade: "",
@@ -129,7 +130,7 @@ const Register = () => {
       }
 
       // Then check for other required fields
-      const requiredFields = ['name', 'phone', 'grade', 'gender', 'church', 'participant_location'] as const;
+      const requiredFields = ['firstName', 'fathersName', 'phone', 'grade', 'gender', 'church', 'participant_location'] as const;
       const missingFields = requiredFields.filter(field => !formData[field]);
       
       if (missingFields.length > 0) {
@@ -148,7 +149,7 @@ const Register = () => {
 
       // Create the registration data that matches the RegistrationInsert type
       const registrationData = {
-        name: formData.name.trim(),
+        name: `${formData.firstName.trim()} ${formData.fathersName.trim()}`.trim(),
         phone: formData.phone.trim(),
         age: formData.age,
         grade: formData.grade,
