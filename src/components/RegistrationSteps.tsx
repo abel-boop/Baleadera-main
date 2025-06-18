@@ -37,12 +37,61 @@ export const RegistrationSteps = ({
     phone: '' 
   });
   
+  // Handle name input with validation
+  const handleNameInput = (field: 'firstName' | 'fathersName', value: string) => {
+    // Allow typing by updating the field value
+    onInputChange(field, value);
+    
+    // Clear any existing error for this field
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    }
+  };
+
+  // Handle paste event to clean input
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>, field: 'firstName' | 'fathersName') => {
+    e.preventDefault();
+    const pastedText = e.clipboardData.getData('text/plain').trim();
+    // Only allow pasting if it's a single word with valid characters
+    if (/^[\p{L}-]+$/u.test(pastedText) && pastedText.length <= 20) {
+      onInputChange(field, pastedText);
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    } else {
+      setErrors(prev => ({
+        ...prev,
+        [field]: 'Please paste a single name without spaces or special characters'
+      }));
+    }
+  };
+
   const validateName = (name: string, field: 'firstName' | 'fathersName') => {
-    // Only allow letters and Amharic characters
-    const nameRegex = /^[\p{L}]+(?:[\s-][\p{L}]+)*$/u;
-    if (!name.trim()) return field === 'firstName' ? 'First name is required' : 'Father\'s name is required';
-    if (!nameRegex.test(name)) return 'Can only contain letters and hyphens';
-    if (name.trim().split(/\s+/).length > 2) return 'Please enter only first and last name';
+    const fieldName = field === 'firstName' ? 'First name' : 'Father\'s name';
+    
+    // Check for empty input
+    if (!name.trim()) return `${fieldName} is required`;
+    
+    // Check for spaces
+    if (/\s/.test(name)) {
+      return 'Spaces are not allowed. Please enter a single name.';
+    }
+    
+    // Check for invalid characters (only letters and hyphens allowed)
+    if (!/^[\p{L}-]+$/u.test(name)) {
+      return `${fieldName} can only contain letters and hyphens`;
+    }
+    
+    // Check length (2-20 characters)
+    if (name.length < 2) return `${fieldName} is too short (min 2 characters)`;
+    if (name.length > 20) return `${fieldName} is too long (max 20 characters)`;
+    
+    // Check for hyphen at start/end or multiple hyphens
+    if (name.startsWith('-') || name.endsWith('-')) {
+      return 'Name cannot start or end with a hyphen';
+    }
+    if (name.includes('--')) {
+      return 'Multiple hyphens in a row are not allowed';
+    }
+    
     return '';
   };
   
@@ -156,16 +205,10 @@ export const RegistrationSteps = ({
                     </Label>
                     <Input
                       id="firstName"
-                      placeholder="Your first name"
+                      placeholder="E.g., Selam or Bethelhem"
                       value={formData.firstName}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        // Only update if the input matches the allowed pattern or is empty
-                        if (value === '' || /^[\p{L}\s-]*$/u.test(value)) {
-                          onInputChange('firstName', value);
-                          setErrors(prev => ({ ...prev, firstName: '' }));
-                        }
-                      }}
+                      onChange={(e) => handleNameInput('firstName', e.target.value)}
+                      onPaste={(e) => handlePaste(e, 'firstName')}
                       onBlur={(e) => {
                         const error = validateName(e.target.value, 'firstName');
                         setErrors(prev => ({ ...prev, firstName: error }));
@@ -173,10 +216,18 @@ export const RegistrationSteps = ({
                       className={`border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 ${
                         errors.firstName ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
                       }`}
+                      maxLength={20}
+                      autoComplete="given-name"
                       required
                     />
-                    {errors.firstName && (
-                      <p className="text-red-500 text-xs mt-1 animate-fade-in">{errors.firstName}</p>
+                    {errors.firstName ? (
+                      <p className="text-red-500 text-xs mt-1 animate-fade-in">
+                        {errors.firstName}
+                      </p>
+                    ) : (
+                      <p className="text-muted-foreground text-xs mt-1">
+                        Single name only. 2-20 letters. Example: "Selam" or "Bethelhem"
+                      </p>
                     )}
                   </div>
 
@@ -186,16 +237,10 @@ export const RegistrationSteps = ({
                     </Label>
                     <Input
                       id="fathersName"
-                      placeholder="Your father's name"
+                      placeholder="E.g., Tesfaye or Abebe"
                       value={formData.fathersName}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        // Only update if the input matches the allowed pattern or is empty
-                        if (value === '' || /^[\p{L}\s-]*$/u.test(value)) {
-                          onInputChange('fathersName', value);
-                          setErrors(prev => ({ ...prev, fathersName: '' }));
-                        }
-                      }}
+                      onChange={(e) => handleNameInput('fathersName', e.target.value)}
+                      onPaste={(e) => handlePaste(e, 'fathersName')}
                       onBlur={(e) => {
                         const error = validateName(e.target.value, 'fathersName');
                         setErrors(prev => ({ ...prev, fathersName: error }));
@@ -203,10 +248,18 @@ export const RegistrationSteps = ({
                       className={`border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 ${
                         errors.fathersName ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
                       }`}
+                      maxLength={20}
+                      autoComplete="family-name"
                       required
                     />
-                    {errors.fathersName && (
-                      <p className="text-red-500 text-xs mt-1 animate-fade-in">{errors.fathersName}</p>
+                    {errors.fathersName ? (
+                      <p className="text-red-500 text-xs mt-1 animate-fade-in">
+                        {errors.fathersName}
+                      </p>
+                    ) : (
+                      <p className="text-muted-foreground text-xs mt-1">
+                        Single name only. 2-20 letters. Example: "Tesfaye" or "Abebe"
+                      </p>
                     )}
                   </div>
                 </div>
