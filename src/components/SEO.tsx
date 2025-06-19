@@ -1,12 +1,21 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 // Structured data for local business
+// Base URL for all absolute paths
+const baseUrl = process.env.NODE_ENV === 'production' 
+  ? 'https://baleadera-tiweled.org' 
+  : 'http://localhost:3000';
+
+// Cache busting parameter
+const cacheBuster = `?v=${Date.now()}`;
+
 const localBusinessStructuredData = {
   "@context": "https://schema.org",
   "@type": "ChristianChurch",
   "name": "Balaadera Tiweled",
+  "alternateName": "Trustee Generation the Chosen Camp",
   "description": "Balaadera Tiweled (Trustee Generation the Chosen Camp) in Hawassa, Ethiopia. Join our leadership program for young believers aged 14-19. Empowering the next generation of Christian leaders in Southern Ethiopia.",
-  "image": "/trustee-generation-share.png",
+  "image": `${baseUrl}/trustee-generation-share.png${cacheBuster}`,
   "url": "https://baleadera-tiweled.org/",
   "telephone": "+251-XXX-XXXXXX",
   "address": {
@@ -62,8 +71,15 @@ export const SEO = ({
   twitterCard = "summary_large_image",
   twitterSite = "@baleadera-tiweled",
 }: SEOProps) => {
-  // Create JSON-LD script for structured data
-  const structuredData = JSON.stringify(localBusinessStructuredData);
+  // Create JSON-LD script for structured data with current URL
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : baseUrl;
+  const fullImageUrl = `${baseUrl}/trustee-generation-share.png${cacheBuster}`;
+  
+  const structuredData = JSON.stringify({
+    ...localBusinessStructuredData,
+    url: currentUrl,
+    image: fullImageUrl
+  });
 
   return (
     <Helmet>
@@ -107,18 +123,34 @@ export const SEO = ({
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
+      <meta property="og:image" content={`${baseUrl}${image}${cacheBuster}`} />
+      <meta property="og:image:secure_url" content={`${baseUrl}${image}${cacheBuster}`} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={title} />
       <meta property="og:site_name" content={siteName} />
+      <meta property="og:locale" content="en_US" />
 
       {/* Twitter */}
       <meta name="twitter:card" content={twitterCard} />
       <meta name="twitter:site" content={twitterSite} />
+      <meta name="twitter:creator" content={twitterSite} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
+      <meta name="twitter:image" content={`${baseUrl}${image}${cacheBuster}`} />
       <meta name="twitter:image:alt" content={`${title} - ${siteName}`} />
+      
+      {/* Additional Meta Tags */}
+      <meta name="robots" content="index, follow" />
+      <meta name="theme-color" content="#1e40af" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-title" content={siteName} />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      
+      {/* Favicon */}
+      <link rel="icon" href={`${baseUrl}/favicon.ico${cacheBuster}`} type="image/x-icon" />
+      <link rel="apple-touch-icon" href={`${baseUrl}/apple-touch-icon.png${cacheBuster}`} />
+      <link rel="manifest" href={`${baseUrl}/site.webmanifest${cacheBuster}`} />
     </Helmet>
   );
 };
