@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import { useState } from "react";
+import CountdownTimer from "@/components/CountdownTimer";
 
 const Index = () => {
   const { scrollToSection } = useSmoothScroll();
@@ -132,9 +133,9 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="relative bg-gradient-to-br from-blue-50 via-background to-red-50 dark:from-slate-900/20 dark:via-background dark:to-slate-800/20 py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section id="home" className="relative bg-gradient-to-br from-blue-50 via-background to-red-50 dark:from-slate-900/20 dark:via-background dark:to-slate-800/20 pt-16 sm:pt-20 pb-24 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/lovable-uploads/eadb4c28-fc6b-401e-9970-5f67b9ce053c.png')] bg-cover bg-center opacity-10"></div>
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative max-w-6xl mx-auto flex flex-col min-h-[70vh]">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="text-center lg:text-left">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 animate-fade-in leading-tight">
@@ -191,6 +192,9 @@ const Index = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="mt-auto pt-8">
+            <CountdownTimer />
           </div>
         </div>
       </section>
