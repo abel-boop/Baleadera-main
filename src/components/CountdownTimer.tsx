@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
-// Fixed target date: 9 days from today at 11:59:59 PM
+// Fixed target date: 8 days from today at 11:59:59 PM
 const getTargetDate = () => {
   const target = new Date();
-  target.setDate(target.getDate() + 9);
+  target.setDate(target.getDate() + 8);
   target.setHours(23, 59, 59, 0);
   return target;
 };
