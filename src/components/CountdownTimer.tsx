@@ -1,5 +1,13 @@
 import { useState, useEffect } from 'react';
 
+// Fixed target date: 9 days from today at 11:59:59 PM
+const getTargetDate = () => {
+  const target = new Date();
+  target.setDate(target.getDate() + 9);
+  target.setHours(23, 59, 59, 0);
+  return target;
+};
+
 const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -9,19 +17,17 @@ const CountdownTimer = () => {
   });
 
   useEffect(() => {
-    // Set the target date to 9 days from now
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 9);
+    const targetDate = getTargetDate();
     
-    const interval = setInterval(() => {
+    const updateCountdown = () => {
       const now = new Date().getTime();
       const distance = targetDate.getTime() - now;
 
       // Calculate time remaining
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const days = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
+      const hours = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+      const minutes = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+      const seconds = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000));
 
       setTimeLeft({ days, hours, minutes, seconds });
 
@@ -29,7 +35,13 @@ const CountdownTimer = () => {
         clearInterval(interval);
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
-    }, 1000);
+    };
+    
+    // Initial call to set the countdown immediately
+    updateCountdown();
+    
+    // Then update every second
+    const interval = setInterval(updateCountdown, 1000);
 
     return () => clearInterval(interval);
   }, []);
