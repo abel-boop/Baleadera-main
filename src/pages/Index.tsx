@@ -32,7 +32,7 @@ const Index = () => {
                 <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent">
                   ባለአደራ ትውልድ
                 </h1>
-                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation Leadership Camp</p>
+                <p className="text-sm text-muted-foreground hidden sm:block">Trustee Generation the Chosen Camp</p>
               </div>
             </div>
             
@@ -289,9 +289,8 @@ Location 1: ሀዋሳ ገነት ቤተ-ክርሰቲያን (Hawasa Genet Church)<
               </CardHeader>
               <CardContent className="text-center">
                 <CardDescription className="text-muted-foreground text-sm sm:text-base">
-                  Young Believers Ages 14-19<br />
-                  From Partner Churches<br />
-                  Called to Leadership
+                  Teenagers (Ages 14–19)<br />
+                  From our awesome partner churches — specially chosen & called for something greater.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -364,9 +363,9 @@ Location 1: ሀዋሳ ገነት ቤተ-ክርሰቲያን (Hawasa Genet Church)<
       {/* Call to Action */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-red-600">
         <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 animate-fade-in">Answer Your Divine Calling</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 animate-fade-in">Step Into Your Calling. Change Your World!</h3>
           <p className="text-lg sm:text-xl text-blue-100 mb-8 animate-slide-up">
-            Join the trustee generation who are transforming their communities through God's love and wisdom
+            Join the Trustee Generation — a movement of young warriors rising up to lead with God's love, live with unshakable purpose, and bring real change to their communities through divine wisdom
           </p>
           <Link to="/register">
             <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-bounce-in">
@@ -388,7 +387,7 @@ Location 1: ሀዋሳ ገነት ቤተ-ክርሰቲያን (Hawasa Genet Church)<
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl font-bold text-card-foreground">ባለአደራ ትውልድ</h3>
-                  <p className="text-muted-foreground text-sm sm:text-base">Trustee Generation Leadership Camp</p>
+                  <p className="text-muted-foreground text-sm sm:text-base">Trustee Generation the Chosen Camp</p>
                 </div>
               </div>
               <p className="text-muted-foreground mb-4 text-sm sm:text-base">
@@ -454,7 +453,7 @@ Location 1: ሀዋሳ ገነት ቤተ-ክርሰቲያን (Hawasa Genet Church)<
           
           <div className="border-t border-border mt-8 pt-8 text-center space-y-2">
             <p className="text-muted-foreground text-sm">
-              © 2025 ባለአደራ ትውልድ Trustee Generation Leadership Camp. Transforming communities through faithful stewardship.
+              © 2025 ባለአደራ ትውልድ Trustee Generation the Chosen Camp. Transforming communities through faithful stewardship.
             </p>
             <p className="text-xs text-muted-foreground/60">
               Built with ❤️ by Abel Desalegn · 
