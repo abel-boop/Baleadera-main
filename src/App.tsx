@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
@@ -27,10 +28,11 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <AuthProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <SEO />
+          <LanguageProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <SEO />
             <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
@@ -50,7 +52,8 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
             </BrowserRouter>
-          </TooltipProvider>
+            </TooltipProvider>
+          </LanguageProvider>
         </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
