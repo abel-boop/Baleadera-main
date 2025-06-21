@@ -146,13 +146,11 @@ const Index = () => {
                 <span className="block text-foreground mb-2 animate-slide-in-left">{t('heroTitle1')}</span>
                 <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent animate-slide-in-right">{t('heroTitle2')}</span>
               </h2>
-              <p className="text-lg sm:text-xl text-foreground mb-8 leading-relaxed animate-fade-in-delayed max-w-2xl mx-auto lg:mx-0">
-                {t('heroSubtitle1')}<strong className="text-lg sm:text-xl">{t('heroSubtitleBold1')}</strong>, <strong className="text-lg sm:text-xl">{t('heroSubtitleBold2')}</strong> {t('and')} <strong className="text-lg sm:text-xl">{t('heroSubtitleBold3')}</strong>.
-                <br /><br />
-                {t('heroSubtitle2')}<strong className="text-lg sm:text-xl">{t('heroSubtitleBold4')}</strong>{t('heroSubtitle3')}<strong className="text-lg sm:text-xl">{t('heroSubtitleBold5')}</strong>{t('heroSubtitle4')}<strong className="text-lg sm:text-xl">{t('heroSubtitleBold6')}</strong>{t('heroSubtitle5')} <strong className="text-lg sm:text-xl">{t('heroSubtitleBold7')}</strong>{t('heroSubtitle6')}
-                <br /><br />
-                {t('heroSubtitle7')}<strong className="text-lg sm:text-xl">{t('heroSubtitleBold8')}</strong>{t('heroSubtitle8')}<strong className="text-lg sm:text-xl">{t('heroSubtitleBold9')}</strong>{t('heroSubtitle9')}<strong className="text-lg sm:text-xl">{t('heroSubtitleBold10')}</strong>{t('heroSubtitle10')}
-              </p>
+              <div className="text-lg sm:text-xl text-foreground mb-8 leading-relaxed animate-fade-in-delayed max-w-2xl mx-auto lg:mx-0 space-y-4">
+                <p>{t('heroParagraph1')}</p>
+                <p>{t('heroParagraph2')}</p>
+                <p>{t('heroParagraph3')}</p>
+              </div>
               <div className="w-full">
                 <div className="inline-flex flex-wrap gap-3 sm:gap-4">
                   <Link to="/register" className="min-w-[140px] max-w-[200px] sm:max-w-none">

@@ -21,50 +21,41 @@ const translations: Translations = {
   admin: { en: 'Admin', am: 'አስተዳዳሪ' },
   
   // Hero Section
-  heroTitle1: { en: 'Become a', am: 'ባለአደራ ትውልድ' },
-  heroTitle2: { en: 'Trustee Generation', am: 'ይሁኑ' },
-  and: { en: 'and', am: 'እና' },
-  heroSubtitle1: { en: 'This is your moment. A generation rising — ', am: 'ጊዜው አውን ነው። የሚነሳ ትውልድ :-'},
-  heroSubtitleBold1: { en: 'bold', am: 'ደፋር' },
-  heroSubtitleBold2: { en: 'fearless', am: 'የማይፈራ'},
-  heroSubtitleBold3: { en: 'grounded in truth', am: 'በእውነት የተመሰረተ፣' },
-  heroSubtitle2: { en: 'Join a ', am: 'ተቀላቀሉን በዚ' },
-  heroSubtitleBold4: { en: 'life-changing journey', am: ' ህይወትን የሚቀይር ጉዞ' },
-  heroSubtitle3: { en: ' where young hearts are ', am: '፣ ልባችንም ' },
-  heroSubtitleBold5: { en: 'lit with divine wisdom', am: 'በመሎኮታዊ እና' },
-  heroSubtitle4: { en: ', trained in real ', am: '፣ በእውነተኛ ' },
-  heroSubtitleBold6: { en: 'biblical power', am: 'የመጽሐፍ ቅዱሳዊ ኃይል' },
-  heroSubtitle5: { en: ', and called to carry', am: ' እየሞላን' },
-  heroSubtitleBold7: { en: "God's mission with purpose", am: 'ለእግዚአብሔር ተልዕኮ' },
-  heroSubtitle6: { en: '.', am: ' የተዘጋጀን እንሁን።' },
-  heroSubtitle7: { en: 'You\'re not just learning — you\'re becoming a ', am: 'መማር ብቻ ሳይሆን:-  በዚ ትውልድ - ' },
-  heroSubtitleBold8: { en: 'trusted leader', am: 'ታማኝ መሪ' },
-  heroSubtitle8: { en: ', a ', am: '፣ ' },
-  heroSubtitleBold9: { en: 'world-changer', am: 'ዓለም ቀያሪ' },
-  heroSubtitle9: { en: ', a ', am: '፣ ' },
-  heroSubtitleBold10: { en: 'kingdom warrior', am: 'የመንግሥተ ሰማያት ወታደር' },
-  heroSubtitle10: { en: ' for your generation.', am: ' ነው የሚሆኑት።' },
+  heroTitle1: { en: 'Become a', am: 'ባለአደራ ትውልድን' },
+  heroTitle2: { en: 'Trustee Generation', am: 'ይቀላቀሉ' },
+  heroParagraph1: { 
+    en: 'This is your moment. A generation is rising — passionate about the Church, all about unity, and building together, not apart and grounded in truth.', 
+    am: 'ጊዜው አሁን ነው! ትውልድ እየተነሳ ነው! ለቤተ-ክርስቲያን ሸክም ያለው ፣ በአንድነት የሚያምን እና በእውነት ስር የሰደደ።'
+  },
+  heroParagraph2: {
+    en: 'Join a life-changing journey where young hearts are lit with divine wisdom, trained in real biblical power, and called to carry God\'s mission with purpose.',
+    am: 'ወደዚህ ህይወት ለዋጭ ጉዞ ይቀላቀሉ። በመንፈስ ቅዱስ ኃይል እና በመጽሐፍ ቅዱስ  በእግዚአብሔር ቃል ጥበብ እየተሞላን ፡ ለእግዚአብሔር ተልዕኮ የተዘጋጀን እንሁን።'
+  },
+  heroParagraph3: {
+    en: 'You\'re not just learning — you\'re becoming a trusted leader, a world-changer, a kingdom warrior for your generation.',
+    am: 'ወደዚህ መጠራታችሁ ስልጠና ለመካፈል ብቻ ሳይሆን ፤ በትውልዳችሁ መካከል - የምትታመኑ መሪዎች ፣ ዓለም የምትቀይሩ እና የመንግሥተ ሰማያት ወታደሮች እንድትሆኑ ተጠርታችኋል።'
+  },
   registerNow: { en: 'Register Now', am: 'አሁኑኑ ይመዝገቡ' },
   ourMission: { en: 'Our Mission', am: 'ተልእኳችን' },
   trusteeGeneration: { en: 'Trustee Generation of Tomorrow', am: 'የነገ ባለአደራ ትውልድ' },
   
   // About Section
-  ourDivineCalling: { en: 'Our Divine Calling', am: 'የእኛ ጥሪ' },
+  ourDivineCalling: { en: 'Our Divine Calling', am: 'ጥሪያችን' },
   callingDescription: { 
     en: 'To raise a generation of trustworthy, Christ-centered individuals who are deeply passionate about and faithfully committed to their local church — cultivating the Body of Christ, advancing the mission of the Church, and strengthening the unity and fellowship of believers for the glory of God.',
-    am: 'በክርስቶስ የተመሰረተ ፣ በቤተክርስቲያናቸው ላይ ጥልቅ ትኩረት ያላቸው እና ታማኝ ተስፋ ያላቸው ባለአደራ ትውልድ ለመድረስ — የክርስቶስን ሥጋ በመንከባከብ ፣ የቤተክርስቲያንን ተልእኮ በማሳደግ ፣ እና የምእምናንን አንድነት እና ቤተክርስቲያናዊ ተባባሪነት ለእግዚአብሔር ክብር በማጠናከር።'
+    am: 'ክርስቶስን ማዕከል ያደረገ ፣ ለቤተ-ክርስቲያንና ለወንጌል ሸክም ያለው እንዲሁም በአንድነት የሚያምን — አካሉን ለማነጽ የሚተጋ እና ለታላቁ ተልዕኮ ራሱን ያዘጋጀ ባለአደራ ትውልድን ማስነሳት።'
   },
   
   // Program Section
   eventDetails: { en: 'Event Details', am: 'ዝርዝር' },
-  joinUs: { en: 'Join us for a transformative spiritual experience', am: 'ለለውጣማ መንፈሳዊ ተሞክሮ ይቀላቀሉን' },
+  joinUs: { en: 'Join us for a transformative spiritual experience', am: 'ወደ ለዋጩ መንፈሳ ልምምድ ይቀላቀሉ' },
   when: { en: 'When', am: 'መቼ' },
   where: { en: 'Where', am: 'የት' },
   who: { en: 'Who', am: 'ለማን' },
   
   // Impact Section
   ourImpact: { en: 'Our Impact', am: 'ተጽዕኖ' },
-  transformingLives: { en: 'Transforming lives through 4 powerful rounds of our program', am: 'በ 4 ኃይለኛ የፕሮግራማችን ምድቦች ሕይወቶችን በመቀየር ላይ' },
+  transformingLives: { en: 'Transforming lives through 4 powerful rounds of our program', am: 'በ 4ቱ አስደናቂ የስልጠና ዙሮች የተከናወኑ ህይወት ለዋጭ ተግባራት' },
   totalReach: { en: 'Total Reach', am: 'ጠቅላላ ደርሷል' },
   teenagersReached: { en: 'Teenagers reached across our 4 rounds of programs', am: 'በ 4 የፕሮግራማችን ምድቦች የደረስናቸው ወጣቶች' },
   spiritualImpact: { en: 'Spiritual Impact', am: 'መንፈሳዊ ተጽዕኖ' },
@@ -87,12 +78,12 @@ const translations: Translations = {
   followUs: { en: 'Follow Us', am: 'ተከተሉን' },
   
   // Card Content
-  biblicalFoundation: { en: 'Biblical Foundation', am: 'የመጽሐፍ ቅዱስ መሰረት' },
+  biblicalFoundation: { en: 'Biblical Foundation', am: 'መጽሐፍ ቅዱሳዊ መሰረት' },
   biblicalFoundationDesc: { 
     en: 'Grounded in Scripture, we equip young people with God\'s Word as the foundation for wise leadership and righteous living in their communities.',
-    am: 'በመጽሐፍ ቅዱስ የተመሰረተ ፣ ወጣቶችን በእግዚአብሔር ቃል እናዘጋጃቸዋለን በማህበረሰባቸው ውስጥ ጥበበኛ መሪ እና ጻድቅ ህይወት ለመኖር።'
+    am: 'በመጽሐፍ ቅዱስ የተመሰረቱ ፣ ታዳጊ ወጣቶችን በእግዚአብሔር ቃል እናዘጋጃቸዋለን ፡ በማህበረሰባቸው ውስጥ አስተዋይ መሪዎች ለመሆን እና የጽድቅን ህይወት ለመኖር።'
   },
-  servantLeadership: { en: 'Servant Leadership', am: 'አገልጋይ መሪነት' },
+  servantLeadership: { en: 'Servant Leadership', am: 'መሪነት' },
   servantLeadershipDesc: {
     en: 'Following Christ\'s example of servant leadership, we nurture hearts that seek to serve others with humility, compassion, and divine love.',
     am: 'የክርስቶስን የአገልጋይ መሪነት ምሳሌ ተከትለን ፣ አንዳንዶችን በትሕትና ፣ በርኅራኄ እና በአምላካዊ ፍቅር ለማገልገል የሚፈልጉ ልቦችን እንፈጥራለን።'
@@ -100,10 +91,10 @@ const translations: Translations = {
   spiritualGrowth: { en: 'Spiritual Growth', am: 'መንፈሳዊ እድገት' },
   spiritualGrowthDesc: {
     en: 'Through prayer, fellowship, and biblical study, participants grow in spiritual maturity and develop a deeper relationship with God.',
-    am: 'በጸሎት ፣ በወንጌላዊ ጉባኤ እና በመጽሐፍ ቅዱስ ጥናት በኩል ተሳታፊዎች በመንፈሳዊ ጤናቸው ይዳብራሉ እና ከእግዚአብሔር ጋር የበለጠ ጥልቅ ግንኙነት ይፈጥራሉ።'
+    am: 'በጸሎት ፣ በትምህርት ጉባኤ እና በመጽሐፍ ቅዱስ ጥናት በኩል ተሳታፊዎች በመንፈሳዊ ጤናቸው ይዳብራሉ እና ከእግዚአብሔር ጋር የበለጠ ጥልቅ ግንኙነት ይፈጥራሉ።'
   },
   // Program Section
-  who: { en: 'Who', am: 'ማን' },
+  programWhoLabel: { en: 'Who', am: 'ለማን' },
   programLocation1: { 
     en: 'Location 1: Hawassa Genet Church',
     am: 'ቦታ 1: ሀዋሳ ገነት ቤተ-ክርስቲያን'
@@ -114,9 +105,9 @@ const translations: Translations = {
   },
   programWho: {
     en: 'Teenagers (Ages 14–19) From our awesome partner churches — specially chosen & called for something greater.',
-    am: 'ወጣቶች (14-19 ዓመት) ከእኛ አስደናቂ የተቋቋሙ ቤተክርስቲያናት — ለበለጠ ነገር በልዩ ምርጫ እና ጥሪ የተጠሩ።'
+    am: 'ታዳጊ ወጣቶች ዕድሜያቸው (ከ14-19 ዓመት) ያሉ ጥሪ ከተደረገላቸው ከተለያዩ ቤተክርስቲያናት።'
   },
-  churchesPartnered: {
+  churchesPartneredDesc: {
     en: 'Churches partnered with us, including 11 churches that have integrated our program into their regular curriculum',
     am: 'ከእኛ ጋር የተተባበሩ ቤተክርስቲያናት፣ ፕሮግራማችንን በመደበኛ ስርዓተ-ትምህርታቸው ውስጥ ያስተካከሉ 11 ቤተክርስቲያናትን ጨምሮ'
   },
