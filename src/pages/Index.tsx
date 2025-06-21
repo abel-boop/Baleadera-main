@@ -457,8 +457,8 @@ Location 1: ሀዋሳ ገነት ቤተ-ክርሰቲያን (Hawasa Genet Church)<
             </p>
             <p className="text-xs text-muted-foreground/60">
               Built with ❤️ by Abel Desalegn · 
-              <a href="mailto:abeldesalegn2121@gmail.com" className="hover:text-muted-foreground transition-colors" aria-label="Contact developer">
-                abeldesalegn2121@gmail.com
+              <a href="mailto:abeldesalegn.et@gmail.com" className="hover:text-muted-foreground transition-colors" aria-label="Contact developer">
+                abeldesalegn.et@gmail.com
               </a>
             </p>
           </div>
