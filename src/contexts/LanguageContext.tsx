@@ -24,15 +24,15 @@ const translations: Translations = {
   heroTitle1: { en: 'Become a', am: 'ባለአደራ ትውልድን' },
   heroTitle2: { en: 'Trustee Generation', am: 'ይቀላቀሉ' },
   heroParagraph1: { 
-    en: 'This is your moment. A generation is rising — passionate about the Church, all about unity, and building together, not apart and grounded in truth.', 
+    en: 'This is your moment. A generation is <strong>rising</strong> — <strong>passionate</strong> about the Church, all about <strong>unity</strong>, and building <strong>together</strong>, not apart and <strong>grounded</strong> in truth.', 
     am: 'ጊዜው አሁን ነው! ትውልድ እየተነሳ ነው! ለቤተ-ክርስቲያን ሸክም ያለው ፣ በአንድነት የሚያምን እና በእውነት ስር የሰደደ።'
   },
   heroParagraph2: {
-    en: 'Join a life-changing journey where young hearts are lit with divine wisdom, trained in real biblical power, and called to carry God\'s mission with purpose.',
+    en: 'Join a <strong>life-changing</strong> journey where young hearts are <strong>ignited</strong> with <strong>divine wisdom</strong>, trained in real <strong>biblical power</strong>, and called to carry <strong>God\'s mission</strong> with purpose.',
     am: 'ወደዚህ ህይወት ለዋጭ ጉዞ ይቀላቀሉ። በመንፈስ ቅዱስ ኃይል እና በመጽሐፍ ቅዱስ  በእግዚአብሔር ቃል ጥበብ እየተሞላን ፡ ለእግዚአብሔር ተልዕኮ የተዘጋጀን እንሁን።'
   },
   heroParagraph3: {
-    en: 'You\'re not just learning — you\'re becoming a trusted leader, a world-changer, a kingdom warrior for your generation.',
+    en: 'You\'re not just learning — you\'re becoming a <strong>trusted leader</strong>, a <strong>world-changer</strong>, a <strong>kingdom warrior</strong> for your generation.',
     am: 'ወደዚህ መጠራታችሁ ስልጠና ለመካፈል ብቻ ሳይሆን ፤ በትውልዳችሁ መካከል - የምትታመኑ መሪዎች ፣ ዓለም የምትቀይሩ እና የመንግሥተ ሰማያት ወታደሮች እንድትሆኑ ተጠርታችኋል።'
   },
   registerNow: { en: 'Register Now', am: 'አሁኑኑ ይመዝገቡ' },

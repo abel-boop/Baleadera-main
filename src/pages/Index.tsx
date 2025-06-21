@@ -147,9 +147,9 @@ const Index = () => {
                 <span className="bg-gradient-to-r from-blue-600 to-red-600 bg-clip-text text-transparent animate-slide-in-right">{t('heroTitle2')}</span>
               </h2>
               <div className="text-lg sm:text-xl text-foreground mb-8 leading-relaxed animate-fade-in-delayed max-w-2xl mx-auto lg:mx-0 space-y-4">
-                <p>{t('heroParagraph1')}</p>
-                <p>{t('heroParagraph2')}</p>
-                <p>{t('heroParagraph3')}</p>
+                <p dangerouslySetInnerHTML={{ __html: t('heroParagraph1') }} />
+                <p dangerouslySetInnerHTML={{ __html: t('heroParagraph2') }} />
+                <p dangerouslySetInnerHTML={{ __html: t('heroParagraph3') }} />
               </div>
               <div className="w-full">
                 <div className="inline-flex flex-wrap gap-3 sm:gap-4">
