@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 
-// Fixed target date: 8 days from today at 11:59:59 PM
+// Fixed target date: June 28, 2025 at 11:59:59 PM (EAT - East Africa Time)
 const getTargetDate = () => {
-  const target = new Date();
-  target.setDate(target.getDate() + 8);
-  target.setHours(23, 59, 59, 0);
-  return target;
+  // Using the specific date you started the countdown (June 19, 2025) + 9 days = June 28, 2025
+  return new Date('2025-06-28T23:59:59+03:00');
 };
 
 const CountdownTimer = () => {
