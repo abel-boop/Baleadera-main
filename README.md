@@ -1,4 +1,4 @@
-# Youth Spark Register
+#  Baleadera Tiweled
 
 A modern web application built with React, TypeScript, and Vite, featuring a beautiful UI powered by Shadcn UI components.
 
@@ -24,7 +24,7 @@ A modern web application built with React, TypeScript, and Vite, featuring a bea
 1. **Clone the repository**
    ```bash
    git clone https://github.com/your-username/youth-spark-register.git
-   cd youth-spark-register
+   cd
    ```
 
 2. **Install dependencies**

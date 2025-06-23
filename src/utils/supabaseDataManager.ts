@@ -45,25 +45,43 @@ export type RegistrationInsert = {
 // Get all registrations from Supabase (admin only)
 export const getAllRegistrations = async (editionId?: number): Promise<Registration[]> => {
   try {
-    let query = supabase
-      .from('registrations')
-      .select('*');
+    let allRegistrations: any[] = [];
+    let page = 0;
+    const pageSize = 1000; // Fetch 1000 records at a time
+    let hasMore = true;
+    
+    while (hasMore) {
+      let query = supabase
+        .from('registrations')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .range(page * pageSize, (page + 1) * pageSize - 1);
+        
+      if (editionId) {
+        query = query.eq('edition_id', editionId);
+      }
       
-    if (editionId) {
-      query = query.eq('edition_id', editionId);
-    }
-    
-    const orderedQuery = query.order('created_at', { ascending: false });
-    
-    const { data, error } = await orderedQuery;
-    
-    if (error) {
-      console.error('Error loading registrations:', error);
-      throw new Error('Failed to load registrations');
+      const { data, error, count } = await query;
+      
+      if (error) {
+        console.error('Error loading registrations:', error);
+        throw new Error('Failed to load registrations');
+      }
+      
+      if (data && data.length > 0) {
+        allRegistrations = [...allRegistrations, ...data];
+      }
+      
+      // If we got less than the page size, we've reached the end
+      if (!data || data.length < pageSize) {
+        hasMore = false;
+      } else {
+        page++;
+      }
     }
     
     // Map the database response to our Registration type
-    return (data || []).map(item => ({
+    return allRegistrations.map(item => ({
       id: item.id,
       name: item.name,
       phone: item.phone,
