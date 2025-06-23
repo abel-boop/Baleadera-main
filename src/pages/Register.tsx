@@ -29,6 +29,15 @@ const Register = () => {
     participant_location: "Hawassa" as 'Hawassa' | 'Addis Ababa'
   });
 
+  const formatPhoneNumber = (phone: string): string => {
+    // Remove all non-digit characters
+    const numbers = phone.replace(/\D/g, '');
+    
+    // Format as Ethiopian phone number (e.g., 0912345678)
+    // This ensures the number is in a consistent format for duplicate checking
+    return numbers;
+  };
+
   const handleInputChange = (field: string, value: string) => {
     if (field === 'age') {
       // Only allow numbers and empty string
@@ -41,6 +50,22 @@ const Register = () => {
       
       // Then validate
       validateAge(value);
+    } else if (field === 'phone') {
+      // Format phone number as user types
+      const numbers = value.replace(/\D/g, '');
+      let formattedValue = numbers;
+      
+      // Add basic formatting for better UX (e.g., 0912 345 678)
+      if (numbers.length > 3) {
+        formattedValue = `${numbers.slice(0, 4)} ${numbers.slice(4, 7)}`;
+        if (numbers.length > 7) {
+          formattedValue += ` ${numbers.slice(7, 10)}`;
+        } else if (numbers.length > 4) {
+          formattedValue += ` ${numbers.slice(4)}`;
+        }
+      }
+      
+      setFormData(prev => ({ ...prev, [field]: formattedValue }));
     } else {
       setFormData(prev => ({ ...prev, [field]: value }));
     }
@@ -147,10 +172,18 @@ const Register = () => {
         throw new Error("Invalid age range. Please enter an age between 14 and 19");
       }
 
+      // Format the phone number consistently (remove all non-digit characters)
+      const formattedPhone = formData.phone.replace(/\D/g, '');
+      
+      // Validate phone number format (Ethiopian format: starts with 09 or +2519 and is 10 digits)
+      if (!/^(09|\+?2519)\d{8}$/.test(formattedPhone)) {
+        throw new Error('Please enter a valid Ethiopian phone number (e.g., 0912345678)');
+      }
+
       // Create the registration data that matches the RegistrationInsert type
       const registrationData = {
         name: `${formData.firstName.trim()} ${formData.fathersName.trim()}`.trim(),
-        phone: formData.phone.trim(),
+        phone: formattedPhone,
         age: formData.age,
         grade: formData.grade,
         gender: formData.gender,

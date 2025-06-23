@@ -140,6 +140,31 @@ export const getRegistration = async (id: string): Promise<Registration | null> 
   }
 };
 
+// Check if a registration with the same phone number already exists for this edition
+const checkForExistingRegistration = async (phone: string, editionId: number): Promise<boolean> => {
+  try {
+    const { data, error } = await supabase
+      .from('registrations')
+      .select('id')
+      .eq('phone', phone)
+      .eq('edition_id', editionId)
+      .maybeSingle();
+
+    if (error) {
+      console.error('Error checking for existing registration:', error);
+      // If there's an error checking, we'll let the save attempt continue
+      // rather than blocking registration due to a check error
+      return false;
+    }
+
+
+    return !!data;
+  } catch (error) {
+    console.error('Error in checkForExistingRegistration:', error);
+    return false;
+  }
+};
+
 // Save a new registration (public - no auth required)
 export const saveRegistration = async (formData: RegistrationInsert): Promise<string> => {
   try {
@@ -147,9 +172,18 @@ export const saveRegistration = async (formData: RegistrationInsert): Promise<st
       throw new Error('No edition ID provided');
     }
 
+    // Normalize phone number by removing any non-digit characters
+    const normalizedPhone = formData.phone.replace(/\D/g, '');
+
+    // Check for existing registration with the same phone number for this edition
+    const exists = await checkForExistingRegistration(normalizedPhone, formData.edition_id);
+    if (exists) {
+      throw new Error('A registration with this phone number already exists for this event.');
+    }
+
     const registrationData = {
       name: formData.name,
-      phone: formData.phone,
+      phone: normalizedPhone, // Use normalized phone number
       age: formData.age,
       grade: formData.grade,
       gender: formData.gender,
@@ -167,6 +201,12 @@ export const saveRegistration = async (formData: RegistrationInsert): Promise<st
 
     if (error) {
       console.error('Error saving registration:', error);
+      
+      // Check for unique constraint violation (in case of race condition)
+      if (error.code === '23505') { // PostgreSQL unique violation error code
+        throw new Error('A registration with this phone number already exists for this event.');
+      }
+      
       throw new Error(error.message || 'Failed to save registration');
     }
 
