@@ -442,6 +442,12 @@ export const RegistrationSteps = ({
                       <SelectItem value="በክርስቶስ ፍቅር የዓለም ብርሃን ቤተ-ክርስቲያን">20. በክርስቶስ ፍቅር የዓለም ብርሃን ቤተ-ክርስቲያን</SelectItem>
                       <SelectItem value="ቤተ-ሳይዳ የወንጌል አማኞች ቤተ-ክርስቲያን">21. ቤተ-ሳይዳ የወንጌል አማኞች ቤተ-ክርስቲያን</SelectItem>
                       <SelectItem value="ምስጋና ቤተ-ክርስቲያን">22. ምስጋና ቤተ-ክርስቲያን</SelectItem>
+                      <SelectItem value="ታቦር መካነየሱስ ማህበረ ምዕመናን">23. ታቦር መካነየሱስ ማህበረ ምዕመናን</SelectItem>
+                      <SelectItem value="ሆጋኔ መካነየሱስ ማህበረ ምዕመናን">24. ሆጋኔ መካነየሱስ ማህበረ ምዕመናን</SelectItem>
+                      <SelectItem value="አላሙራ መካነየሱስ ማህበረ ምዕመናን">25. አላሙራ መካነየሱስ ማህበረ ምዕመናን</SelectItem>
+                      <SelectItem value="ፒያሳ ሙሉወንጌል አማኞች ቤ/ክ">26. ፒያሳ ሙሉወንጌል አማኞች ቤ/ክ</SelectItem>
+                      <SelectItem value="አዲሱ ገበያ ሙሉወንጌል አማኞች ቤ/ክ">27. አዲሱ ገበያ ሙሉወንጌል አማኞች ቤ/ክ</SelectItem>
+                      <SelectItem value="ሪፈራል ቃለህይወት ቤ/ክ">28. ሪፈራል ቃለህይወት ቤ/ክ</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
