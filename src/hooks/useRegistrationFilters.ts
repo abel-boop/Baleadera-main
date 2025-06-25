@@ -50,10 +50,6 @@ export const useRegistrationFilters = (registrations: Registration[], options: F
 
   // Filter registrations
   const filteredRegistrations = useMemo(() => {
-    console.log('Filtering with churchFilter:', churchFilter);
-    const uniqueChurches = [...new Set(registrations.map(r => r.church))];
-    console.log('Available churches in registrations:', uniqueChurches);
-    
     return registrations.filter(registration => {
       const matchesSearch = searchTerm === '' || 
         registration.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -74,30 +70,11 @@ export const useRegistrationFilters = (registrations: Registration[], options: F
         // Check if the registration church matches the filter (with or without numbering)
         matchesChurch = regChurch === cleanFilter;
         
-        // Log the comparison for debugging
-        console.log('Church comparison:', {
-          registrationChurch: registration.church,
-          filterChurch: churchFilter,
-          cleanFilter,
-          matches: matchesChurch
-        });
+        // Church comparison logic
       }
       const matchesLocation = locationFilter === 'all' || registration.participant_location === locationFilter;
       
-      const matches = matchesSearch && matchesStatus && matchesGrade && matchesChurch && matchesLocation;
-      if (churchFilter !== 'all' && matches) {
-        console.log('Match found:', { 
-          church: registration.church, 
-          filter: churchFilter,
-          matchesChurch,
-          matchesSearch,
-          matchesStatus,
-          matchesGrade,
-          matchesLocation
-        });
-      }
-      console.log('Registration church:', registration.church, 'Filter:', churchFilter, 'Match:', matches);
-      return matches;
+      return matchesSearch && matchesStatus && matchesGrade && matchesChurch && matchesLocation;
     });
   }, [registrations, searchTerm, statusFilter, gradeFilter, churchFilter, locationFilter]);
 
