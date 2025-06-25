@@ -50,6 +50,10 @@ export const useRegistrationFilters = (registrations: Registration[], options: F
 
   // Filter registrations
   const filteredRegistrations = useMemo(() => {
+    console.log('Filtering with churchFilter:', churchFilter);
+    const uniqueChurches = [...new Set(registrations.map(r => r.church))];
+    console.log('Available churches in registrations:', uniqueChurches);
+    
     return registrations.filter(registration => {
       const matchesSearch = searchTerm === '' || 
         registration.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -59,10 +63,41 @@ export const useRegistrationFilters = (registrations: Registration[], options: F
       
       const matchesStatus = statusFilter === 'all' || registration.status === statusFilter;
       const matchesGrade = gradeFilter === 'all' || registration.grade === gradeFilter;
-      const matchesChurch = churchFilter === 'all' || registration.church === churchFilter;
+      // Handle church matching with or without numbering
+      let matchesChurch = churchFilter === 'all';
+      
+      if (!matchesChurch && registration.church && churchFilter) {
+        // Remove any numbering prefix from the filter (e.g., "1. ")
+        const cleanFilter = churchFilter.replace(/^\d+\.\s*/, '').trim().toLowerCase();
+        const regChurch = registration.church.trim().toLowerCase();
+        
+        // Check if the registration church matches the filter (with or without numbering)
+        matchesChurch = regChurch === cleanFilter;
+        
+        // Log the comparison for debugging
+        console.log('Church comparison:', {
+          registrationChurch: registration.church,
+          filterChurch: churchFilter,
+          cleanFilter,
+          matches: matchesChurch
+        });
+      }
       const matchesLocation = locationFilter === 'all' || registration.participant_location === locationFilter;
       
-      return matchesSearch && matchesStatus && matchesGrade && matchesChurch && matchesLocation;
+      const matches = matchesSearch && matchesStatus && matchesGrade && matchesChurch && matchesLocation;
+      if (churchFilter !== 'all' && matches) {
+        console.log('Match found:', { 
+          church: registration.church, 
+          filter: churchFilter,
+          matchesChurch,
+          matchesSearch,
+          matchesStatus,
+          matchesGrade,
+          matchesLocation
+        });
+      }
+      console.log('Registration church:', registration.church, 'Filter:', churchFilter, 'Match:', matches);
+      return matches;
     });
   }, [registrations, searchTerm, statusFilter, gradeFilter, churchFilter, locationFilter]);
 
