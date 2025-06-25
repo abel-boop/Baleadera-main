@@ -2,6 +2,16 @@ import { useMemo } from 'react';
 import { Registration } from '@/utils/supabaseDataManager';
 import { CHURCHES } from '@/constants/churches';
 
+// Predefined list of grades that matches the registration form
+const GRADES = [
+  'grade-7',
+  'grade-8',
+  'grade-9',
+  'grade-10',
+  'grade-11',
+  'grade-12'
+] as const;
+
 export interface FilterOptions {
   searchTerm?: string;
   statusFilter?: string;
@@ -19,8 +29,8 @@ export const useRegistrationFilters = (registrations: Registration[], options: F
     locationFilter = 'all'
   } = options;
 
-  // Get unique values for filters
-  const uniqueGrades = useMemo(() => [...new Set(registrations.map(r => r.grade))], [registrations]);
+  // Use the predefined list of grades
+  const uniqueGrades = useMemo(() => [...GRADES], []);
   
   const uniqueLocations = useMemo(() => {
     // Get all unique participant locations
