@@ -51,21 +51,9 @@ const Register = () => {
       // Then validate
       validateAge(value);
     } else if (field === 'phone') {
-      // Format phone number as user types
-      const numbers = value.replace(/\D/g, '');
-      let formattedValue = numbers;
-      
-      // Add basic formatting for better UX (e.g., 0912 345 678)
-      if (numbers.length > 3) {
-        formattedValue = `${numbers.slice(0, 4)} ${numbers.slice(4, 7)}`;
-        if (numbers.length > 7) {
-          formattedValue += ` ${numbers.slice(7, 10)}`;
-        } else if (numbers.length > 4) {
-          formattedValue += ` ${numbers.slice(4)}`;
-        }
-      }
-      
-      setFormData(prev => ({ ...prev, [field]: formattedValue }));
+      // Only allow digits and limit to 10 characters
+      const numbers = value.replace(/\D/g, '').slice(0, 10);
+      setFormData(prev => ({ ...prev, [field]: numbers }));
     } else {
       setFormData(prev => ({ ...prev, [field]: value }));
     }

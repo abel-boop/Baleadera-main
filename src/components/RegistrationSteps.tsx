@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -36,7 +35,8 @@ export const RegistrationSteps = ({
     fathersName: '',
     phone: '' 
   });
-  
+  const phoneInputRef = useRef<HTMLInputElement>(null);
+
   // Handle name input with validation
   const handleNameInput = (field: 'firstName' | 'fathersName', value: string) => {
     // Allow typing by updating the field value
@@ -104,17 +104,13 @@ export const RegistrationSteps = ({
     return '';
   };
   
-  const formatPhoneNumber = (value: string) => {
-    // Remove all non-digit characters
+  // Simple phone formatter that only handles display
+  const formatPhoneDisplay = (value: string) => {
+    if (!value) return '';
     const cleaned = value.replace(/\D/g, '');
-    
-    // Format as 09XX XXX XXXX
-    if (cleaned.length > 3 && cleaned.length <= 6) {
-      return `${cleaned.slice(0, 3)} ${cleaned.slice(3)}`;
-    } else if (cleaned.length > 6) {
-      return `${cleaned.slice(0, 3)} ${cleaned.slice(3, 6)} ${cleaned.slice(6, 10)}`;
-    }
-    return cleaned;
+    if (cleaned.length <= 3) return cleaned;
+    if (cleaned.length <= 6) return `${cleaned.slice(0, 3)} ${cleaned.slice(3)}`;
+    return `${cleaned.slice(0, 3)} ${cleaned.slice(3, 6)} ${cleaned.slice(6, 10)}`;
   };
 
   const nextStep = () => {
@@ -272,15 +268,12 @@ export const RegistrationSteps = ({
                     <Input
                       id="phone"
                       type="tel"
-                      placeholder="09XX XXX XXXX"
-                      value={formatPhoneNumber(formData.phone)}
+                      placeholder="09XXXXXXXX"
+                      value={formData.phone}
                       onChange={(e) => {
-                        const value = e.target.value;
-                        // Only allow numbers and spaces, max 12 characters (including spaces)
-                        if (/^[0-9\s]*$/.test(value) && value.replace(/\s/g, '').length <= 10) {
-                          onInputChange('phone', value.replace(/\s/g, ''));
-                          setErrors(prev => ({ ...prev, phone: '' }));
-                        }
+                        // Let the parent component handle the formatting
+                        onInputChange('phone', e.target.value);
+                        setErrors(prev => ({ ...prev, phone: '' }));
                       }}
                       onBlur={(e) => {
                         const error = validatePhone(e.target.value);
@@ -289,7 +282,7 @@ export const RegistrationSteps = ({
                       className={`border-border focus:border-blue-500 focus:ring-blue-500 transition-all duration-300 pr-10 ${
                         errors.phone ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''
                       }`}
-                      maxLength={12} // 09XX XXX XXXX
+                      maxLength={10}
                       required
                     />
                     <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
