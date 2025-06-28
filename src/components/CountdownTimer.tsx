@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
-// Fixed target date: June 28, 2025 at 11:59:59 PM (EAT - East Africa Time)
+// Extended deadline: July 1, 2025 at 11:59:59 PM (EAT - East Africa Time)
 const getTargetDate = () => {
-  // Using the specific date you started the countdown (June 19, 2025) + 9 days = June 28, 2025
-  return new Date('2025-06-28T23:59:59+03:00');
+  // Extended by 3 days from the original deadline (June 28 → July 1)
+  return new Date('2025-07-01T23:59:59+03:00');
 };
 
 const CountdownTimer = () => {
@@ -54,8 +54,11 @@ const CountdownTimer = () => {
   );
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-border/50 mt-8 sm:mt-12">
-      <h3 className="text-center text-lg sm:text-xl font-semibold text-foreground mb-4">
+    <div className="flex flex-col items-center justify-center w-full mt-auto pt-8">
+      <div className="animate-bounce mb-4 px-4 py-2 bg-gradient-to-r from-red-500 to-yellow-500 text-white text-sm font-bold rounded-full shadow-lg transform rotate-[-3deg] hover:rotate-0 transition-transform duration-300">
+        🎉 Deadline Extended! 🎉
+      </div>
+      <h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 text-center">
         Registration Deadline
       </h3>
       <div className="flex justify-center gap-3 sm:gap-6">
