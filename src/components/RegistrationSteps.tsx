@@ -441,6 +441,7 @@ export const RegistrationSteps = ({
                       <SelectItem value="ፒያሳ ሙሉወንጌል አማኞች ቤ/ክ">26. ፒያሳ ሙሉወንጌል አማኞች ቤ/ክ</SelectItem>
                       <SelectItem value="አዲሱ ገበያ ሙሉወንጌል አማኞች ቤ/ክ">27. አዲሱ ገበያ ሙሉወንጌል አማኞች ቤ/ክ</SelectItem>
                       <SelectItem value="ሪፈራል ቃለህይወት ቤ/ክ">28. ሪፈራል ቃለህይወት ቤ/ክ</SelectItem>
+                      <SelectItem value="የሐዲስ ኪዳን ካህናት ቤ/ክ">29. የሐዲስ ኪዳን ካህናት ቤ/ክ</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
