@@ -1,6 +1,5 @@
-
 import { Link } from "react-router-dom";
-import { Users, UserCheck, Calendar, MapPin, Award, Target, Heart, ChevronRight, Facebook, Phone, Mail, Menu, X, BookOpen, Lightbulb, Crown, Youtube, Instagram, MessageSquare } from "lucide-react";
+import { Users, UserCheck, Calendar, MapPin, Award, Target, Heart, ChevronRight, Facebook, Phone, Mail, Menu, X, BookOpen, Lightbulb, Crown, Youtube, Instagram, MessageSquare, Shirt } from "lucide-react";
 import { FaTiktok } from "react-icons/fa6";
 import { FaTelegramPlane } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
@@ -48,6 +47,13 @@ const Index = () => {
               >
                 {t('home')}
               </button>
+              <Link 
+                to="/tshirt-order"
+                className="text-foreground hover:text-blue-600 font-medium transition-colors duration-300 hover:scale-105 flex items-center"
+              >
+                <Shirt className="h-4 w-4 mr-1" />
+                {t('orderTshirt')}
+              </Link>
               <Link to="/about" className="text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:scale-105">
                 {t('about')}
               </Link>
@@ -91,10 +97,17 @@ const Index = () => {
               <nav className="flex flex-col space-y-2">
                 <button 
                   onClick={() => handleNavClick('home')} 
-                  className="text-left py-2 px-4 text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:bg-accent rounded-lg"
+                  className="block px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 rounded-md w-full text-left"
                 >
                   {t('home')}
                 </button>
+                <Link 
+                  to="/tshirt-order"
+                  className="flex items-center px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 rounded-md w-full"
+                >
+                  <Shirt className="h-4 w-4 mr-2" />
+                  {t('orderTshirt')}
+                </Link>
                 <Link 
                   to="/about" 
                   className="py-2 px-4 text-foreground hover:text-blue-600 font-medium transition-all duration-300 hover:bg-accent rounded-lg"

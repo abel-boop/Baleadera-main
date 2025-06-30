@@ -11,6 +11,7 @@ type Translations = {
 const translations: Translations = {
   // Navigation
   home: { en: 'Home', am: 'ዋና ገጽ' },
+  orderTshirt: { en: 'Order T-Shirt', am: 'ሸሚዝ ይዘዙ' },
   about: { en: 'About Us', am: 'ስለ እኛ' },
   program: { en: 'Program', am: 'ፕሮግራም' },
   testimonials: { en: 'Testimonials', am: 'ምስክርነቶች' },

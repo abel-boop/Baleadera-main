@@ -22,14 +22,16 @@ import AdminStatsCards from "@/components/AdminStatsCards";
 import AdminRegistrationsTable from "@/components/AdminRegistrationsTable";
 import PrintParticipantIds from "@/components/PrintParticipantIds";
 import AdminEditions from "@/components/AdminEditions";
+import AdminTshirtOrders from "@/components/AdminTshirtOrders";
 import { supabase } from '@/integrations/supabase/client';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { AdminTab } from "@/components/AdminSidebar";
 
 const Admin = () => {
   const { user, signOut } = useAuth();
   const { toast } = useToast();
-  const [activeTab, setActiveTab] = useState("registrations");
+  const [activeTab, setActiveTab] = useState<AdminTab>("registrations");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -337,22 +339,28 @@ const Admin = () => {
                     </Select>
                   </div>
                 </div>
+                
+                <AdminRegistrationsTable
+                  registrations={registrations}
+                  searchTerm={searchTerm}
+                  statusFilter={statusFilter}
+                  gradeFilter={gradeFilter}
+                  churchFilter={churchFilter}
+                  locationFilter={locationFilter}
+                  onSearchChange={setSearchTerm}
+                  onStatusFilterChange={setStatusFilter}
+                  onGradeFilterChange={setGradeFilter}
+                  onChurchFilterChange={setChurchFilter}
+                  onLocationFilterChange={setLocationFilter}
+                  onStatusUpdate={handleStatusUpdate}
+                />
               </div>
-              <AdminRegistrationsTable
-                registrations={registrations}
-                searchTerm={searchTerm}
-                statusFilter={statusFilter}
-                gradeFilter={gradeFilter}
-                churchFilter={churchFilter}
-                locationFilter={locationFilter}
-                onSearchChange={setSearchTerm}
-                onStatusFilterChange={setStatusFilter}
-                onGradeFilterChange={setGradeFilter}
-                onChurchFilterChange={setChurchFilter}
-                onLocationFilterChange={setLocationFilter}
-                onStatusUpdate={handleStatusUpdate}
-                onExportData={exportData}
-              />
+            </div>
+          )}
+
+          {activeTab === "tshirt-orders" && (
+            <div className="animate-fade-in">
+              <AdminTshirtOrders />
             </div>
           )}
 

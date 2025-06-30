@@ -8,7 +8,61 @@ export type Json =
 
 export type Database = {
   public: {
+    Enums: {
+      tshirt_size: 'S' | 'M' | 'L' | 'XL';
+    };
     Tables: {
+      tshirt_orders: {
+        Row: {
+          id: string;
+          registration_id: string;
+          edition_id: number;
+          size: Database['public']['Enums']['tshirt_size'];
+          quantity: number;
+          payment_reference: string;
+          status: 'pending' | 'verified' | 'cancelled';
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          registration_id: string;
+          edition_id: number;
+          size: Database['public']['Enums']['tshirt_size'];
+          quantity: number;
+          payment_reference: string;
+          status?: 'pending' | 'verified' | 'cancelled';
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          registration_id?: string;
+          edition_id?: number;
+          size?: Database['public']['Enums']['tshirt_size'];
+          quantity?: number;
+          payment_reference?: string;
+          status?: 'pending' | 'verified' | 'cancelled';
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "tshirt_orders_registration_id_fkey";
+            columns: ["registration_id"];
+            isOneToOne: false;
+            referencedRelation: "registrations";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "tshirt_orders_edition_id_fkey";
+            columns: ["edition_id"];
+            isOneToOne: false;
+            referencedRelation: "editions";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       registrations: {
         Row: {
           age: string

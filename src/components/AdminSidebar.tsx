@@ -1,14 +1,22 @@
 
-import { Users, Calendar, Settings, LogOut, BarChart3, CreditCard } from "lucide-react";
+import { Users, Calendar, Settings, LogOut, BarChart3, CreditCard, Shirt } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
 
+export type AdminTab = 
+  | 'registrations' 
+  | 'tshirt-orders' 
+  | 'print-ids' 
+  | 'events' 
+  | 'users' 
+  | 'settings';
+
 interface AdminSidebarProps {
-  activeTab: string;
-  onTabChange: (tab: string) => void;
+  activeTab: AdminTab;
+  onTabChange: (tab: AdminTab) => void;
   className?: string;
 }
 
@@ -35,6 +43,7 @@ const AdminSidebar = ({ activeTab, onTabChange, className }: AdminSidebarProps) 
 
   const menuItems = [
     { id: "registrations", label: "Registrations", icon: Users },
+    { id: "tshirt-orders", label: "T-Shirt Orders", icon: Shirt },
     { id: "print-ids", label: "Print Participant IDs", icon: CreditCard },
     { id: "events", label: "Events", icon: Calendar },
     { id: "users", label: "Users", icon: BarChart3 },
